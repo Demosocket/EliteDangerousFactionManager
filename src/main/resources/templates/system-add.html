@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add System</title>
+</head>
+<body>
+<form action="#" th:action="@{/system-add}" th:object="${system}" method="post">
+    <label for="id">ID</label>
+    <input type="number" th:field="*{id}" id="id" placeholder="ID"><br>
+    <label for="sys">System</label>
+    <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
+    <label for="population">Population</label>
+    <input type="number" th:field="*{population}" id="population" placeholder="Population"><br>
+    <label for="date">Date</label>
+    <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
+    <input type="submit" value="Add System">
+</form>
+
+</body>
+</html>

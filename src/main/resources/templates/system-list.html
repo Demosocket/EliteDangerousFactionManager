@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Systems</title>
+</head>
+<body>
+<div th:switch="${systems}">
+    <h2 th:case="null">No systems found!</h2>
+    <div th:case="*">
+        <h2>Systems</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>System</th>
+                <th>Population</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="system : ${systems}">
+                <td th:text="${system.id}"></td>
+                <td th:text="${system.sys}"></td>
+                <td th:text="${system.population}"></td>
+                <td th:text="${system.date}"></td>
+                <td><a th:href="@{system-edit/{id}(id=${system.id})}">Edit</a></td>
+                <td><a th:href="@{system-delete/{id}(id=${system.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/system-add">Add System</a></p>
+</div>
+</body>
+</html>
