@@ -12,10 +12,12 @@ import java.util.Date;
 public class System {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nagiisys_sys_id_seq")
-    @SequenceGenerator(sequenceName = "nagiisys_sys_id_seq", allocationSize = 1, name = "nagiisys_sys_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sys_id")
     private Integer id;
+
+    @Column(name = "sys_num")
+    private Integer sysNum;
 
     @Column(name = "sys")
     private String sys;

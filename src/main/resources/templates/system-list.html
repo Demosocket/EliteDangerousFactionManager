@@ -12,15 +12,15 @@
         <table>
             <thead>
             <tr>
-                <th>Id</th>
+                <th>№</th>
                 <th>System</th>
                 <th>Population</th>
-                <th>Date</th>
+                <th>Expansion Date</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="system : ${systems}">
-                <td th:text="${system.id}"></td>
+                <td th:text="${system.sysNum}"></td>
                 <td th:text="${system.sys}"></td>
                 <td th:text="${system.population}"></td>
                 <td th:text="${system.date}"></td>

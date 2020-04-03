@@ -7,12 +7,14 @@
 <body>
 <form action="#" th:action="@{/system-edit}" th:object="${system}" method="post">
     <label for="id">ID</label>
-    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"><br>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="id"><br>
+    <label for="num">№</label>
+    <input type="number" th:field="*{sysNum}" id="num" placeholder="№"><br>
     <label for="sys">System</label>
     <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
-    <label for="population">System</label>
+    <label for="population">Population</label>
     <input type="number" th:field="*{population}" id="population" placeholder="Population"><br>
-    <label for="date">System</label>
+    <label for="date">Expansion date</label>
     <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
     <input type="submit" value="Edit System">
 </form>
