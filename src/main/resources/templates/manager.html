@@ -27,32 +27,9 @@
         <li class="menu-list-right"><a class="menu-link" href="#">Login</a></li>
     </ul>
 </div>
-<div th:switch="${systems}">
-    <h2 th:case="null">No systems found!</h2>
-    <div th:case="*">
-        <h2>Systems</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>№</th>
-                <th>System</th>
-                <th>Population</th>
-                <th>Expansion Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="system : ${systems}">
-                <td th:text="${system.sysNum}"></td>
-                <td th:text="${system.sys}"></td>
-                <td th:text="${system.population}"></td>
-                <td th:text="${system.date}"></td>
-                <td><a th:href="@{/systems/edit/{id}(id=${system.id})}">Edit</a></td>
-                <td><a th:href="@{/systems/delete/{id}(id=${system.id})}">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <p><a th:href="@{/systems/add}">Add System</a></p>
+<div>
+    <h1>Start page Faction Manager</h1>
+    <p>Applications for managing the faction in the game Elite Dangerous</p>
 </div>
 </body>
 </html>
