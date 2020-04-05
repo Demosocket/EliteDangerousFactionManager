@@ -27,32 +27,44 @@
         <li class="menu-list-right"><a class="menu-link" href="#">Login</a></li>
     </ul>
 </div>
-<div th:switch="${systems}">
-    <h2 th:case="null">No systems found!</h2>
-    <div th:case="*">
-        <h2>Systems</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>№</th>
-                <th>System</th>
-                <th>Population</th>
-                <th>Expansion Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="system : ${systems}">
-                <td th:text="${system.sysNum}"></td>
-                <td th:text="${system.sys}"></td>
-                <td th:text="${system.population}"></td>
-                <td th:text="${system.date}"></td>
-                <td><a th:href="@{/systems/edit/{id}(id=${system.id})}">Edit</a></td>
-                <td><a th:href="@{/systems/delete/{id}(id=${system.id})}">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
+<div class="content">
+    <div th:switch="${systems}">
+        <h2 th:case="null">No systems found!</h2>
+        <div th:case="*">
+            <h2>Systems</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th>System</th>
+                    <th>Population</th>
+                    <th>Expansion Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="system : ${systems}">
+                    <td th:text="${system.sysNum}"></td>
+                    <td th:text="${system.sys}"></td>
+                    <td th:text="${system.population}"></td>
+                    <td th:text="${system.date}"></td>
+                    <td>
+                        <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
+                            <img src="/images/edit.png" alt="Edit">
+                            <span class="tooltip-text">Edit System</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${system.id})}">
+                            <img src="/images/delete.png" alt="Delete">
+                            <span class="tooltip-text">Delete System</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a class="menu-link" th:href="@{/systems/add}">Add System</a></p>
     </div>
-    <p><a th:href="@{/systems/add}">Add System</a></p>
 </div>
 </body>
 </html>

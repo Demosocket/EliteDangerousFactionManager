@@ -38,3 +38,53 @@
 .menu-link:hover {
     background: #cf7c1f;
 }
+.content {
+    background-color: #a9a9a9;
+    text-align: center;
+    padding: 5px;
+    margin-top: 15px;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+body {
+    background: gainsboro url("/images/background-pic.jpg");
+}
+table {
+    text-align: center;
+    margin: auto;
+}
+th {
+    background: #0d53b5;
+    color: white;
+    padding: 10px 15px;
+}
+th, td {
+    border-style: solid;
+    border-width: 0 0 0 0;
+    border-color: white;
+}
+td {
+    padding: 5px 10px;
+    background: gray;
+}

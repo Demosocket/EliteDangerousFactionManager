@@ -27,16 +27,18 @@
         <li class="menu-list-right"><a class="menu-link" href="#">Login</a></li>
     </ul>
 </div>
-<form action="#" th:action="@{/systems/add}" th:object="${system}" method="post">
-    <label for="num">№</label>
-    <input type="number" th:field="*{sysNum}" id="num" placeholder="№"><br>
-    <label for="sys">System</label>
-    <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
-    <label for="population">Population</label>
-    <input type="number" th:field="*{population}" id="population" placeholder="Population"><br>
-    <label for="date">Expansion Date</label>
-    <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
-    <input type="submit" value="Add System">
-</form>
+<div class="content">
+    <form action="#" th:action="@{/systems/add}" th:object="${system}" method="post">
+        <label for="num">№</label>
+        <input type="number" th:field="*{sysNum}" id="num" placeholder="№"><br>
+        <label for="sys">System</label>
+        <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
+        <label for="population">Population</label>
+        <input type="number" th:field="*{population}" id="population" placeholder="Population"><br>
+        <label for="date">Expansion Date</label>
+        <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
+        <input type="submit" class="menu-link"  value="Add System">
+    </form>
+</div>
 </body>
 </html>
