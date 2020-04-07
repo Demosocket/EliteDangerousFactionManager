@@ -1,6 +1,7 @@
 package com.demosocket.manager.controller;
 
 import com.demosocket.manager.model.System;
+import com.demosocket.manager.service.SystemService;
 import com.demosocket.manager.service.SystemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,10 @@ import java.util.List;
 @RequestMapping("/systems")
 public class SystemController {
 
-    private SystemServiceImpl systemService;
+    private SystemService systemService;
 
     @Autowired
-    public SystemController(SystemServiceImpl systemService) {
+    public SystemController(SystemService systemService) {
         this.systemService = systemService;
     }
 

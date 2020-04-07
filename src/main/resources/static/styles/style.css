@@ -1,3 +1,7 @@
+body {
+    background: gainsboro url("/images/background-pic.jpg");
+}
+/*header style*/
 .header {
     position: relative;
     width: 100%;
@@ -38,9 +42,11 @@
 .menu-link:hover {
     background: #cf7c1f;
 }
+/*main div and tips*/
 .content {
     background-color: #a9a9a9;
     text-align: center;
+    align-items: center;
     padding: 5px;
     margin-top: 15px;
 }
@@ -49,7 +55,6 @@
     display: inline-block;
     border-bottom: 1px dotted black;
 }
-
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 120px;
@@ -58,18 +63,13 @@
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-
-    /* Position the tooltip */
     position: absolute;
-    z-index: 1;
+    top: -25px;
 }
-
 .tooltip:hover .tooltip-text {
     visibility: visible;
 }
-body {
-    background: gainsboro url("/images/background-pic.jpg");
-}
+/*table style*/
 table {
     text-align: center;
     margin: auto;
@@ -87,4 +87,49 @@ th, td {
 td {
     padding: 5px 10px;
     background: gray;
+}
+/*forms style*/
+.form-div {
+    margin: auto;
+    width: 400px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+.row {
+    margin-top: 5px;
+    height: 45px;
+}
+.col-35 {
+    position: relative;
+    text-align: left;
+    margin-top: 15px;
+    float: left;
+    width: 35%;
+}
+.col-65 {
+    position: relative;
+    float: left;
+    width: 65%;
+}
+input {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+input:focus {
+    border: 3px solid #555;
+}
+input[type=submit] {
+    background: darkgrey;
+    width: 100px;
+}
+input[type=submit]:hover {
+    background-color: #cf7c1f;
 }

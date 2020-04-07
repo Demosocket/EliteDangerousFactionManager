@@ -28,17 +28,45 @@
     </ul>
 </div>
 <div class="content">
-    <form action="#" th:action="@{/systems/add}" th:object="${system}" method="post">
-        <label for="num">№</label>
-        <input type="number" th:field="*{sysNum}" id="num" placeholder="№"><br>
-        <label for="sys">System</label>
-        <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
-        <label for="population">Population</label>
-        <input type="number" th:field="*{population}" id="population" placeholder="Population"><br>
-        <label for="date">Expansion Date</label>
-        <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
-        <input type="submit" class="menu-link"  value="Add System">
-    </form>
+    <div class="form-div">
+        <form action="#" th:action="@{/systems/add}" th:object="${system}" method="post">
+            <span>Enter new system data:</span>
+            <div class="row">
+                <div class="col-35">
+                    <label for="num">№</label>
+                </div>
+                <div class="col-65">
+                    <input type="number" th:field="*{sysNum}" id="num" placeholder="№" max="200"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="sys">System</label>
+                </div>
+                <div class="col-65">
+                    <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="population">Population</label>
+                </div>
+                <div class="col-65">
+                    <input type="number" th:field="*{population}" id="population" placeholder="Population" min="1"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="date">Expansion Date</label>
+                </div>
+                <div class="col-65">
+                    <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
+                </div>
+            </div>
+            <input type="submit" value="Add System">
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

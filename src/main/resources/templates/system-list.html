@@ -63,7 +63,9 @@
                 </tbody>
             </table>
         </div>
-        <p><a class="menu-link" th:href="@{/systems/add}">Add System</a></p>
+        <form action="#" th:action="@{/systems/add}" method="get">
+            <input type="submit" value="Add System">
+        </form>
     </div>
 </div>
 </body>
