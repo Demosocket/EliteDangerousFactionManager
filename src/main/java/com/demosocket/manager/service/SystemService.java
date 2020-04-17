@@ -7,7 +7,7 @@ import java.util.List;
 public interface SystemService {
 
     List<System> findAll();
-    System saveSystem(System system);
+    void saveSystem(System system);
     System findById(Integer id);
     void deleteById(Integer id);
 }

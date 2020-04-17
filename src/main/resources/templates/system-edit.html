@@ -24,12 +24,14 @@
         </li>
     </ul>
     <ul class="menu">
-        <li class="menu-list-right"><a class="menu-link" href="#">Login</a></li>
+        <li class="menu-list-right">
+            <a class="menu-link" th:href="@{/signin}">Sign In</a>
+        </li>
     </ul>
 </div>
 <div class="content">
     <div class="form-div">
-        <form action="#" th:action="@{/systems/edit}" th:object="${system}" method="post">
+        <form action="#" th:action="@{/systems/edit}" th:object="${system}" method="POST">
             <span>Edit system data:</span>
             <div class="row">
                 <div class="col-35">

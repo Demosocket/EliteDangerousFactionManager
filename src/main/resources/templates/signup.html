@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add System</title>
-    <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
+    <title>Edit System</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../../styles/style.css}">
 </head>
 <body style="background-color: gainsboro">
 <div class="header">
@@ -31,44 +31,31 @@
 </div>
 <div class="content">
     <div class="form-div">
-        <form action="#" th:action="@{/systems/add}" th:object="${system}" method="POST">
-            <span>Enter new system data:</span>
+        <form action="#"  th:action="@{/signup}" method="POST">
+            <span>Register:</span>
             <div class="row">
                 <div class="col-35">
-                    <label for="num">№</label>
+                    <label for="username">Username</label>
                 </div>
                 <div class="col-65">
-                    <input type="number" th:field="*{sysNum}" id="num" placeholder="№" max="200"><br>
+                    <input type="text" id="username" placeholder="username"><br>
                 </div>
             </div>
             <div class="row">
                 <div class="col-35">
-                    <label for="sys">System</label>
+                    <label for="password">Password</label>
                 </div>
                 <div class="col-65">
-                    <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
+                    <input type="password" id="password" placeholder="password"><br>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-35">
-                    <label for="population">Population</label>
-                </div>
-                <div class="col-65">
-                    <input type="number" th:field="*{population}" id="population" placeholder="Population" min="1"><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-35">
-                    <label for="date">Expansion Date</label>
-                </div>
-                <div class="col-65">
-                    <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
-                </div>
-            </div>
-            <input type="submit" value="Add System">
+
+
+
+
+            <input type="submit" class="menu-link" value="Sign Up">
         </form>
     </div>
-
 </div>
 </body>
 </html>
