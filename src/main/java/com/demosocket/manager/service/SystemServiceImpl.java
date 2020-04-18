@@ -22,8 +22,8 @@ public class SystemServiceImpl implements SystemService {
         return systemRepository.findAll(Sort.by(Sort.Direction.ASC, "Id"));
     }
 
-    public System saveSystem(System system) {
-        return systemRepository.save(system);
+    public void saveSystem(System system) {
+        systemRepository.save(system);
     }
 
     public System findById(Integer id) {

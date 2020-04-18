@@ -23,7 +23,7 @@ public class SystemController {
         this.systemService = systemService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public String findAll(Model model){
         List<System> systems = systemService.findAll();
         model.addAttribute("systems", systems);
@@ -38,13 +38,13 @@ public class SystemController {
     @PostMapping("/add")
     public String createSystem(System system) {
         systemService.saveSystem(system);
-        return "redirect:/systems/";
+        return "redirect:/systems/all";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id){
         systemService.deleteById(id);
-        return "redirect:/systems/";
+        return "redirect:/systems/all";
     }
 
     @GetMapping("/edit/{id}")
@@ -57,7 +57,7 @@ public class SystemController {
     @PostMapping("/edit")
     public String updateSystem(System system){
         systemService.saveSystem(system);
-        return "redirect:/systems/";
+        return "redirect:/systems/all";
     }
 
 }
