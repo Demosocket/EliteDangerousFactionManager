@@ -17,7 +17,7 @@
             <a class="menu-link" href="#">Faction</a>
         </li>
         <li class="menu-list-left">
-            <a class="menu-link" th:href="@{/systems/}">Systems</a>
+            <a class="menu-link" th:href="@{/systems/all}">Systems</a>
         </li>
         <li class="menu-list-left">
             <a class="menu-link" href="#">Influence</a>
@@ -25,13 +25,13 @@
     </ul>
     <ul class="menu">
         <li class="menu-list-right">
-            <a class="menu-link" th:href="@{/signin}">Sign In</a>
+            <a class="menu-link" th:href="@{/logout}">Log Out</a>
         </li>
     </ul>
 </div>
 <div class="content">
     <div class="form-div">
-        <form action="#" th:action="@{/systems/add}" th:object="${system}" method="POST">
+        <form th:action="@{/systems/add}" th:object="${system}" method="post">
             <span>Enter new system data:</span>
             <div class="row">
                 <div class="col-35">
