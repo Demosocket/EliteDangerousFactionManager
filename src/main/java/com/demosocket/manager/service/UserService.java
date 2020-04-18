@@ -2,6 +2,6 @@ package com.demosocket.manager.service;
 
 import com.demosocket.manager.model.UserForm;
 
-public interface SignUpService {
-    void signUp(UserForm userForm);
+public interface UserService {
+    void saveUser(UserForm userForm);
 }
