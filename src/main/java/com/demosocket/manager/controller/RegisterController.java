@@ -1,30 +1,34 @@
 package com.demosocket.manager.controller;
 
-import com.demosocket.manager.model.UserForm;
+import com.demosocket.manager.dto.UserDto;
 import com.demosocket.manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RegistrationController {
+@RequestMapping
+public class RegisterController {
 
     private UserService userService;
 
     @Autowired
-    public RegistrationController(UserService userService) {
+    public RegisterController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/signup")
-    public String registration() {
+    @GetMapping("/signup")
+    public String registration(UserDto userDto) {
+//        UserDto userDto = new UserDto();
+//        model.addAttribute("userDto", new User());
         return "signup-page";
     }
 
-    @PostMapping(value = "/signup")
-    public String createNewUser(UserForm userForm) {
-        userService.saveUser(userForm);
+    @PostMapping("/signup")
+    public String registrationNewUser(UserDto userDto) {
+        userService.saveUser(userDto);
         return "redirect:/";
     }
 }

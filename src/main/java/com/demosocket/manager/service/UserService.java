@@ -1,7 +1,7 @@
 package com.demosocket.manager.service;
 
-import com.demosocket.manager.model.UserForm;
+import com.demosocket.manager.dto.UserDto;
 
 public interface UserService {
-    void saveUser(UserForm userForm);
+    void saveUser(UserDto userDto);
 }

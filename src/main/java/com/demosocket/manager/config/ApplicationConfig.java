@@ -5,6 +5,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+//@EnableWebMvc
+//@ComponentScan(basePackages = {"com.demosocket.manager.controller"})
 public class ApplicationConfig implements WebMvcConfigurer {
 
     @Override
