@@ -19,7 +19,7 @@ public class SystemServiceImpl implements SystemService {
     }
 
     public List<System> findAll() {
-        return systemRepository.findAll(Sort.by(Sort.Direction.ASC, "Id"));
+        return systemRepository.findAll(Sort.by(Sort.Direction.ASC, "sysNum"));
     }
 
     public void saveSystem(System system) {

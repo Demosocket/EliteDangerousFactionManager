@@ -21,8 +21,6 @@ public class RegisterController {
 
     @GetMapping("/signup")
     public String registration(UserDto userDto) {
-//        UserDto userDto = new UserDto();
-//        model.addAttribute("userDto", new User());
         return "signup-page";
     }
 

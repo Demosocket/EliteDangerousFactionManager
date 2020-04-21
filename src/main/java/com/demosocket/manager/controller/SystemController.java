@@ -41,12 +41,6 @@ public class SystemController {
         return "redirect:/systems/all";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id){
-        systemService.deleteById(id);
-        return "redirect:/systems/all";
-    }
-
     @GetMapping("/edit/{id}")
     public String updateSystemForm(@PathVariable("id") Integer id, Model model){
         System system = systemService.findById(id);
@@ -60,4 +54,9 @@ public class SystemController {
         return "redirect:/systems/all";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Integer id){
+        systemService.deleteById(id);
+        return "redirect:/systems/all";
+    }
 }
