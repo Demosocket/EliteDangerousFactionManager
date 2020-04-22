@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Systems</title>
+    <title>Users</title>
     <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
 </head>
@@ -24,7 +23,7 @@
         <li class="menu-list-left">
             <a class="menu-link" href="#">Influence</a>
         </li>
-        <li class="menu-list-left" sec:authorize="hasAuthority('COMMANDER')">
+        <li class="menu-list-left">
             <a class="menu-link" th:href="@{/users}">Users</a>
         </li>
         <li class="menu-list-left">
@@ -38,44 +37,44 @@
     </ul>
 </div>
 <div class="content">
-    <div th:switch="${systems}">
+    <div th:switch="${users}">
         <h2 th:case="null">No systems found!</h2>
         <div th:case="*">
-            <h2>Systems</h2>
+            <h2>Users</h2>
             <table>
                 <thead>
                 <tr>
-                    <th>№</th>
-                    <th>System</th>
-                    <th>Population</th>
-                    <th>Expansion Date</th>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Enabled</th>
+                    <th>Role</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="system : ${systems}">
-                    <td th:text="${system.sysNum}"></td>
-                    <td th:text="${system.sys}"></td>
-                    <td th:text="${system.population}"></td>
-                    <td th:text="${system.date}"></td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-                        <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.enabled}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td>
+                        <a class="tooltip" href="#">
                             <img src="/images/edit.png" alt="Edit">
-                            <span class="tooltip-text">Edit System</span>
+                            <span class="tooltip-text">Edit User</span>
                         </a>
                     </td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${system.id})}">
-                            <img src="/images/delete.png" alt="Delete">
-                            <span class="tooltip-text">Delete System</span>
-                        </a>
-                    </td>
+<!--                    <td>-->
+<!--                        <a class="tooltip" href="#">-->
+<!--                            <img src="/images/delete.png" alt="Delete">-->
+<!--                            <span class="tooltip-text">Delete User</span>-->
+<!--                        </a>-->
+<!--                    </td>-->
                 </tr>
                 </tbody>
             </table>
         </div>
-        <form th:action="@{/systems/add}" method="get" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-            <input type="submit" value="Add System">
-        </form>
+<!--        <form th:action="@{/systems/add}" method="get">-->
+<!--            <input type="submit" value="Add System">-->
+<!--        </form>-->
     </div>
 </div>
 </body>
