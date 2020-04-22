@@ -22,6 +22,11 @@
     <h2>Registration</h2>
     <div class="form-div">
         <form th:action="@{/signup}" th:object="${userDto}"  method="post">
+<!--            -->
+            <div th:if="${userExist}">
+                <span class="error-message">User already Exists!</span>
+            </div>
+<!--            -->
             <div class="row">
                 <div class="col-35">
                     <label for="username">Username:</label>

@@ -53,6 +53,7 @@ body {
 .tooltip {
     position: relative;
     display: inline-block;
+    margin-bottom: -2px;
     border-bottom: 1px dotted black;
 }
 .tooltip .tooltip-text {
@@ -68,6 +69,12 @@ body {
 }
 .tooltip:hover .tooltip-text {
     visibility: visible;
+}
+.error-message {
+    color: firebrick;
+}
+.inform-message {
+    color: black;
 }
 /*table style*/
 table {

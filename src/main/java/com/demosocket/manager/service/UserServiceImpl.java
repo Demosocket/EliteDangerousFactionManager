@@ -2,7 +2,6 @@ package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.UserDto;
 import com.demosocket.manager.model.Role;
-import com.demosocket.manager.model.State;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +22,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public void saveUser(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEnabled(true);
-        user.setRole(Role.USER);
-        user.setState(State.ACTIVE);
+        user.setRole(Role.COMRADE);
 
         userRepository.save(user);
     }

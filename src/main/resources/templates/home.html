@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -22,6 +23,9 @@
         <li class="menu-list-left">
             <a class="menu-link" href="#">Influence</a>
         </li>
+        <li class="menu-list-left">
+            <a class="menu-link" href="#">Information</a>
+        </li>
     </ul>
     <ul class="menu">
         <li class="menu-list-right">
@@ -30,6 +34,9 @@
     </ul>
 </div>
 <div class="content">
+    <div sec:authorize="hasAnyAuthority('COMMANDER', 'COMMUNIST')">
+        <span>COMMANDER and COMMUNIST</span>
+    </div>
     <h1 th:inline="text">Hello, <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
     <p>This is an applications for managing factions in the game Elite Dangerous</p>
 </div>
