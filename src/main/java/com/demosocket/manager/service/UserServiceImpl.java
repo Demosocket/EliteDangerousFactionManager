@@ -2,7 +2,6 @@ package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.UserDto;
 import com.demosocket.manager.model.Role;
-import com.demosocket.manager.model.System;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
