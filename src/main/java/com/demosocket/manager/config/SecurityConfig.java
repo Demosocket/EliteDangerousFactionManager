@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/systems/add", "/systems/delete/**", "/systems/edit/**")
                 .hasAnyAuthority("COMMUNIST", "COMMANDER")
-                .antMatchers("/signup", "/styles/*", "/images/*")
+                .antMatchers("/signup", "/information", "/styles/*", "/images/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

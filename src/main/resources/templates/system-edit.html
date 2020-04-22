@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit System</title>
+    <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{../../styles/style.css}">
 </head>
 <body style="background-color: gainsboro">
@@ -14,7 +15,7 @@
             </a>
         </li>
         <li class="menu-list-left">
-            <a class="menu-link" href="#">Faction</a>
+            <a class="menu-link" th:href="@{/faction}">Faction</a>
         </li>
         <li class="menu-list-left">
             <a class="menu-link" th:href="@{/systems/all}">Systems</a>
@@ -23,7 +24,7 @@
             <a class="menu-link" href="#">Influence</a>
         </li>
         <li class="menu-list-left">
-            <a class="menu-link" href="#">Information</a>
+            <a class="menu-link" th:href="@{/information}">Information</a>
         </li>
     </ul>
     <ul class="menu">

@@ -140,3 +140,7 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #cf7c1f;
 }
+/*info text style*/
+.info-div {
+    text-align: center;
+}

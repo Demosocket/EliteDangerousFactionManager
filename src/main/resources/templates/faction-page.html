@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Faction Manager</title>
+    <title>Faction</title>
     <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
 </head>
@@ -34,8 +34,7 @@
     </ul>
 </div>
 <div class="content">
-    <h1 th:inline="text">Hello, <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
-    <h2>Today we have the following tasks:</h2>
+    <h1>Summary information about faction: population, controlling stations and systems</h1>
 </div>
 </body>
 </html>

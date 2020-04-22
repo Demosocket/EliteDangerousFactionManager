@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Information</title>
+    <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
+</head>
+<body>
+<div class="header">
+    <ul class="menu">
+        <li class="menu-list-left" id="logo">
+            <a class="menu-link" id="logo-link" th:href="@{/}">
+                <img src="/images/factionManager.png" alt="Faction Manager">
+            </a>
+        </li>
+        <li class="menu-list-left" sec:authorize="isAuthenticated()">
+            <a class="menu-link" th:href="@{/faction}">Faction</a>
+        </li>
+        <li class="menu-list-left" sec:authorize="isAuthenticated()">
+            <a class="menu-link" th:href="@{/systems/all}">Systems</a>
+        </li>
+        <li class="menu-list-left" sec:authorize="isAuthenticated()">
+            <a class="menu-link" href="#">Influence</a>
+        </li>
+        <li class="menu-list-left">
+            <a class="menu-link" th:href="@{/information}">Information</a>
+        </li>
+    </ul>
+    <ul class="menu">
+        <li class="menu-list-right" sec:authorize="!isAuthenticated()">
+            <a class="menu-link" th:href="@{/login}">Log In</a>
+        </li>
+        <li class="menu-list-right" sec:authorize="isAuthenticated()">
+            <a class="menu-link" th:href="@{/logout}">Log Out</a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="info-div">
+        <h1>Elite Dangerous: Faction Manager</h1>
+        <p>
+            <span>This application for managing the faction in the game <a target="_blank" href="https://www.elitedangerous.com">Elite Dangerous</a></span>
+        </p>
+        <p>
+            <span>You can write to us on the forum:
+                <a target="_blank" href="http://rci.mybb.ru">Interstellar Communist Union</a>
+            or visit our
+                <a target="_blank" href="https://discord.gg/Mmvc4HE">discord</a>
+            </span>
+        </p><br>
+        <p>
+            If you encounter any bugs please report them:
+            <a class="github-button" href="https://github.com/demosocket/EliteDangerousFactionManager/issues"
+               data-color-scheme="no-preference: light; light: light; dark: dark;"
+               data-icon="octicon-issue-opened"
+               aria-label="Issue demosocket/EliteDangerousFactionManager on GitHub">Issue</a>        </p>
+        <p>
+            <span>or send me an email <a target="_blank" href="mailto:dzemianenka.aliaksei@gmail.com">dzemianenka.aliaksei@gmail.com</a></span>
+        </p>
+    </div>
+</div>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

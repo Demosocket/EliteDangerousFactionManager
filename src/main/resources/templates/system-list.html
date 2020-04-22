@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Systems</title>
+    <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
 </head>
 <body style="background-color: gainsboro">
@@ -15,7 +16,7 @@
             </a>
         </li>
         <li class="menu-list-left">
-            <a class="menu-link" href="#">Faction</a>
+            <a class="menu-link" th:href="@{/faction}">Faction</a>
         </li>
         <li class="menu-list-left">
             <a class="menu-link" th:href="@{/systems/all}">Systems</a>
@@ -24,7 +25,7 @@
             <a class="menu-link" href="#">Influence</a>
         </li>
         <li class="menu-list-left">
-            <a class="menu-link" href="#">Information</a>
+            <a class="menu-link" th:href="@{/information}">Information</a>
         </li>
     </ul>
     <ul class="menu">
@@ -53,13 +54,13 @@
                     <td th:text="${system.sys}"></td>
                     <td th:text="${system.population}"></td>
                     <td th:text="${system.date}"></td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER', 'COMMUNIST')">
+                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
                         <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
                             <img src="/images/edit.png" alt="Edit">
                             <span class="tooltip-text">Edit System</span>
                         </a>
                     </td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER', 'COMMUNIST')">
+                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
                         <a class="tooltip" th:href="@{/systems/delete/{id}(id=${system.id})}">
                             <img src="/images/delete.png" alt="Delete">
                             <span class="tooltip-text">Delete System</span>
@@ -69,7 +70,7 @@
                 </tbody>
             </table>
         </div>
-        <form th:action="@{/systems/add}" method="get" sec:authorize="hasAnyAuthority('COMMANDER', 'COMMUNIST')">
+        <form th:action="@{/systems/add}" method="get" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
             <input type="submit" value="Add System">
         </form>
     </div>
