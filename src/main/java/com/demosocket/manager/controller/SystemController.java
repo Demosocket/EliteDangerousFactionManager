@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/systems")
 public class SystemController {
 
-    private SystemService systemService;
+    private final SystemService systemService;
 
     @Autowired
     public SystemController(SystemService systemService) {

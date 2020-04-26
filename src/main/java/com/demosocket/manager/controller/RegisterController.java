@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class RegisterController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public RegisterController(UserService userService) {

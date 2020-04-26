@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class SystemServiceImpl implements SystemService {
 
-    private SystemRepository systemRepository;
+    private final SystemRepository systemRepository;
 
     @Autowired
     public SystemServiceImpl(SystemRepository systemRepository) {
