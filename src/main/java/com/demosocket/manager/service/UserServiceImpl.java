@@ -34,13 +34,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public void saveNewUser(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEnabled(true);
         user.setRole(Role.COMRADE);
 
+        userRepository.save(user);
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 }

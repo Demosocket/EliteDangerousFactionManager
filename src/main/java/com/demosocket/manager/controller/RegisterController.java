@@ -32,7 +32,7 @@ public class RegisterController {
         if (userFromDb != null) {
             model.addAttribute("userExist", "User already Exists");
             return "signup-page";
-        } else userService.saveUser(userDto);
+        } else userService.saveNewUser(userDto);
         return "redirect:/";
     }
 }

@@ -29,24 +29,15 @@
                     <td th:text="${user.enabled}"></td>
                     <td th:text="${user.role}"></td>
                     <td>
-                        <a class="tooltip" href="#">
+                        <a class="tooltip" th:href="@{/users/edit/{id}(id=${user.id})}">
                             <img src="/images/edit.png" alt="Edit">
                             <span class="tooltip-text">Edit User</span>
                         </a>
                     </td>
-<!--                    <td>-->
-<!--                        <a class="tooltip" href="#">-->
-<!--                            <img src="/images/delete.png" alt="Delete">-->
-<!--                            <span class="tooltip-text">Delete User</span>-->
-<!--                        </a>-->
-<!--                    </td>-->
                 </tr>
                 </tbody>
             </table>
         </div>
-<!--        <form th:action="@{/systems/add}" method="get">-->
-<!--            <input type="submit" value="Add System">-->
-<!--        </form>-->
     </div>
 </div>
 </body>
