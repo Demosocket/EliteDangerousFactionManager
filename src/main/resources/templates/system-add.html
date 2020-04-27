@@ -22,6 +22,16 @@
             </div>
             <div class="row">
                 <div class="col-35">
+                    <label for="faction">Faction</label>
+                </div>
+                <div class="col-65">
+                    <select th:field="*{faction}" id="faction">
+                        <option th:value="NAGII_UNION">NAGII_UNION</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
                     <label for="sys">System</label>
                 </div>
                 <div class="col-65">
@@ -38,6 +48,118 @@
             </div>
             <div class="row">
                 <div class="col-35">
+                    <label for="primaryEconomy">Primary Economy</label>
+                </div>
+                <div class="col-65">
+                    <select th:field="*{primaryEconomy}" id="primaryEconomy">
+                        <option th:value="null">Select from the list</option>
+                        <option th:value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option th:value="EXTRACTION">EXTRACTION</option>
+                        <option th:value="REFINERY">REFINERY</option>
+                        <option th:value="MILITARY">MILITARY</option>
+                        <option th:value="COLONY">COLONY</option>
+                        <option th:value="TERRAFORMING">TERRAFORMING</option>
+                        <option th:value="HIGH_TECH">HIGH_TECH</option>
+                        <option th:value="AGRICULTURE">AGRICULTURE</option>
+                        <option th:value="PRISON">PRISON</option>
+                        <option th:value="SERVICE">SERVICE</option>
+                        <option th:value="TOURISM">TOURISM</option>
+                        <option th:value="DAMAGER">DAMAGER</option>
+                        <option th:value="REPAIR">REPAIR</option>
+                        <option th:value="RESCUE">RESCUE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="secondaryEconomy">Secondary Economy</label>
+                </div>
+                <div class="col-65">
+                    <select th:field="*{secondaryEconomy}" id="secondaryEconomy">
+                        <option th:value="null">Select from the list</option>
+                        <option th:value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option th:value="EXTRACTION">EXTRACTION</option>
+                        <option th:value="REFINERY">REFINERY</option>
+                        <option th:value="MILITARY">MILITARY</option>
+                        <option th:value="COLONY">COLONY</option>
+                        <option th:value="TERRAFORMING">TERRAFORMING</option>
+                        <option th:value="HIGH_TECH">HIGH_TECH</option>
+                        <option th:value="AGRICULTURE">AGRICULTURE</option>
+                        <option th:value="PRISON">PRISON</option>
+                        <option th:value="SERVICE">SERVICE</option>
+                        <option th:value="TOURISM">TOURISM</option>
+                        <option th:value="DAMAGER">DAMAGER</option>
+                        <option th:value="REPAIR">REPAIR</option>
+                        <option th:value="RESCUE">RESCUE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="orbitLargeControl">Orbit Large</label>
+                </div>
+                <div class="col-65">
+                    <div class="col-25-left">
+                        <input type="number" th:field="*{orbitLargeControl}" id="orbitLargeControl" placeholder="Controlled">
+                    </div>
+                    <div class="col-15-center">
+                        <label for="orbitLarge"> / </label>
+                    </div>
+                    <div class="col-25-right">
+                        <input type="number" th:field="*{orbitLarge}" id="orbitLarge" placeholder="Total">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="orbitMediumControl">Orbit Medium</label>
+                </div>
+                <div class="col-65">
+                    <div class="col-25-left">
+                        <input type="number" th:field="*{orbitMediumControl}" id="orbitMediumControl" placeholder="Controlled">
+                    </div>
+                    <div class="col-15-center">
+                        <label for="orbitMedium"> / </label>
+                    </div>
+                    <div class="col-25-right">
+                        <input type="number" th:field="*{orbitMedium}" id="orbitMedium" placeholder="Total">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="planetLargeControl">Planet Large</label>
+                </div>
+                <div class="col-65">
+                    <div class="col-25-left">
+                        <input type="number" th:field="*{planetLargeControl}" id="planetLargeControl" placeholder="Controlled">
+                    </div>
+                    <div class="col-15-center">
+                        <label for="planetLarge"> / </label>
+                    </div>
+                    <div class="col-25-right">
+                        <input type="number" th:field="*{planetLarge}" id="planetLarge" placeholder="Total">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
+                    <label for="planetBaseControl">Planet Base</label>
+                </div>
+                <div class="col-65">
+                    <div class="col-25-left">
+                        <input type="number" th:field="*{planetBaseControl}" id="planetBaseControl" placeholder="Controlled">
+                    </div>
+                    <div class="col-15-center">
+                        <label for="planetBase"> / </label>
+                    </div>
+                    <div class="col-25-right">
+                        <input type="number" th:field="*{planetBase}" id="planetBase" placeholder="Total">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-35">
                     <label for="date">Expansion Date</label>
                 </div>
                 <div class="col-65">
@@ -47,7 +169,6 @@
             <input type="submit" value="Add System">
         </form>
     </div>
-
 </div>
 </body>
 </html>

@@ -119,6 +119,22 @@ td {
     float: left;
     width: 65%;
 }
+.col-25-left {
+    position: relative;
+    float: left;
+    width: 45%;
+}
+.col-15-center {
+    position: relative;
+    float: left;
+    width: 10%;
+    margin-top: 13px;
+}
+.col-25-right {
+    position: relative;
+    float: right;
+    width: 45%;
+}
 input,select {
     width: 100%;
     padding: 8px 10px;

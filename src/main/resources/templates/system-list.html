@@ -20,6 +20,31 @@
                     <th>№</th>
                     <th>System</th>
                     <th>Population</th>
+                    <th>Economy</th>
+                    <th>
+                        <span class="tooltip">
+                            OL
+                            <span class="tooltip-text">Orbital Large</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="tooltip">
+                            OM
+                            <span class="tooltip-text">Orbital Medium</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="tooltip">
+                            PL
+                            <span class="tooltip-text">Planet Large</span>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="tooltip">
+                            PB
+                            <span class="tooltip-text">Planet Base</span>
+                        </span>
+                    </th>
                     <th>Expansion Date</th>
                 </tr>
                 </thead>
@@ -28,6 +53,27 @@
                     <td th:text="${system.sysNum}"></td>
                     <td th:text="${system.sys}"></td>
                     <td th:text="${system.population}"></td>
+
+                    <td th:if="${system.secondaryEconomy} == null" th:text="${system.primaryEconomy}"></td>
+                    <td th:unless="${system.secondaryEconomy} == null"
+                        th:text="${system.primaryEconomy} + ' / ' + ${system.secondaryEconomy}"></td>
+
+                    <td th:if="${system.orbitLarge} == null" th:text="'- / -'"></td>
+                    <td th:unless="${system.orbitLarge} == null"
+                        th:text="${system.orbitLargeControl} + ' / '+ ${system.orbitLarge}"></td>
+
+                    <td th:if="${system.orbitMedium} == null" th:text="'- / -'"></td>
+                    <td th:unless="${system.orbitMedium} == null"
+                        th:text="${system.orbitMediumControl} + ' / ' + ${system.orbitMedium}"></td>
+
+                    <td th:if="${system.planetLarge} == null" th:text="'- / -'"></td>
+                    <td th:unless="${system.planetLarge} == null"
+                        th:text="${system.planetLargeControl} + ' / ' + ${system.planetLarge}"></td>
+
+                    <td th:if="${system.planetBase} == null" th:text="'- / -'"></td>
+                    <td th:unless="${system.planetBase} == null"
+                        th:text="${system.planetBaseControl} + ' / ' + ${system.planetBase}"></td>
+
                     <td th:text="${system.date}"></td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
                         <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
