@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setEnabled(true);
         user.setRole(Role.COMRADE);
+        user.setEnabled(true);
 
         userRepository.save(user);
     }

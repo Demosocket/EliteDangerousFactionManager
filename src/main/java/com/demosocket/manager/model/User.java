@@ -22,9 +22,9 @@ public class User{
     @Column(name = "hash_password")
     private String hashPassword;
 
-    @Column(name = "enabled")
-    private boolean enabled;
-
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @Column(name = "enabled")
+    private boolean enabled;
 }

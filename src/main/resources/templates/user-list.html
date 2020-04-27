@@ -16,18 +16,18 @@
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Id</th>
                     <th>Username</th>
-                    <th>Enabled</th>
                     <th>Role</th>
+                    <th>Enabled</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.username}"></td>
-                    <td th:text="${user.enabled}"></td>
                     <td th:text="${user.role}"></td>
+                    <td th:text="${user.enabled}"></td>
                     <td>
                         <a class="tooltip" th:href="@{/users/edit/{id}(id=${user.id})}">
                             <img src="/images/edit.png" alt="Edit">

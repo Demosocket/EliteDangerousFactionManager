@@ -1,5 +1,6 @@
 package com.demosocket.manager.controller;
 
+import com.demosocket.manager.dto.UserEditDto;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,20 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String updateUserForm(@PathVariable("id") Integer id, Model model){
         User user = userService.findById(id);
-        model.addAttribute("user", user);
+        UserEditDto userEditDto = new UserEditDto();
+        userEditDto.setId(user.getId());
+        userEditDto.setUsername(user.getUsername());
+        userEditDto.setRole(user.getRole());
+        userEditDto.setEnabled(user.isEnabled());
+        model.addAttribute("user", userEditDto);
         return "user-edit";
     }
 
     @PostMapping("/edit")
-    public String updateUser(User user){
+    public String updateUser(UserEditDto userEditDto){
+        User user = userService.findById(userEditDto.getId());
+        user.setRole(userEditDto.getRole());
+        user.setEnabled(userEditDto.getEnabled());
         userService.saveUser(user);
         return "redirect:/users/all";
     }

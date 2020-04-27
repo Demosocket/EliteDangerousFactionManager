@@ -14,7 +14,7 @@
             <span>Edit user data:</span>
             <div class="row">
                 <div class="col-35">
-                    <label for="id">ID</label>
+                    <label for="id">Id</label>
                 </div>
                 <div class="col-65">
                     <input readonly type="number" th:field="*{id}" id="id" placeholder="id"><br>
@@ -30,18 +30,22 @@
             </div>
             <div class="row">
                 <div class="col-35">
-                    <label for="enabled">Enabled</label>
+                    <label for="role">Role</label>
                 </div>
                 <div class="col-65">
-                    <input type="checkbox" th:field="*{enabled}" id="enabled" placeholder="Enabled"><br>
+                    <select th:field="*{role}" id="role">
+                        <option th:value="COMRADE">COMRADE</option>
+                        <option th:value="COMMUNIST">COMMUNIST</option>
+                        <option th:value="COMMANDER">COMMANDER</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-35">
-                    <label for="role">Role</label>
+                    <label for="enabled">Enabled</label>
                 </div>
                 <div class="col-65">
-                    <input type="text" th:field="*{role}" id="role" placeholder="Role"><br>
+                    <input type="checkbox" th:field="*{enabled}" id="enabled" placeholder="Enabled"><br>
                 </div>
             </div>
             <input type="submit" class="menu-link" value="Edit User">
