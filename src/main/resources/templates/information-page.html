@@ -25,7 +25,7 @@
             <a class="menu-link" href="#">Influence</a>
         </li>
         <li class="menu-list-left" sec:authorize="hasAuthority('COMMANDER')">
-            <a class="menu-link" th:href="@{/users}">Users</a>
+            <a class="menu-link" th:href="@{/users/all}">Users</a>
         </li>
         <li class="menu-list-left">
             <a class="menu-link" th:href="@{/information}">Information</a>

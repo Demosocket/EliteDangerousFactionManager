@@ -54,7 +54,7 @@ body {
     position: relative;
     display: inline-block;
     margin-bottom: -2px;
-    border-bottom: 1px dotted black;
+    border-bottom: 2px dotted black;
 }
 .tooltip .tooltip-text {
     visibility: hidden;
@@ -94,6 +94,9 @@ th, td {
 td {
     padding: 5px 10px;
     background: gray;
+}
+td.equal-stations {
+    background: forestgreen;
 }
 /*forms style*/
 .form-div {
@@ -135,7 +138,8 @@ td {
     float: right;
     width: 45%;
 }
-input,select {
+input, select {
+    background: white;
     width: 100%;
     padding: 8px 10px;
     margin: 5px 0;
@@ -146,13 +150,11 @@ input,select {
     transition: 0.5s;
     outline: none;
 }
-input:focus {
+input:focus, select:focus {
     border: 3px solid #555;
 }
-select:focus {
-    border: 3px solid #555;
-}
-#enabled {
+
+input[type=checkbox] {
     cursor:pointer;
     height: 25px;
     width: 25px;
