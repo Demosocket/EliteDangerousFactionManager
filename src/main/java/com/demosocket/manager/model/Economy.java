@@ -1,6 +1,7 @@
 package com.demosocket.manager.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
@@ -22,5 +23,6 @@ public enum Economy {
     RESCUE("Rescue"),
     NONE("None");
 
+    @Getter
     private String title;
 }

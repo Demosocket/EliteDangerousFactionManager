@@ -65,8 +65,8 @@ public class System {
     @Column(name = "planet_base")
     private Integer planetBase;
 
-    @Column(name = "date")
+    @Column(name = "exp_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date expDate;
 }

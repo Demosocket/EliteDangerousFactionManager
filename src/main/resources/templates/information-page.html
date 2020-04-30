@@ -22,7 +22,7 @@
             <a class="menu-link" th:href="@{/systems/all}">Systems</a>
         </li>
         <li class="menu-list-left" sec:authorize="isAuthenticated()">
-            <a class="menu-link" href="#">Influence</a>
+            <a class="menu-link" th:href="@{/influence}">Influence</a>
         </li>
         <li class="menu-list-left" sec:authorize="hasAuthority('COMMANDER')">
             <a class="menu-link" th:href="@{/users/all}">Users</a>

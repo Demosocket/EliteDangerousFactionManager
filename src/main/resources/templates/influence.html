@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Influence</title>
+    <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{../styles/style.css}">
+</head>
+<body style="background-color: gainsboro">
+<div th:insert="home :: header"></div>
+<div class="content">
+<!--    -->
+    <div th:switch="${h}">
+        <h2 th:case="null">No systems found!</h2>
+        <div th:case="h">
+            <h2>Influence</h2>
+            <h3>Faction, Date</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>System</th>
+                    <th>State</th>
+                    <th>Influence</th>
+                    <th>Changes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="system : ${h}">
+<!--                    System-->
+                    <td th:text="${h.sys}"></td>
+<!--                    State-->
+                    <td th:text="${h.state}"></td>
+<!--                    Influence-->
+                    <td th:text="${h.influence}"></td>
+<!--                    Changes-->
+                    <td th:text="${h.changes}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <form th:action="@{/influence/update}" method="get" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+            <input type="submit" value="Update the Influence">
+        </form>
+    </div>
+</div>
+</body>
+</html>

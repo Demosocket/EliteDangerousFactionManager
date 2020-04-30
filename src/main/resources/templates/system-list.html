@@ -90,7 +90,7 @@
                     <td th:unless="(${system.planetBase} == null) or (${system.planetBaseControl} == ${system.planetBase})"
                         th:text="${system.planetBaseControl} + ' / ' + ${system.planetBase}"></td>
 <!--                    Expansion Date-->
-                    <td th:text="${system.date}"></td>
+                    <td th:text="${system.expDate}"></td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
                         <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
                             <img src="/images/edit.png" alt="Edit">
