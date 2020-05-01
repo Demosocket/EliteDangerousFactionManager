@@ -8,6 +8,6 @@ public interface SystemService {
 
     List<System> findAll();
     void saveSystem(System system);
-    System findById(Integer id);
-    void deleteById(Integer id);
+    System findById(Long id);
+    void deleteById(Long id);
 }

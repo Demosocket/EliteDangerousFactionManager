@@ -10,7 +10,7 @@
 <div th:insert="home :: header"></div>
 <div class="content">
     <div class="form-div">
-        <form th:action="@{/systems/edit}" th:object="${system}" method="post">
+        <form th:action="@{/systems/edit}" th:object="${sys}" method="post">
             <span>Edit system data:</span>
 <!--            if you delete this line records will be added rather than edited -->
             <div class="row">
@@ -27,7 +27,7 @@
                     <label for="num">№</label>
                 </div>
                 <div class="col-65">
-                    <input type="number" th:field="*{sysNum}" id="num" placeholder="№" max="200"><br>
+                    <input type="number" th:field="*{systemNum}" id="num" placeholder="№"><br>
                 </div>
             </div>
             <div class="row">
@@ -42,10 +42,10 @@
             </div>
             <div class="row">
                 <div class="col-35">
-                    <label for="sys">System</label>
+                    <label for="system">System</label>
                 </div>
                 <div class="col-65">
-                    <input type="text" th:field="*{sys}" id="sys" placeholder="System"><br>
+                    <input type="text" th:field="*{systemName}" id="system" placeholder="System"><br>
                 </div>
             </div>
             <div class="row">

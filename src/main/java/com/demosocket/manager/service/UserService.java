@@ -10,6 +10,6 @@ public interface UserService {
     List<User> findAll();
     void saveNewUser(UserDto userDto);
     User findByUsername(String username);
-    User findById(Integer id);
+    User findById(Long id);
     void saveUser(User user);
 }

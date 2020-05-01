@@ -11,9 +11,9 @@
 <div th:insert="home :: header"></div>
 <div class="content">
 <!--    -->
-    <div th:switch="${h}">
+    <div th:switch="${influences}">
         <h2 th:case="null">No systems found!</h2>
-        <div th:case="h">
+        <div th:case="influence">
             <h2>Influence</h2>
             <h3>Faction, Date</h3>
             <table>
@@ -22,19 +22,19 @@
                     <th>System</th>
                     <th>State</th>
                     <th>Influence</th>
-                    <th>Changes</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="system : ${h}">
+                <tr th:each="influence : ${influences}">
 <!--                    System-->
-                    <td th:text="${h.sys}"></td>
+                    <td th:text="${influence.system}"></td>
 <!--                    State-->
-                    <td th:text="${h.state}"></td>
+                    <td th:text="${influence.state}"></td>
 <!--                    Influence-->
-                    <td th:text="${h.influence}"></td>
-<!--                    Changes-->
-                    <td th:text="${h.changes}"></td>
+                    <td th:text="${influence.influence}"></td>
+<!--                    Date-->
+<!--                    -->
+<!--                    -->
                 </tr>
                 </tbody>
             </table>

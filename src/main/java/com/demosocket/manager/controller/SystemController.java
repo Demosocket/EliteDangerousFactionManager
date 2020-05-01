@@ -31,31 +31,31 @@ public class SystemController {
     }
 
     @GetMapping("/add")
-    public String createSystemForm(System system) {
+    public String createSystemForm(System sys) {
         return "system-add";
     }
 
     @PostMapping("/add")
-    public String createSystem(System system) {
-        systemService.saveSystem(system);
+    public String createSystem(System sys) {
+        systemService.saveSystem(sys);
         return "redirect:/systems/all";
     }
 
     @GetMapping("/edit/{id}")
-    public String updateSystemForm(@PathVariable("id") Integer id, Model model){
-        System system = systemService.findById(id);
-        model.addAttribute("system", system);
+    public String updateSystemForm(@PathVariable("id") Long id, Model model){
+        System sys = systemService.findById(id);
+        model.addAttribute("sys", sys);
         return "system-edit";
     }
 
     @PostMapping("/edit")
-    public String updateSystem(System system){
-        systemService.saveSystem(system);
+    public String updateSystem(System sys){
+        systemService.saveSystem(sys);
         return "redirect:/systems/all";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id){
+    public String deleteUser(@PathVariable("id") Long id){
         systemService.deleteById(id);
         return "redirect:/systems/all";
     }

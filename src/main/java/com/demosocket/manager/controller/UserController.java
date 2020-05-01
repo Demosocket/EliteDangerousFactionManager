@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    public String updateUserForm(@PathVariable("id") Integer id, Model model){
+    public String updateUserForm(@PathVariable("id") Long id, Model model){
         User user = userService.findById(id);
         UserEditDto userEditDto = new UserEditDto();
         userEditDto.setId(user.getId());

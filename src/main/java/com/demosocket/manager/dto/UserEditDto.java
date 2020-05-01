@@ -6,11 +6,8 @@ import lombok.Data;
 @Data
 public class UserEditDto {
 
-    private Integer id;
-
+    private Long id;
     private String username;
-
     private Role Role;
-
     private Boolean enabled;
 }

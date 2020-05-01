@@ -19,18 +19,21 @@ public class SystemServiceImpl implements SystemService {
     }
 
     public List<System> findAll() {
-        return systemRepository.findAll(Sort.by(Sort.Direction.ASC, "sysNum"));
+        return systemRepository.findAll(Sort.by(Sort.Direction.ASC, "systemNum"));
     }
 
-    public void saveSystem(System system) {
-        systemRepository.save(system);
+    public void saveSystem(System sys) {
+        // get by id
+        // merge
+        // save
+        systemRepository.save(sys);
     }
 
-    public System findById(Integer id) {
+    public System findById(Long id) {
         return systemRepository.findById(id).orElse(null);
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         systemRepository.deleteById(id);
     }
 }

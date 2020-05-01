@@ -54,51 +54,51 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="system : ${systems}">
+                <tr th:each="sys : ${systems}">
 <!--                    №-->
-                    <td th:text="${system.sysNum}"></td>
+                    <td th:text="${sys.systemNum}"></td>
 <!--                    System-->
-                    <td th:text="${system.sys}"></td>
+                    <td th:text="${sys.systemName}"></td>
 <!--                    Population-->
-                    <td th:text="${system.population}"></td>
+                    <td th:text="${sys.population}"></td>
 <!--                    Economy-->
-                    <td th:if="${system.secondaryEconomy} == null" th:text="${system.primaryEconomy}"></td>
-                    <td th:unless="${system.secondaryEconomy} == null"
-                        th:text="${system.primaryEconomy} + ' / ' + ${system.secondaryEconomy}"></td>
+                    <td th:if="${sys.secondaryEconomy} == null" th:text="${sys.primaryEconomy}"></td>
+                    <td th:unless="${sys.secondaryEconomy} == null"
+                        th:text="${sys.primaryEconomy} + ' / ' + ${sys.secondaryEconomy}"></td>
 <!--                    Orbital Large-->
-                    <td th:if="${system.orbitLarge} == null" th:text="'- / -'"></td>
-                    <td th:unless="(${system.orbitLarge} == null) or (${system.orbitLargeControl} != ${system.orbitLarge})"
-                        th:text="${system.orbitLargeControl} + ' / ' + ${system.orbitLarge}" class="equal-stations"></td>
-                    <td th:unless="(${system.orbitLarge} == null) or (${system.orbitLargeControl} == ${system.orbitLarge})"
-                        th:text="${system.orbitLargeControl} + ' / ' + ${system.orbitLarge}"></td>
+                    <td th:if="${sys.orbitLarge} == null" th:text="'- / -'"></td>
+                    <td th:unless="(${sys.orbitLarge} == null) or (${sys.orbitLargeControl} != ${sys.orbitLarge})"
+                        th:text="${sys.orbitLargeControl} + ' / ' + ${sys.orbitLarge}" class="equal-stations"></td>
+                    <td th:unless="(${sys.orbitLarge} == null) or (${sys.orbitLargeControl} == ${sys.orbitLarge})"
+                        th:text="${sys.orbitLargeControl} + ' / ' + ${sys.orbitLarge}"></td>
 <!--                    Orbital Medium-->
-                    <td th:if="${system.orbitMedium} == null" th:text="'- / -'"></td>
-                    <td th:unless="(${system.orbitMedium} == null) or (${system.orbitMediumControl} != ${system.orbitMedium})"
-                        th:text="${system.orbitMediumControl} + ' / ' + ${system.orbitMedium}" class="equal-stations"></td>
-                    <td th:unless="(${system.orbitMedium} == null) or (${system.orbitMediumControl} == ${system.orbitMedium})"
-                        th:text="${system.orbitMediumControl} + ' / ' + ${system.orbitMedium}"></td>
+                    <td th:if="${sys.orbitMedium} == null" th:text="'- / -'"></td>
+                    <td th:unless="(${sys.orbitMedium} == null) or (${sys.orbitMediumControl} != ${sys.orbitMedium})"
+                        th:text="${sys.orbitMediumControl} + ' / ' + ${sys.orbitMedium}" class="equal-stations"></td>
+                    <td th:unless="(${sys.orbitMedium} == null) or (${sys.orbitMediumControl} == ${sys.orbitMedium})"
+                        th:text="${sys.orbitMediumControl} + ' / ' + ${sys.orbitMedium}"></td>
 <!--                    Planet Large-->
-                    <td th:if="${system.planetLarge} == null" th:text="'- / -'"></td>
-                    <td th:unless="(${system.planetLarge} == null) or (${system.planetLargeControl} != ${system.planetLarge})"
-                        th:text="${system.planetLargeControl} + ' / ' + ${system.planetLarge}" class="equal-stations"></td>
-                    <td th:unless="(${system.planetLarge} == null) or (${system.planetLargeControl} == ${system.planetLarge})"
-                        th:text="${system.planetLargeControl} + ' / ' + ${system.planetLarge}"></td>
+                    <td th:if="${sys.planetLarge} == null" th:text="'- / -'"></td>
+                    <td th:unless="(${sys.planetLarge} == null) or (${sys.planetLargeControl} != ${sys.planetLarge})"
+                        th:text="${sys.planetLargeControl} + ' / ' + ${sys.planetLarge}" class="equal-stations"></td>
+                    <td th:unless="(${sys.planetLarge} == null) or (${sys.planetLargeControl} == ${sys.planetLarge})"
+                        th:text="${sys.planetLargeControl} + ' / ' + ${sys.planetLarge}"></td>
 <!--                    Planet Base-->
-                    <td th:if="${system.planetBase} == null" th:text="'- / -'"></td>
-                    <td th:unless="(${system.planetBase} == null) or (${system.planetBaseControl} != ${system.planetBase})"
-                        th:text="${system.planetBaseControl} + ' / ' + ${system.planetBase}" class="equal-stations"></td>
-                    <td th:unless="(${system.planetBase} == null) or (${system.planetBaseControl} == ${system.planetBase})"
-                        th:text="${system.planetBaseControl} + ' / ' + ${system.planetBase}"></td>
+                    <td th:if="${sys.planetBase} == null" th:text="'- / -'"></td>
+                    <td th:unless="(${sys.planetBase} == null) or (${sys.planetBaseControl} != ${sys.planetBase})"
+                        th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}" class="equal-stations"></td>
+                    <td th:unless="(${sys.planetBase} == null) or (${sys.planetBaseControl} == ${sys.planetBase})"
+                        th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}"></td>
 <!--                    Expansion Date-->
-                    <td th:text="${system.expDate}"></td>
+                    <td th:text="${sys.expDate}"></td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-                        <a class="tooltip" th:href="@{/systems/edit/{id}(id=${system.id})}">
+                        <a class="tooltip" th:href="@{/systems/edit/{id}(id=${sys.id})}">
                             <img src="/images/edit.png" alt="Edit">
                             <span class="tooltip-text">Edit System</span>
                         </a>
                     </td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${system.id})}">
+                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}">
                             <img src="/images/delete.png" alt="Delete">
                             <span class="tooltip-text">Delete System</span>
                         </a>

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -17,18 +18,18 @@ public class System {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sys_id")
-    private Integer id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "faction")
     @Enumerated(value = EnumType.STRING)
     private Faction faction;
 
-    @Column(name = "sys_num")
-    private Integer sysNum;
+    @Column(name = "system_num")
+    private Integer systemNum;
 
-    @Column(name = "sys")
-    private String sys;
+    @Column(name = "system_name")
+    private String systemName;
 
     @Column(name = "population")
     private Long population;
@@ -69,4 +70,8 @@ public class System {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date expDate;
+//
+    @OneToMany(targetEntity = Influence.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "system_id")
+    private Collection<Influence> influences;
 }
