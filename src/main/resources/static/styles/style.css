@@ -99,6 +99,9 @@ td.equal-stations {
     background: forestgreen;
 }
 /*forms style*/
+#id-hide {
+    display: none;
+}
 .form-div {
     margin: auto;
     width: 400px;

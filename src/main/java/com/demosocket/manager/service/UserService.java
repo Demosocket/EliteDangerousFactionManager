@@ -1,15 +1,16 @@
 package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.UserDto;
+import com.demosocket.manager.dto.UserEditDto;
 import com.demosocket.manager.model.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> findAll();
-    void saveNewUser(UserDto userDto);
+    List<UserEditDto> findAll();
+    UserEditDto findById(Long id);
     User findByUsername(String username);
-    User findById(Long id);
-    void saveUser(User user);
+    void saveNewUser(UserDto userDto);
+    void saveUser(UserEditDto userEditDto);
 }

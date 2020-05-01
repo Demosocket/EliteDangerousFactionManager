@@ -2,10 +2,8 @@ package com.demosocket.manager.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@NoArgsConstructor
 public enum Economy {
     INDUSTRIAL("Industrial"),
     EXTRACTION("Extraction"),
@@ -24,5 +22,5 @@ public enum Economy {
     NONE("None");
 
     @Getter
-    private String title;
+    private final String title;
 }
