@@ -1,13 +1,13 @@
 package com.demosocket.manager.service;
 
-import com.demosocket.manager.model.System;
+import com.demosocket.manager.dto.SystemDto;
 
 import java.util.List;
 
 public interface SystemService {
 
-    List<System> findAll();
-    void saveSystem(System system);
-    System findById(Long id);
+    List<SystemDto> findAll();
+    SystemDto findById(Long id);
+    void saveSystem(SystemDto systemDto);
     void deleteById(Long id);
 }

@@ -49,18 +49,19 @@ public class UserServiceImpl implements UserService {
             userEditDto.setRole(role);
             userEditDtoList.add(userEditDto);
         }
-
         return new PageImpl<>(userEditDtoList, pageable, userPage.getTotalElements());
     }
 
     @Override
     public UserEditDto findById(Long id) {
         User userFromDb = userRepository.findById(id).orElse(null);
-        UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
         if (userFromDb == null) {
             return null;
-        } else userEditDto.setRole(userFromDb.getRole().getTitle());
-        return userEditDto;
+        } else {
+            UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
+            userEditDto.setRole(userFromDb.getRole().getTitle());
+            return userEditDto;
+        }
     }
 
     @Override
@@ -69,7 +70,6 @@ public class UserServiceImpl implements UserService {
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(Role.COMRADE);
         user.setEnabled(true);
-
         userRepository.save(user);
     }
 
@@ -79,7 +79,6 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(userEditDto, User.class);
         user.setHashPassword(userFromDB.getHashPassword());
         user.setRole(Role.valueOf(userEditDto.getRole().toUpperCase()));
-
         userRepository.save(user);
     }
 }

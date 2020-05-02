@@ -2,8 +2,6 @@ package com.demosocket.manager.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class SystemDto {
 
@@ -21,5 +19,5 @@ public class SystemDto {
     private Integer planetLarge;
     private Integer planetBaseControl;
     private Integer planetBase;
-    private Date expDate;
+    private String expDate;
 }

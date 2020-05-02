@@ -10,7 +10,7 @@
 <body style="background-color: gainsboro">
 <div th:insert="home :: header"></div>
 <div class="content">
-    <div th:switch="${systems}">
+    <div th:switch="${systemsDb}">
         <h2 th:case="null">No systems found!</h2>
         <div th:case="*">
             <h2>Systems</h2>
@@ -54,7 +54,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="sys : ${systems}">
+                <tr th:each="sys : ${systemsDb}">
 <!--                    №-->
                     <td th:text="${sys.systemNum}"></td>
 <!--                    System-->
@@ -62,8 +62,8 @@
 <!--                    Population-->
                     <td th:text="${sys.population}"></td>
 <!--                    Economy-->
-                    <td th:if="${sys.secondaryEconomy} == null" th:text="${sys.primaryEconomy}"></td>
-                    <td th:unless="${sys.secondaryEconomy} == null"
+                    <td th:if="${sys.secondaryEconomy} == None" th:text="${sys.primaryEconomy}"></td>
+                    <td th:unless="${sys.secondaryEconomy} == None"
                         th:text="${sys.primaryEconomy} + ' / ' + ${sys.secondaryEconomy}"></td>
 <!--                    Orbital Large-->
                     <td th:if="${sys.orbitLarge} == null" th:text="'- / -'"></td>

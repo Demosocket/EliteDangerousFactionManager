@@ -10,7 +10,7 @@
 <div th:insert="home :: header"></div>
 <div class="content">
     <div class="form-div">
-        <form th:action="@{/systems/edit}" th:object="${sys}" method="post">
+        <form th:action="@{/systems/edit}" th:object="${systemDto}" method="post">
             <span>Edit system data:</span>
             <div class="row" id="id-hide">
                 <div class="col-35">
@@ -26,16 +26,6 @@
                 </div>
                 <div class="col-65">
                     <input type="number" th:field="*{systemNum}" id="num" placeholder="№"><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-35">
-                    <label for="faction">Faction</label>
-                </div>
-                <div class="col-65">
-                    <select th:field="*{faction}" id="faction">
-                        <option th:value="NAGII_UNION">NAGII_UNION</option>
-                    </select>
                 </div>
             </div>
             <div class="row">
@@ -60,21 +50,21 @@
                 </div>
                 <div class="col-65">
                     <select th:field="*{primaryEconomy}" id="primaryEconomy">
-                        <option th:value="null">Select from the list</option>
-                        <option th:value="INDUSTRIAL">INDUSTRIAL</option>
-                        <option th:value="EXTRACTION">EXTRACTION</option>
-                        <option th:value="REFINERY">REFINERY</option>
-                        <option th:value="MILITARY">MILITARY</option>
-                        <option th:value="COLONY">COLONY</option>
-                        <option th:value="TERRAFORMING">TERRAFORMING</option>
-                        <option th:value="HIGH_TECH">HIGH_TECH</option>
-                        <option th:value="AGRICULTURE">AGRICULTURE</option>
-                        <option th:value="PRISON">PRISON</option>
-                        <option th:value="SERVICE">SERVICE</option>
-                        <option th:value="TOURISM">TOURISM</option>
-                        <option th:value="DAMAGER">DAMAGER</option>
-                        <option th:value="REPAIR">REPAIR</option>
-                        <option th:value="RESCUE">RESCUE</option>
+                        <option th:value="None">Select from the list</option>
+                        <option th:value="Industrial">Industrial</option>
+                        <option th:value="Extraction">Extraction</option>
+                        <option th:value="Refinery">Refinery</option>
+                        <option th:value="Military">Military</option>
+                        <option th:value="Colony">Colony</option>
+                        <option th:value="Terraforming">Terraforming</option>
+                        <option th:value="High+' '+Tech">High Tech</option>
+                        <option th:value="Agriculture">Agriculture</option>
+                        <option th:value="Prison">Prison</option>
+                        <option th:value="Service">Service</option>
+                        <option th:value="Tourism">Tourism</option>
+                        <option th:value="Damager">Damager</option>
+                        <option th:value="Repair">Repair</option>
+                        <option th:value="Rescue">Rescue</option>
                     </select>
                 </div>
             </div>
@@ -84,21 +74,21 @@
                 </div>
                 <div class="col-65">
                     <select th:field="*{secondaryEconomy}" id="secondaryEconomy">
-                        <option th:value="null">Select from the list</option>
-                        <option th:value="INDUSTRIAL">INDUSTRIAL</option>
-                        <option th:value="EXTRACTION">EXTRACTION</option>
-                        <option th:value="REFINERY">REFINERY</option>
-                        <option th:value="MILITARY">MILITARY</option>
-                        <option th:value="COLONY">COLONY</option>
-                        <option th:value="TERRAFORMING">TERRAFORMING</option>
-                        <option th:value="HIGH_TECH">HIGH_TECH</option>
-                        <option th:value="AGRICULTURE">AGRICULTURE</option>
-                        <option th:value="PRISON">PRISON</option>
-                        <option th:value="SERVICE">SERVICE</option>
-                        <option th:value="TOURISM">TOURISM</option>
-                        <option th:value="DAMAGER">DAMAGER</option>
-                        <option th:value="REPAIR">REPAIR</option>
-                        <option th:value="RESCUE">RESCUE</option>
+                        <option th:value="None">Select from the list</option>
+                        <option th:value="Industrial">Industrial</option>
+                        <option th:value="Extraction">Extraction</option>
+                        <option th:value="Refinery">Refinery</option>
+                        <option th:value="Military">Military</option>
+                        <option th:value="Colony">Colony</option>
+                        <option th:value="Terraforming">Terraforming</option>
+                        <option th:value="High+' '+Tech">High Tech</option>
+                        <option th:value="Agriculture">Agriculture</option>
+                        <option th:value="Prison">Prison</option>
+                        <option th:value="Service">Service</option>
+                        <option th:value="Tourism">Tourism</option>
+                        <option th:value="Damager">Damager</option>
+                        <option th:value="Repair">Repair</option>
+                        <option th:value="Rescue">Rescue</option>
                     </select>
                 </div>
             </div>
