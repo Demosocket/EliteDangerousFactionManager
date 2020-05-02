@@ -9,8 +9,8 @@
 <body style="background-color: gainsboro">
 <div th:insert="home :: header"></div>
 <div class="content">
-    <div th:switch="${users}">
-        <h2 th:case="null">No systems found!</h2>
+    <div th:switch="${userPage}">
+        <h2 th:case="null">No users found!</h2>
         <div th:case="*">
             <h2>Users</h2>
             <table>
@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${users}">
+                <tr th:each="user : ${userPage}">
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.username}"></td>
                     <td th:text="${user.role}"></td>
@@ -37,6 +37,19 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="pagination-main">
+                <div class="pagination-name">
+                    <span>Pages:</span>
+                </div>
+                <div th:if="${userPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
+
+                    <div>
+                        <a th:href="@{/users/all(size=${userPage.size}, page=${pageNumber})}"
+                           th:text=${pageNumber}
+                           th:class="${pageNumber == userPage.number + 1} ? active"></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

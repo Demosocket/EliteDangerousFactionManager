@@ -1,7 +1,7 @@
 body {
     background: gainsboro url("/images/background-pic.jpg");
 }
-/*header style*/
+/*--------------------header style--------------------*/
 .header {
     position: relative;
     width: 100%;
@@ -42,7 +42,7 @@ body {
 .menu-link:hover {
     background: #cf7c1f;
 }
-/*main div and tips*/
+/*--------------------main div and tips--------------------*/
 .content {
     background-color: #a9a9a9;
     text-align: center;
@@ -76,7 +76,7 @@ body {
 .inform-message {
     color: black;
 }
-/*table style*/
+/*--------------------table style--------------------*/
 table {
     text-align: center;
     margin: auto;
@@ -98,7 +98,34 @@ td {
 td.equal-stations {
     background: forestgreen;
 }
-/*forms style*/
+/*--------------------pagination--------------------*/
+.pagination-main {
+    position: relative;
+}
+.pagination-name {
+    position: relative;
+    bottom: 17px;
+    display: inline-block;
+}
+.pagination {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a.active {
+    background-color: gray;
+    color: white;
+}
+.pagination a:hover:not(.active) {
+    background-color: #cf7c1f;
+}
+/*--------------------forms style--------------------*/
 #id-hide {
     display: none;
 }
@@ -156,7 +183,6 @@ input, select {
 input:focus, select:focus {
     border: 3px solid #555;
 }
-
 input[type=checkbox] {
     cursor:pointer;
     height: 25px;
@@ -169,7 +195,7 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #cf7c1f;
 }
-/*info text style*/
+/*--------------------info text style--------------------*/
 .info-div {
     text-align: center;
 }

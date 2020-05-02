@@ -1,6 +1,5 @@
 package com.demosocket.manager.dto;
 
-import com.demosocket.manager.model.Economy;
 import lombok.Data;
 
 import java.util.Date;

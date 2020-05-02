@@ -7,7 +7,9 @@ import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,30 +33,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEditDto findById(Long id) {
-        User userFromDb = userRepository.findById(id).orElse(null);
-        UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
-        assert userFromDb != null;
-        userEditDto.setRole(userFromDb.getRole().getTitle());
-        return userEditDto;
-    }
-
-    @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public List<UserEditDto> findAll() {
+    public Page<UserEditDto> findAll(Pageable pageable) {
+        Page<User> userPage = userRepository.findAll(pageable);
+        List<User> userList = userPage.getContent();
+
         List<UserEditDto> userEditDtoList = new ArrayList<>();
-        List<User> userList = userRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         for (User user : userList) {
             String role = user.getRole().getTitle();
             UserEditDto userEditDto = modelMapper.map(user, UserEditDto.class);
             userEditDto.setRole(role);
             userEditDtoList.add(userEditDto);
         }
-        return userEditDtoList;
+
+        return new PageImpl<>(userEditDtoList, pageable, userPage.getTotalElements());
+    }
+
+    @Override
+    public UserEditDto findById(Long id) {
+        User userFromDb = userRepository.findById(id).orElse(null);
+        UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
+        if (userFromDb == null) {
+            return null;
+        } else userEditDto.setRole(userFromDb.getRole().getTitle());
+        return userEditDto;
     }
 
     @Override

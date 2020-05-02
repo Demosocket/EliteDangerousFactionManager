@@ -3,12 +3,18 @@ package com.demosocket.manager.controller;
 import com.demosocket.manager.dto.UserEditDto;
 import com.demosocket.manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 
 @Controller
 @RequestMapping("/users")
@@ -22,19 +28,36 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public String findAll(Model model){
-        model.addAttribute("users", userService.findAll());
+    public String findAll(
+            Model model,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(25);
+
+        Page<UserEditDto> userPage = userService.findAll(
+                PageRequest.of(currentPage - 1, pageSize, Sort.by("id").ascending()));
+        model.addAttribute("userPage", userPage);
+
+        int totalPages = userPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "user-list";
     }
 
     @GetMapping("/edit/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model){
+    public String updateUserForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "user-edit";
     }
 
     @PostMapping("/edit")
-    public String updateUser(UserEditDto userEditDto){
+    public String updateUser(UserEditDto userEditDto) {
         userService.saveUser(userEditDto);
         return "redirect:/users/all";
     }
