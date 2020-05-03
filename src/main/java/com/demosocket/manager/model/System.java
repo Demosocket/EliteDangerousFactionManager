@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -70,8 +69,8 @@ public class System {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date expDate;
-//
-    @OneToMany(targetEntity = Influence.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "system_id")
-    private Collection<Influence> influences;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+//    private List<Influence> influences;
 }

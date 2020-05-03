@@ -12,8 +12,8 @@
 <div class="content">
 <!--    -->
     <div th:switch="${influences}">
-        <h2 th:case="null">No systems found!</h2>
-        <div th:case="influence">
+        <h2 th:case="null">No influence found!</h2>
+        <div th:case="*">
             <h2>Influence</h2>
             <h3>Faction, Date</h3>
             <table>
@@ -27,7 +27,7 @@
                 <tbody>
                 <tr th:each="influence : ${influences}">
 <!--                    System-->
-                    <td th:text="${influence.system}"></td>
+<!--                    <td th:text="${influence.system.systemName}"></td>-->
 <!--                    State-->
                     <td th:text="${influence.state}"></td>
 <!--                    Influence-->
