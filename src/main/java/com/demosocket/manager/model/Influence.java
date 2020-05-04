@@ -20,17 +20,17 @@ public class Influence {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "system_id")
-    private Long system_id;
+//    @Column(name = "systems_id")
+//    private Long systems_id;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "system_id", referencedColumnName = "id")
-//    private System system;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "systems_id", referencedColumnName = "id")
+    private System system;
 
-    @Column(name = "date")
+    @Column(name = "day")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date day;
 
     @Column(name = "influence")
     private Integer influence;

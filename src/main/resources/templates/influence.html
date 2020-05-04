@@ -14,31 +14,50 @@
     <div th:switch="${influences}">
         <h2 th:case="null">No influence found!</h2>
         <div th:case="*">
-            <h2>Influence</h2>
-            <h3>Faction, Date</h3>
+            <h2>The Influence of the faction Nagii Union <span th:text="${lastDate}"></span></h2>
             <table>
                 <thead>
                 <tr>
                     <th>System</th>
                     <th>State</th>
                     <th>Influence</th>
+                    <th>Changes</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="influence : ${influences}">
 <!--                    System-->
-<!--                    <td th:text="${influence.system.systemName}"></td>-->
+                    <td th:text="${influence.systemName}"></td>
 <!--                    State-->
                     <td th:text="${influence.state}"></td>
 <!--                    Influence-->
                     <td th:text="${influence.influence}"></td>
-<!--                    Date-->
-<!--                    -->
-<!--                    -->
+<!--                    Changes-->
+                    <td th:text="${influence.changes}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <div th:switch="${dates}">
+            <h2 th:case="null">No dates found!</h2>
+            <div th:case="*">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="d : ${dates}">
+<!--                    Date-->
+                        <td th:text="${d}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <form th:action="@{/influence/update}" method="get" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
             <input type="submit" value="Update the Influence">
         </form>
