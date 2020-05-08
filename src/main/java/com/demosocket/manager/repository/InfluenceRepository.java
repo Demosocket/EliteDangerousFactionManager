@@ -9,11 +9,7 @@ import java.util.List;
 
 public interface InfluenceRepository extends JpaRepository<Influence, Long> {
 
-    Influence findFirstByOrderByDayDesc();
-
-    List<Influence> findByDay(Date date);
-    List<Influence> findAllByDayOrderById(Date date);
-
     @Query(value = "SELECT i.day FROM Influence i GROUP BY i.day ORDER BY i.day DESC LIMIT 2", nativeQuery = true)
-    List<Date> findMyQuery();
+    List<Date> findTwoLastDays();
+    List<Influence> findAllByDayOrderById(Date date);
 }

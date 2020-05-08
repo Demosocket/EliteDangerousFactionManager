@@ -13,7 +13,7 @@ body {
     position: relative;
     background: #a9a9a9;
     top: 50%;
-    padding-left: 0;
+    padding-right: 10px;
 }
 #logo {
     position: relative;
@@ -24,17 +24,17 @@ body {
 }
 .menu-list-left {
     float: left;
-    margin-left: 10px;
     margin-top: -0.625em;
 }
 .menu-list-right {
     float: right;
-    margin-right: 10px;
     margin-top: -0.625em;
 }
 .menu-link {
     text-decoration: none;
     padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     color:#fff;
     background: #696969;
     border-radius:5px;
@@ -47,7 +47,8 @@ body {
     background-color: #a9a9a9;
     text-align: center;
     align-items: center;
-    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     margin-top: 15px;
 }
 .tooltip {
@@ -194,6 +195,33 @@ input[type=submit] {
 }
 input[type=submit]:hover {
     background-color: #cf7c1f;
+}
+/*--------------------influence date--------------------*/
+.thisDate {
+    width: auto;
+}
+.influence-date-title {
+    padding-right: 10px;
+    display: flex;
+    width: auto;
+}
+.influence-date-main {
+    width:auto;
+    display: flex;
+}
+.influence-date {
+    height: 10px;
+    margin: -7px;
+    -webkit-flex: 1;
+    display: flex;
+    /*width: auto;*/
+}
+.influence-value {
+    width: 75px;
+}
+.influence-value, .influence-state {
+    height: 10px;
+    margin: -2px;
 }
 /*--------------------info text style--------------------*/
 .info-div {

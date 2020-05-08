@@ -1,18 +1,14 @@
 package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.InfluenceDto;
-import com.demosocket.manager.model.Influence;
+import com.demosocket.manager.dto.InfluenceFormDto;
 
 import java.util.Date;
 import java.util.List;
 
 public interface InfluenceService {
-//    List<InfluenceDto> findAll();
-//
-    Influence findFirstByOrderByDayDesc();
-//
-//    List<InfluenceDto> findByDay(Date date);
 
-    List<InfluenceDto> findLastInfluence();
-    List<Date> findMyQuery();
+    List<InfluenceDto> findInfluenceDtoLastDay();
+    List<Date> findTwoLastDays();
+    void saveInfluence(InfluenceFormDto influenceFormDto, Date date);
 }

@@ -46,7 +46,7 @@ public class SystemController {
 
     @PostMapping("/edit")
     public String updateSystem(SystemDto systemDto){
-        systemService.saveSystem(systemDto);
+        systemService.editSystem(systemDto);
         return "redirect:/systems/all";
     }
 

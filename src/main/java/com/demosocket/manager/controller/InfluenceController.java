@@ -1,16 +1,13 @@
 package com.demosocket.manager.controller;
 
-import com.demosocket.manager.dto.InfluenceDto;
-import com.demosocket.manager.model.Influence;
+import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.service.InfluenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/influence")
@@ -25,10 +22,23 @@ public class InfluenceController {
 
     @GetMapping("/last")
     public String influencePage(Model model) {
-        Date lastDate = influenceService.findFirstByOrderByDayDesc().getDay();
-        model.addAttribute("lastDate", lastDate);
-        model.addAttribute("influences", influenceService.findLastInfluence());
-        model.addAttribute("dates", influenceService.findMyQuery());
+        model.addAttribute("lastDate", influenceService.findTwoLastDays().get(0));
+        model.addAttribute("influences", influenceService.findInfluenceDtoLastDay());
         return "influence";
+    }
+
+    @GetMapping("/update")
+    public String influenceUpdateForm(Model model) {
+        model.addAttribute("thisDate", new Date());
+        model.addAttribute("lastDate", influenceService.findTwoLastDays().get(0));
+        model.addAttribute("form", influenceService.findInfluenceDtoLastDay());
+        return "influence-update";
+    }
+
+    @PostMapping("/update")
+    public String influenceUpdate(@ModelAttribute String form, Model model) {
+        System.out.println(form);
+//        model.addAttribute("form", influenceService.findInfluenceDtoLastDay());
+        return "redirect:/influence/last";
     }
 }

@@ -60,7 +60,7 @@
 <!--                    System-->
                     <td th:text="${sys.systemName}"></td>
 <!--                    Population-->
-                    <td th:text="${sys.population}"></td>
+                    <td th:text="${#numbers.formatInteger(sys.population,3,'POINT')}"></td>
 <!--                    Economy-->
                     <td th:if="${sys.secondaryEconomy} == None" th:text="${sys.primaryEconomy}"></td>
                     <td th:unless="${sys.secondaryEconomy} == None"
@@ -97,7 +97,7 @@
                             <span class="tooltip-text">Edit System</span>
                         </a>
                     </td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')" class="spoiler" style="display: none">
                         <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}">
                             <img src="/images/delete.png" alt="Delete">
                             <span class="tooltip-text">Delete System</span>
@@ -107,10 +107,26 @@
                 </tbody>
             </table>
         </div>
-        <form th:action="@{/systems/add}" method="get" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-            <input type="submit" value="Add System">
-        </form>
+        <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+            <a class="menu-link" th:href="@{/systems/add}">Add system</a>
+            <a class="menu-link" href="javascript:Spoiler();" id="linkSpoiler">Delete system</a>
+        </div>
     </div>
 </div>
 </body>
+<script>
+    function Spoiler() {
+        const elements = document.getElementsByClassName("spoiler");
+        const text = document.getElementById("linkSpoiler");
+        for (let item of elements) {
+            if(item.style.display === "block") {
+                item.style.display = "none";
+                text.innerHTML = "Delete system";
+            } else {
+                item.style.display = "block";
+                text.innerHTML = "Hide buttons";
+            }
+        }
+    }
+</script>
 </html>

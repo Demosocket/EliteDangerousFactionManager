@@ -1,6 +1,7 @@
 package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.InfluenceDto;
+import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.model.Influence;
 import com.demosocket.manager.repository.InfluenceRepository;
 import org.modelmapper.ModelMapper;
@@ -21,74 +22,67 @@ public class InfluenceServiceImpl implements InfluenceService {
         this.modelMapper = modelMapper;
     }
 
-//    @Override
-//    public List<InfluenceDto> findAll() {
-//        List<Influence> influenceList = influenceRepository.findAll();
-//        List<InfluenceDto> influenceDtoList = new ArrayList<>();
-//        for (Influence influence : influenceList) {
-//            InfluenceDto influenceDto = modelMapper.map(influence, InfluenceDto.class);
-//            influenceDto.setState(influence.getState().getTitle());
-//            influenceDtoList.add(influenceDto);
-//        }
-//        return influenceDtoList;
-//    }
 
     @Override
-    public Influence findFirstByOrderByDayDesc() {
-        return influenceRepository.findFirstByOrderByDayDesc();
-    }
-
-//    @Override
-//    public List<InfluenceDto> findByDay(Date date) {
-//        List<Influence> influenceList = influenceRepository.findByDay(influenceRepository.findFirstByOrderByDayDesc().getDay());
-//        List<InfluenceDto> influenceDtoList = new ArrayList<>();
-//        for (Influence influence : influenceList) {
-//            InfluenceDto influenceDto = modelMapper.map(influence, InfluenceDto.class);
-//            influenceDto.setState(influence.getState().getTitle());
-//            influenceDtoList.add(influenceDto);
-//        }
-//        return influenceDtoList;
-//    }
-
-    @Override
-    public List<Date> findMyQuery() {
-        return influenceRepository.findMyQuery();
+    public List<Date> findTwoLastDays() {
+        return influenceRepository.findTwoLastDays();
     }
 
     @Override
-    public List<InfluenceDto> findLastInfluence() {
-        List<Influence> influenceLastDayList = influenceRepository.findAllByDayOrderById(influenceRepository.findMyQuery().get(0));
-        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDayOrderById(influenceRepository.findMyQuery().get(1));
+    public List<InfluenceDto> findInfluenceDtoLastDay() {
+        List<Influence> influenceLastDayList = influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(0));
+        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(1));
 
-        List<InfluenceDto> influenceDtoList = new ArrayList<>();
-
-//        For Nagii
+        List<InfluenceDto> influenceDtoResultList = new ArrayList<>();
+//        InfluenceDto for Nagii - main system
         InfluenceDto influenceDtoNagii = modelMapper.map(influenceLastDayList.get(0), InfluenceDto.class);
         influenceDtoNagii.setState(influenceLastDayList.get(0).getState().getTitle());
         influenceDtoNagii.setChanges(
                 influenceLastDayList.get(0).getInfluence()-influenceDayBeforeLastList.get(0).getInfluence()
         );
-
         if (influenceLastDayList.size() == influenceDayBeforeLastList.size()) {
-//            Обычный день
+//            Our faction don't have new systems(Common day)
             for (int i = 1; i < influenceLastDayList.size(); i++) {
                 InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
                 influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
                 influenceDto.setChanges(
                         influenceLastDayList.get(i).getInfluence()-influenceDayBeforeLastList.get(i).getInfluence()
                 );
-                influenceDtoList.add(influenceDto);
+                influenceDtoResultList.add(influenceDto);
             }
         } else if (influenceLastDayList.size() > influenceDayBeforeLastList.size()) {
-//            Веселый день
-        } else {
-//            Грусный день
+//            Our faction get some new systems(Funny day)
+            int howManySystemsAdded = influenceLastDayList.size()-influenceDayBeforeLastList.size();
+            for (int i = 1; i < influenceLastDayList.size()-howManySystemsAdded; i++) {
+                InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
+                influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
+                influenceDto.setChanges(
+                        influenceLastDayList.get(i).getInfluence()-influenceDayBeforeLastList.get(i).getInfluence()
+                );
+                influenceDtoResultList.add(influenceDto);
+            }
+            for (int i = influenceLastDayList.size()-howManySystemsAdded; i < influenceLastDayList.size(); i++) {
+                InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
+                influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
+                influenceDto.setChanges(
+                        influenceLastDayList.get(i).getInfluence()
+                );
+                influenceDtoResultList.add(influenceDto);
+            }
         }
+        /*Here need check the condition when (influenceLastDayList.size() < influenceDayBeforeLastList.size()) in the
+        future version of application(Sad day)*/
 
-        influenceDtoList.sort(Comparator.comparing(InfluenceDto::getSystemName));
-//        Set Nagii at 0
-        influenceDtoList.add(0, influenceDtoNagii);
+//        sort the resulting list for easy presentation
+        influenceDtoResultList.sort(Comparator.comparing(InfluenceDto::getSystemName));
+//        and set Nagii at 0 position
+        influenceDtoResultList.add(0, influenceDtoNagii);
 
-        return influenceDtoList;
+        return influenceDtoResultList;
+    }
+
+    @Override
+    public void saveInfluence(InfluenceFormDto influenceFormDto, Date date) {
+//        Сделай что-нибудь с тем, что пришло из  Thymeleaf, Если конечно оно придет
     }
 }

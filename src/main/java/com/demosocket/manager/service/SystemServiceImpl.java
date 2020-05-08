@@ -1,9 +1,9 @@
 package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.SystemDto;
-import com.demosocket.manager.model.Economy;
-import com.demosocket.manager.model.Faction;
+import com.demosocket.manager.model.*;
 import com.demosocket.manager.model.System;
+import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,13 @@ public class SystemServiceImpl implements SystemService {
 
     private final ModelMapper modelMapper;
 
+    private final InfluenceRepository influenceRepository;
+
     @Autowired
-    public SystemServiceImpl(SystemRepository systemRepository, ModelMapper modelMapper) {
+    public SystemServiceImpl(SystemRepository systemRepository, ModelMapper modelMapper, InfluenceRepository influenceRepository) {
         this.systemRepository = systemRepository;
         this.modelMapper = modelMapper;
+        this.influenceRepository = influenceRepository;
     }
 
     public List<SystemDto> findAll() {
@@ -50,6 +53,19 @@ public class SystemServiceImpl implements SystemService {
         }
     }
 
+    public void editSystem(SystemDto systemDto) {
+        System system = modelMapper.map(systemDto, System.class);
+        system.setFaction(Faction.NAGII_UNION);
+        system.setPrimaryEconomy(Economy.valueOf(
+                systemDto.getPrimaryEconomy().toUpperCase().replaceAll("\\s+", "_")
+        ));
+        system.setSecondaryEconomy(Economy.valueOf(
+                systemDto.getSecondaryEconomy().toUpperCase().replaceAll("\\s+", "_")
+        ));
+        systemRepository.save(system);
+    }
+
+    @Override
     public void saveSystem(SystemDto systemDto) {
         System system = modelMapper.map(systemDto, System.class);
         system.setFaction(Faction.NAGII_UNION);
@@ -60,6 +76,13 @@ public class SystemServiceImpl implements SystemService {
                 systemDto.getSecondaryEconomy().toUpperCase().replaceAll("\\s+", "_")
         ));
         systemRepository.save(system);
+
+        Influence influence = new Influence();
+        influence.setSystem(system);
+        influence.setDay(influenceRepository.findTwoLastDays().get(0));
+        influence.setInfluence(0);
+        influence.setState(State.NONE);
+        influenceRepository.save(influence);
     }
 
     public void deleteById(Long id) {

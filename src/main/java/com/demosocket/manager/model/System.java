@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -70,7 +71,6 @@ public class System {
     @Temporal(TemporalType.DATE)
     private Date expDate;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "id")
-//    private List<Influence> influences;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "system")
+    private List<Influence> influences;
 }
