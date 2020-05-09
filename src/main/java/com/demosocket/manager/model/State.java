@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum State {
     WAR("War"),
-    EXPECTATION_OF_WAR("Expectation of War"),
+    EXPECTATION_OF_WAR("Expectation Of War"),
     ELECTIONS("Elections"),
     EXPECTATION_OF_ELECTIONS("Expectation Of Elections"),
     EXPANSION("Expansion"),

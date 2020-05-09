@@ -25,7 +25,8 @@
                                     <label for="date">Update:</label>
                                 </div>
                                 <div class="influence-date">
-                                    <input type="date" th:field="${form.influences[0].day}" id="date" class="thisDate">
+                                    <input type="date" th:field="${form.influences[0].day}"
+                                           th:min="${form.influences[0].day}" id="date" class="thisDate">
                                 </div>
                             </div>
                         </th>
@@ -47,8 +48,8 @@
                             th:text="${inf.state}" class="state-no-control"></td>
                         <td th:if="(${inf.state} == War) or (${inf.state} == Elections)"
                             th:text="${inf.state}" class="state-conflict"></td>
-                        <td th:if="(${inf.state} == Expectation+' '+of+' '+War)
-                            or (${inf.state} == Expectation+' '+of+' '+Elections)"
+                        <td th:if="(${inf.state} == Expectation+' '+Of+' '+War)
+                            or (${inf.state} == Expectation+' '+Of+' '+Elections)"
                             th:text="${inf.state}" class="state-conflict-expectation"></td>
                         <td th:if="${inf.state} == Expansion"
                             th:text="${inf.state}" class="state-expansion"></td>
@@ -68,24 +69,26 @@
                         </td>
                         <td>
                             <label>
-                                <select th:name="|influences[${itemStat.index}].state|"
-                                        th:value="${inf.state}" class="influence-state">
-                                    <option th:value="None"
-                                            th:text="None"></option>
-                                    <option th:value="Expansion"
-                                            th:text="Expansion"></option>
+                                <select th:name="|influences[${itemStat.index}].state|" class="influence-state">
+                                    <option th:value="None" th:text="None"
+                                            th:selected="${inf.state.contains('None')}"></option>
+                                    <option th:value="Expansion" th:text="Expansion"
+                                            th:selected="${inf.state.contains('Expansion')}"></option>
                                     <option th:value="Expectation+' '+Of+' '+Expansion"
-                                            th:text="Expectation+' '+Of+' '+Expansion"></option>
-                                    <option th:value="No+' '+Control"
-                                            th:text="No+' '+Control"></option>
-                                    <option th:value="Elections"
-                                            th:text="Elections"></option>
-                                    <option th:value="Expectation+' '+of+' '+Elections"
-                                            th:text="Expectation+' '+of+' '+Elections"></option>
-                                    <option th:value="War"
-                                            th:text="War"></option>
-                                    <option th:value="Expectation+' '+of+' '+War"
-                                            th:text="Expectation+' '+of+' '+War"></option>
+                                            th:text="Expectation+' '+Of+' '+Expansion"
+                                            th:selected="${inf.state.contains('Expectation Of Expansion')}"></option>
+                                    <option th:value="No+' '+Control" th:text="No+' '+Control"
+                                            th:selected="${inf.state.contains('No Control')}"></option>
+                                    <option th:value="Elections" th:text="Elections"
+                                            th:selected="${inf.state.contains('Elections')}"></option>
+                                    <option th:value="Expectation+' '+Of+' '+Elections"
+                                            th:text="Expectation+' '+Of+' '+Elections"
+                                            th:selected="${inf.state.contains('Expectation Of Elections')}"></option>
+                                    <option th:value="War" th:text="War"
+                                            th:selected="${inf.state.contains('War')}"></option>
+                                    <option th:value="Expectation+' '+Of+' '+War"
+                                            th:text="Expectation+' '+Of+' '+War"
+                                            th:selected="${inf.state.contains('Expectation Of War')}"></option>
                                 </select>
                             </label>
                         </td>

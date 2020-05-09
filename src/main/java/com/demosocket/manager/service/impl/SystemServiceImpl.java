@@ -1,10 +1,11 @@
-package com.demosocket.manager.service;
+package com.demosocket.manager.service.impl;
 
 import com.demosocket.manager.dto.SystemDto;
 import com.demosocket.manager.model.*;
 import com.demosocket.manager.model.System;
 import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
+import com.demosocket.manager.service.SystemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

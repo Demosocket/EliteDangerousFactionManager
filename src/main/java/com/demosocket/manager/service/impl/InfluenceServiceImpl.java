@@ -1,4 +1,4 @@
-package com.demosocket.manager.service;
+package com.demosocket.manager.service.impl;
 
 import com.demosocket.manager.dto.InfluenceDto;
 import com.demosocket.manager.dto.InfluenceFormDto;
@@ -6,6 +6,7 @@ import com.demosocket.manager.model.Influence;
 import com.demosocket.manager.model.State;
 import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
+import com.demosocket.manager.service.InfluenceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

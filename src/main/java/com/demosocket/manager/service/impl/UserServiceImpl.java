@@ -1,10 +1,11 @@
-package com.demosocket.manager.service;
+package com.demosocket.manager.service.impl;
 
 import com.demosocket.manager.dto.UserDto;
 import com.demosocket.manager.dto.UserEditDto;
 import com.demosocket.manager.model.Role;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
+import com.demosocket.manager.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

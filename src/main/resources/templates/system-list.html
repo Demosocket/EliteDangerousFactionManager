@@ -91,13 +91,15 @@
                         th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}"></td>
 <!--                    Expansion Date-->
                     <td th:text="${sys.expDate}"></td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')"
+                        class="spoilerEdit" style="display: none">
                         <a class="tooltip" th:href="@{/systems/edit/{id}(id=${sys.id})}">
                             <img src="/images/edit.png" alt="Edit">
                             <span class="tooltip-text">Edit System</span>
                         </a>
                     </td>
-                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')" class="spoiler" style="display: none">
+                    <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')"
+                        class="spoilerDelete" style="display: none">
                         <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}"
                            onclick="return confirm('Delete system? This will delete the information about influence');">
                             <img src="/images/delete.png" alt="Delete">
@@ -110,22 +112,23 @@
         </div>
         <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
             <a class="menu-link" th:href="@{/systems/add}">Add system</a>
-            <a class="menu-link" href="javascript:Spoiler();" id="linkSpoiler">Delete system</a>
+            <a class="menu-link" href="javascript:Spoiler('Edit');" id="EditSpoiler">Edit system</a>
+            <a class="menu-link" href="javascript:Spoiler('Delete');" id="DeleteSpoiler">Delete system</a>
         </div>
     </div>
 </div>
 </body>
 <script>
-    function Spoiler() {
-        const elements = document.getElementsByClassName("spoiler");
-        const text = document.getElementById("linkSpoiler");
+    function Spoiler(param) {
+        const elements = document.getElementsByClassName("spoiler"+param);
+        const text = document.getElementById(param+"Spoiler");
         for (let item of elements) {
-            if(item.style.display === "block") {
+            if(item.style.display === "table-cell") {
                 item.style.display = "none";
-                text.innerHTML = "Delete system";
+                text.innerHTML = param +" system";
             } else {
-                item.style.display = "block";
-                text.innerHTML = "Hide buttons";
+                item.style.display = "table-cell";
+                text.innerHTML = "Hide "+param;
             }
         }
     }
