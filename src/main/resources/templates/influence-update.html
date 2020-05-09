@@ -18,14 +18,14 @@
                     <thead>
                     <tr>
                         <th rowspan="2">System</th>
-                        <th colspan="2">Last Update: <span th:text="${lastDate}"></span></th>
+                        <th colspan="2">Last Update: [[${form.influences[0].day}]]</th>
                         <th colspan="2">
                             <div class="influence-date-main">
                                 <div class="influence-date-title">
                                     <label for="date">Update:</label>
                                 </div>
                                 <div class="influence-date">
-                                    <input type="date" th:field="${thisDate}" id="date" placeholder="Date" class="thisDate">
+                                    <input type="date" th:field="${form.influences[0].day}" id="date" class="thisDate">
                                 </div>
                             </div>
                         </th>
@@ -38,23 +38,61 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="influence : ${form}">
+                    <tr th:each="inf, itemStat : ${form.influences}">
 <!--                        System-->
-                        <td th:text="${influence.systemName}"></td>
+                        <td th:text="${inf.systemName}"></td>
 <!--                        State-->
-                        <td th:text="${influence.state}"></td>
+                        <td th:if="${inf.state} == None" th:text="${inf.state}"></td>
+                        <td th:if="${inf.state} == No+' '+Control"
+                            th:text="${inf.state}" class="state-no-control"></td>
+                        <td th:if="(${inf.state} == War) or (${inf.state} == Elections)"
+                            th:text="${inf.state}" class="state-conflict"></td>
+                        <td th:if="(${inf.state} == Expectation+' '+of+' '+War)
+                            or (${inf.state} == Expectation+' '+of+' '+Elections)"
+                            th:text="${inf.state}" class="state-conflict-expectation"></td>
+                        <td th:if="${inf.state} == Expansion"
+                            th:text="${inf.state}" class="state-expansion"></td>
+                        <td th:if="${inf.state} == Expectation+' '+Of+' '+Expansion"
+                            th:text="${inf.state}" class="state-expansion-expectation"></td>
 <!--                        Influence-->
-                        <td th:text="${influence.influence}"></td>
-<!--                        Changes-->
-<!--                        <td th:text="${influence.changes}"></td>-->
-                        <td>
+                        <td th:if="${inf.influence} >= 75" th:text="${inf.influence}" class="influence-more75"></td>
+                        <td th:if="${inf.influence} < 60" th:text="${inf.influence}" class="influence-less60"></td>
+                        <td th:unless="(${inf.influence} < 60) or (${inf.influence} >= 75)"
+                            th:text="${inf.influence}" class="influence-norm"></td>
+<!--                        Hidden for result-->
+                        <td hidden>
                             <label>
-                                <input type="text" th:value="${influence.state}" class="influence-state">
+                                <input type="text" th:name="|influences[${itemStat.index}].systemName|"
+                                       th:value="${inf.systemName}"/>
                             </label>
                         </td>
                         <td>
                             <label>
-                                <input type="number" th:value="${influence.influence}" class="influence-value">
+                                <select th:name="|influences[${itemStat.index}].state|"
+                                        th:value="${inf.state}" class="influence-state">
+                                    <option th:value="None"
+                                            th:text="None"></option>
+                                    <option th:value="Expansion"
+                                            th:text="Expansion"></option>
+                                    <option th:value="Expectation+' '+Of+' '+Expansion"
+                                            th:text="Expectation+' '+Of+' '+Expansion"></option>
+                                    <option th:value="No+' '+Control"
+                                            th:text="No+' '+Control"></option>
+                                    <option th:value="Elections"
+                                            th:text="Elections"></option>
+                                    <option th:value="Expectation+' '+of+' '+Elections"
+                                            th:text="Expectation+' '+of+' '+Elections"></option>
+                                    <option th:value="War"
+                                            th:text="War"></option>
+                                    <option th:value="Expectation+' '+of+' '+War"
+                                            th:text="Expectation+' '+of+' '+War"></option>
+                                </select>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="number" th:name="|influences[${itemStat.index}].influence|"
+                                       th:value="${inf.influence}" class="influence-value"/>
                             </label>
                         </td>
                     </tr>
@@ -62,7 +100,7 @@
                 </table>
             </div>
         </div>
-        <input type="submit" value="Update">
+        <input type="submit" value="Submit">
     </form>
 </div>
 </body>

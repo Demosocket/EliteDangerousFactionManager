@@ -10,5 +10,5 @@ public interface InfluenceService {
 
     List<InfluenceDto> findInfluenceDtoLastDay();
     List<Date> findTwoLastDays();
-    void saveInfluence(InfluenceFormDto influenceFormDto, Date date);
+    void saveInfluence(InfluenceFormDto influenceFormDto);
 }

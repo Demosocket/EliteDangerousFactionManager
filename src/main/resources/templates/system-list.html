@@ -98,7 +98,8 @@
                         </a>
                     </td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')" class="spoiler" style="display: none">
-                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}">
+                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}"
+                           onclick="return confirm('Delete system? This will delete the information about influence');">
                             <img src="/images/delete.png" alt="Delete">
                             <span class="tooltip-text">Delete System</span>
                         </a>

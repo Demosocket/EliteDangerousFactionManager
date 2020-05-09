@@ -11,9 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class InfluenceFormDto {
 
-    private List<InfluenceDto> influenceDtoList;
-
-//    public void addInfluenceDto(InfluenceDto influenceDto) {
-//        this.influenceDtoList.add(influenceDto);
-//    }
+    private List<InfluenceDto> influences;
 }

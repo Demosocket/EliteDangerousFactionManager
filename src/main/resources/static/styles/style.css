@@ -132,7 +132,7 @@ td.equal-stations {
 }
 .form-div {
     margin: auto;
-    width: 400px;
+    width: 500px;
     border: 2px solid #cccccc;
     border-radius: 10px;
     padding: 20px;
@@ -146,12 +146,12 @@ td.equal-stations {
     text-align: left;
     margin-top: 15px;
     float: left;
-    width: 35%;
+    width: 40%;
 }
 .col-65 {
     position: relative;
     float: left;
-    width: 65%;
+    width: 60%;
 }
 .col-25-left {
     position: relative;
@@ -196,12 +196,13 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #cf7c1f;
 }
-/*--------------------influence date--------------------*/
+/*--------------------influence table--------------------*/
 .thisDate {
     width: auto;
 }
 .influence-date-title {
     padding-right: 10px;
+    margin-top: 9px;
     display: flex;
     width: auto;
 }
@@ -210,18 +211,43 @@ input[type=submit]:hover {
     display: flex;
 }
 .influence-date {
-    height: 10px;
     margin: -7px;
     -webkit-flex: 1;
     display: flex;
-    /*width: auto;*/
 }
 .influence-value {
     width: 75px;
 }
-.influence-value, .influence-state {
-    height: 10px;
+.influence-value {
+    /*height: 10px;*/
     margin: -2px;
+}
+.influence-state {
+    margin: -2px;
+}
+.influence-changes-positive, .influence-norm {
+    background: forestgreen;
+}
+.influence-changes-negative, .influence-less60 {
+    background: red;
+}
+.influence-more75 {
+    background: #800000;
+}
+.state-conflict {
+    background: slateblue;
+}
+.state-conflict-expectation {
+    background: deepskyblue;
+}
+.state-expansion {
+    background: greenyellow;
+}
+.state-expansion-expectation {
+    background: khaki;
+}
+.state-no-control {
+    background: fuchsia;
 }
 /*--------------------info text style--------------------*/
 .info-div {

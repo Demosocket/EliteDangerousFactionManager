@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
 @Controller
 @RequestMapping("/influence")
 public class InfluenceController {
@@ -29,16 +27,13 @@ public class InfluenceController {
 
     @GetMapping("/update")
     public String influenceUpdateForm(Model model) {
-        model.addAttribute("thisDate", new Date());
-        model.addAttribute("lastDate", influenceService.findTwoLastDays().get(0));
-        model.addAttribute("form", influenceService.findInfluenceDtoLastDay());
+        model.addAttribute("form", new InfluenceFormDto(influenceService.findInfluenceDtoLastDay()));
         return "influence-update";
     }
 
     @PostMapping("/update")
-    public String influenceUpdate(@ModelAttribute String form, Model model) {
-        System.out.println(form);
-//        model.addAttribute("form", influenceService.findInfluenceDtoLastDay());
+    public String influenceUpdate(@ModelAttribute("form") InfluenceFormDto form) {
+        influenceService.saveInfluence(form);
         return "redirect:/influence/last";
     }
 }

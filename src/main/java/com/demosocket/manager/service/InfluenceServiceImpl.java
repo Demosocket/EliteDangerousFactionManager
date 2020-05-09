@@ -3,7 +3,9 @@ package com.demosocket.manager.service;
 import com.demosocket.manager.dto.InfluenceDto;
 import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.model.Influence;
+import com.demosocket.manager.model.State;
 import com.demosocket.manager.repository.InfluenceRepository;
+import com.demosocket.manager.repository.SystemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,13 @@ public class InfluenceServiceImpl implements InfluenceService {
 
     private final InfluenceRepository influenceRepository;
     private final ModelMapper modelMapper;
+    private final SystemRepository systemRepository;
 
     @Autowired
-    public InfluenceServiceImpl(InfluenceRepository influenceRepository, ModelMapper modelMapper) {
+    public InfluenceServiceImpl(InfluenceRepository influenceRepository, ModelMapper modelMapper, SystemRepository systemRepository) {
         this.influenceRepository = influenceRepository;
         this.modelMapper = modelMapper;
+        this.systemRepository = systemRepository;
     }
 
 
@@ -30,8 +34,11 @@ public class InfluenceServiceImpl implements InfluenceService {
 
     @Override
     public List<InfluenceDto> findInfluenceDtoLastDay() {
-        List<Influence> influenceLastDayList = influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(0));
-        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(1));
+//        Find two last days in db
+        List<Date> lastTwoDays = influenceRepository.findTwoLastDays();
+//        Make query to find 2 lists of influences
+        List<Influence> influenceLastDayList = influenceRepository.findAllByDayOrderById(lastTwoDays.get(0));
+        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDayOrderById(lastTwoDays.get(1));
 
         List<InfluenceDto> influenceDtoResultList = new ArrayList<>();
 //        InfluenceDto for Nagii - main system
@@ -70,9 +77,6 @@ public class InfluenceServiceImpl implements InfluenceService {
                 influenceDtoResultList.add(influenceDto);
             }
         }
-        /*Here need check the condition when (influenceLastDayList.size() < influenceDayBeforeLastList.size()) in the
-        future version of application(Sad day)*/
-
 //        sort the resulting list for easy presentation
         influenceDtoResultList.sort(Comparator.comparing(InfluenceDto::getSystemName));
 //        and set Nagii at 0 position
@@ -82,7 +86,29 @@ public class InfluenceServiceImpl implements InfluenceService {
     }
 
     @Override
-    public void saveInfluence(InfluenceFormDto influenceFormDto, Date date) {
-//        Сделай что-нибудь с тем, что пришло из  Thymeleaf, Если конечно оно придет
+    public void saveInfluence(InfluenceFormDto influenceFormDto) {
+//        day when you should add the information in db
+        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDay());
+
+        List<Influence> influenceList = new ArrayList<>();
+        for (InfluenceDto inf : influenceFormDto.getInfluences()) {
+            Influence influence = new Influence();
+            influence.setSystem(systemRepository.findBySystemName(inf.getSystemName()));
+            influence.setDay(day);
+            influence.setInfluence(inf.getInfluence());
+            influence.setState(State.valueOf(
+                    inf.getState().toUpperCase().replaceAll("\\s+", "_")
+            ));
+            influenceList.add(influence);
+        }
+//        sorting the influence by 'systems_id'
+        Map<Long, Influence> influenceMap = new TreeMap<>();
+        for (Influence inf : influenceList) {
+            influenceMap.put(inf.getSystem().getId(), inf);
+        }
+//        add the result list to the db
+        List<Influence> resultList = new ArrayList<>(influenceMap.values());
+
+        influenceRepository.saveAll(resultList);
     }
 }
