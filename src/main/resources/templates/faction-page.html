@@ -9,7 +9,65 @@
 <body>
 <div th:insert="home :: header"></div>
 <div class="content">
-    <h1>Summary information about faction: population, controlling stations and systems</h1>
+    <div class="faction-information">
+        <h1>Summary information:</h1>
+        <ul>
+            <li>Nagii Union faction is represented in <b><em>[[${countAll}]]</em></b> systems
+<!--                State-->
+                <ul>
+                    <li th:if="${stateInformation.controlCount} != 0">Control
+                        <b><em>[[${stateInformation.controlCount}]]</em></b></li>
+                    <li th:if="${stateInformation.noControlCount} != 0">No control
+                        <b><em>[[${stateInformation.noControlCount}]]</em></b></li>
+                    <li th:if="${stateInformation.expectationOfWarCount} != 0">Expectation of War
+                        <b><em>[[${stateInformation.expectationOfWarCount}]]</em></b></li>
+                    <li th:if="${stateInformation.expectationOfElectionsCount} != 0">Expectation of Elections
+                        <b><em>[[${stateInformation.expectationOfElectionsCount}]]</em></b></li>
+                    <li th:if="${stateInformation.warCount} != 0">War
+                        <b><em>[[${stateInformation.warCount}]]</em></b></li>
+                    <li th:if="${stateInformation.electionsCount} != 0">Elections
+                        <b><em>[[${stateInformation.electionsCount}]]</em></b></li>
+                </ul>
+            </li>
+<!--            Population-->
+            <li>Total population of Nagii Union systems:
+                <b><em>[[${#numbers.formatInteger(totalPopulation,3,'POINT')}]]</em></b></li>
+<!--            Stations-->
+            <li>Total stations in faction systems:
+                <b><em>[[${stationsInformation.totalOrbitLargeControl}
+                    + ${stationsInformation.totalOrbitMediumControl}
+                    + ${stationsInformation.totalPlanetLargeControl}
+                    + ${stationsInformation.totalPlanetBaseControl}]]</em></b> /
+                <b><em>[[${stationsInformation.totalOrbitLarge}
+                    + ${stationsInformation.totalOrbitMedium}
+                    + ${stationsInformation.totalPlanetLarge}
+                    + ${stationsInformation.totalPlanetBase}]]</em></b>
+                <ul>
+                    <li>Orbital Large stations:
+                        <b><em>[[${stationsInformation.totalOrbitLargeControl}]]</em></b> /
+                        <b><em>[[${stationsInformation.totalOrbitLarge}]]</em></b></li>
+                    <li>Orbital Medium stations:
+                        <b><em>[[${stationsInformation.totalOrbitMediumControl}]]</em></b> /
+                        <b><em>[[${stationsInformation.totalOrbitMedium}]]</em></b></li>
+                    <li>Planet Large stations:
+                        <b><em>[[${stationsInformation.totalPlanetLargeControl}]]</em></b> /
+                        <b><em>[[${stationsInformation.totalPlanetLarge}]]</em></b></li>
+                    <li>Planet Base stations:
+                        <b><em>[[${stationsInformation.totalPlanetBaseControl}]]</em></b> /
+                        <b><em>[[${stationsInformation.totalPlanetBase}]]</em></b></li>
+                </ul>
+            </li>
+<!--            Influence-->
+            <li>Last influence update: <b><em>[[${influenceInformation.day}]]</em></b>
+                <ul>
+                    <li>Average influence for this day:
+                        <b><em>[[${influenceInformation.averageInfluence}]]</em></b></li>
+                    <li>Total impact changes:
+                        <b><em>[[${influenceInformation.totalChanges}]]</em></b></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

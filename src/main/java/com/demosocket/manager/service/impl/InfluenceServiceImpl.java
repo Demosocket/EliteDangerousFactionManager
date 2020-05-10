@@ -17,16 +17,17 @@ import java.util.*;
 public class InfluenceServiceImpl implements InfluenceService {
 
     private final InfluenceRepository influenceRepository;
-    private final ModelMapper modelMapper;
     private final SystemRepository systemRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public InfluenceServiceImpl(InfluenceRepository influenceRepository, ModelMapper modelMapper, SystemRepository systemRepository) {
+    public InfluenceServiceImpl(InfluenceRepository influenceRepository,
+                                SystemRepository systemRepository,
+                                ModelMapper modelMapper) {
         this.influenceRepository = influenceRepository;
-        this.modelMapper = modelMapper;
         this.systemRepository = systemRepository;
+        this.modelMapper = modelMapper;
     }
-
 
     @Override
     public List<Date> findTwoLastDays() {

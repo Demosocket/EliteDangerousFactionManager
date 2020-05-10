@@ -8,30 +8,31 @@ import com.demosocket.manager.repository.SystemRepository;
 import com.demosocket.manager.service.SystemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
 public class SystemServiceImpl implements SystemService {
 
     private final SystemRepository systemRepository;
-
+    private final InfluenceRepository influenceRepository;
     private final ModelMapper modelMapper;
 
-    private final InfluenceRepository influenceRepository;
-
     @Autowired
-    public SystemServiceImpl(SystemRepository systemRepository, ModelMapper modelMapper, InfluenceRepository influenceRepository) {
+    public SystemServiceImpl(SystemRepository systemRepository,
+                             InfluenceRepository influenceRepository,
+                             ModelMapper modelMapper) {
         this.systemRepository = systemRepository;
-        this.modelMapper = modelMapper;
         this.influenceRepository = influenceRepository;
+        this.modelMapper = modelMapper;
     }
 
     public List<SystemDto> findAll() {
-        List<System> systemList = systemRepository.findAll(Sort.by(Sort.Direction.ASC, "systemNum"));
+        List<System> systemList = systemRepository.findAllByFaction(Faction.NAGII_UNION);
+        systemList.sort(Comparator.comparing(System::getId));
         List<SystemDto> systemDtoList = new ArrayList<>();
         for (System system : systemList) {
             SystemDto systemDto = modelMapper.map(system, SystemDto.class);

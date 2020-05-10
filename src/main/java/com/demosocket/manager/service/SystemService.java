@@ -1,6 +1,7 @@
 package com.demosocket.manager.service;
 
 import com.demosocket.manager.dto.SystemDto;
+import com.demosocket.manager.model.Faction;
 
 import java.util.List;
 

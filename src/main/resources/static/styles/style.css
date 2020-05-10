@@ -253,3 +253,14 @@ input[type=submit]:hover {
 .info-div {
     text-align: center;
 }
+/*--------------------faction list--------------------*/
+.faction-information {
+    margin: auto;
+    width: 500px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+li {
+    text-align: left;
+}
