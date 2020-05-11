@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class InfluenceInformationDto {
 
     private String day;
-    private Integer averageInfluence;
     private Integer totalChanges;
 }

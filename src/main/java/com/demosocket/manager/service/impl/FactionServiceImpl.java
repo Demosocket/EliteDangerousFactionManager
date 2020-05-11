@@ -134,13 +134,10 @@ public class FactionServiceImpl implements FactionService {
     public InfluenceInformationDto findInfluenceInformation() {
         List<InfluenceDto> influenceDtoList = influenceService.findInfluenceDtoLastDay();
         String day = influenceDtoList.get(0).getDay();
-        Integer sum = 0;
         Integer totalChanges = 0;
         for (InfluenceDto inf : influenceDtoList) {
             totalChanges += inf.getChanges();
-            sum += inf.getInfluence();
         }
-        Integer averageInfluence = sum/influenceDtoList.size();
-        return new InfluenceInformationDto(day, averageInfluence, totalChanges);
+        return new InfluenceInformationDto(day, totalChanges);
     }
 }

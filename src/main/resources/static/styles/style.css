@@ -227,9 +227,11 @@ input[type=submit]:hover {
 }
 .influence-changes-positive, .influence-norm {
     background: forestgreen;
+    color: black;
 }
 .influence-changes-negative, .influence-less60 {
     background: red;
+    color: black;
 }
 .influence-more75 {
     background: #800000;

@@ -83,7 +83,7 @@ public class SystemServiceImpl implements SystemService {
         influence.setSystem(system);
         influence.setDay(influenceRepository.findTwoLastDays().get(0));
         influence.setInfluence(0);
-        influence.setState(State.NONE);
+        influence.setState(State.NO_CONTROL);
         influenceRepository.save(influence);
     }
 
