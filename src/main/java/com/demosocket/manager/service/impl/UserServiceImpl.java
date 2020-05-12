@@ -6,6 +6,8 @@ import com.demosocket.manager.model.Role;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import com.demosocket.manager.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
