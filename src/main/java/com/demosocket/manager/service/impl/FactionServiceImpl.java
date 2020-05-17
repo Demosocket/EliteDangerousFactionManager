@@ -75,12 +75,7 @@ public class FactionServiceImpl implements FactionService {
 
     @Override
     public Long findTotalPopulation() {
-        long totalPopulation = 0;
-        for (Influence inf :
-                influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(0))) {
-            totalPopulation += inf.getSystem().getPopulation();
-        }
-        return totalPopulation;
+        return systemRepository.findAllByFaction(Faction.NAGII_UNION).stream().mapToLong(System::getPopulation).sum();
     }
 
     @Override
@@ -133,11 +128,9 @@ public class FactionServiceImpl implements FactionService {
     @Override
     public InfluenceInformationDto findInfluenceInformation() {
         List<InfluenceDto> influenceDtoList = influenceService.findInfluenceDtoLastDay();
-        String day = influenceDtoList.get(0).getDay();
-        Integer totalChanges = 0;
-        for (InfluenceDto inf : influenceDtoList) {
-            totalChanges += inf.getChanges();
-        }
-        return new InfluenceInformationDto(day, totalChanges);
+        return new InfluenceInformationDto(
+                influenceDtoList.get(0).getDay(),
+                influenceDtoList.stream().mapToInt(InfluenceDto::getChanges).sum()
+        );
     }
 }

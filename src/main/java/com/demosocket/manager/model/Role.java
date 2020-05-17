@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum Role {
+    USER("User"),
     COMRADE("Comrade"),
     COMMUNIST("Communist"),
     COMMANDER("Commander");

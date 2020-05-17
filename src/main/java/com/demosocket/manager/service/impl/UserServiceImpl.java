@@ -6,8 +6,6 @@ import com.demosocket.manager.model.Role;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import com.demosocket.manager.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -71,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public void saveNewUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole(Role.COMRADE);
+        user.setRole(Role.USER);
         user.setEnabled(true);
         userRepository.save(user);
     }
