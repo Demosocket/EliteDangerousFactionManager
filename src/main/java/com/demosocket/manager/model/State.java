@@ -16,5 +16,4 @@ public enum State {
 
     @Getter
     public String title;
-    
 }

@@ -38,8 +38,56 @@
     </ul>
 </div>
 <div class="content">
-    <h1 th:inline="text">Hello, <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
-    <h2>Today we have the following tasks:</h2>
+    <h1 th:inline="text">Hello, cmdr <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
+    <div th:switch="${task}">
+        <h2 th:case="null">No tasks found!</h2>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2">Today we have the following tasks:</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th colspan="2">Changed [[${task.taskDate}]] by: <em>[[${task.user.username}]]</em></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td colspan="2" th:text="${task.messageHeader}" class="task-message-header"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.combatTask, NULL)}">
+                        <td>Combat Task:</td>
+                        <td th:text="${task.combatTask}"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.electionTask, NULL)}">
+                        <td>Election Task:</td>
+                        <td th:text="${task.electionTask}"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.task1, NULL)}">
+                        <td>Priority 1:</td>
+                        <td th:text="${task.task1}"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.task2, NULL)}">
+                        <td>Priority 2:</td>
+                        <td th:text="${task.task2}"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.doNothing, NULL)}">
+                        <td>Do Nothing:</td>
+                        <td th:text="${task.doNothing}" class="task-do-nothing"></td>
+                    </tr>
+                    <tr th:unless="${#strings.equals(task.taskDescription, NULL)}">
+                        <td>Description:</td>
+                        <td th:text="${task.taskDescription}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+                <a class="menu-link" th:href="@{/task/edit/{id}(id=${task.id})}">Edit task</a>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

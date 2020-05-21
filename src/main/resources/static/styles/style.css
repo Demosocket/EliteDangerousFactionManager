@@ -225,16 +225,21 @@ input[type=submit]:hover {
 .influence-state {
     margin: -2px;
 }
-.influence-changes-positive, .influence-norm {
-    background: forestgreen;
-    color: black;
-}
 .influence-changes-negative, .influence-less60 {
     background: red;
     color: black;
 }
+.influence-changes-zero, .influence-norm {
+    background: forestgreen;
+    color: black;
+}
+.influence-changes-positive {
+    background: #00630b;
+    color: black;
+}
 .influence-more75 {
     background: #800000;
+    color: black;
 }
 .state-conflict {
     background: slateblue;
@@ -265,4 +270,13 @@ input[type=submit]:hover {
 }
 li {
     text-align: left;
+}
+/*--------------------tasks--------------------*/
+.task-message-header {
+    color: yellow;
+    font-weight: bold;
+}
+.task-do-nothing {
+    color: maroon;
+    font-weight: bold;
 }

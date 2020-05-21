@@ -55,7 +55,9 @@
                     <td th:unless="(${inf.influence} < 60) or (${inf.influence} >= 75)"
                         th:text="${inf.influence}" class="influence-norm"></td>
 <!--                    Changes-->
-                    <td th:if="${inf.changes} >= 0"
+                    <td th:if="${inf.changes} == 0"
+                        th:text="${inf.changes}" class="influence-changes-zero"></td>
+                    <td th:if="${inf.changes} > 0"
                         th:text="${inf.changes}" class="influence-changes-positive"></td>
                     <td th:unless="${inf.changes >= 0}"
                         th:text="${inf.changes}" class="influence-changes-negative"></td>
