@@ -59,7 +59,7 @@ body {
 }
 .tooltip .tooltip-text {
     visibility: hidden;
-    width: 120px;
+    width: 150px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -169,7 +169,7 @@ td.equal-stations {
     float: right;
     width: 45%;
 }
-input, select {
+input, select, textarea {
     background: white;
     width: 100%;
     padding: 8px 10px;
@@ -181,7 +181,7 @@ input, select {
     transition: 0.5s;
     outline: none;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border: 3px solid #555;
 }
 input[type=checkbox] {
@@ -276,7 +276,45 @@ li {
     color: yellow;
     font-weight: bold;
 }
-.task-do-nothing {
+#task-do-nothing {
     color: maroon;
     font-weight: bold;
+}
+#task-footer {
+    text-align: right;
+}
+.task-div {
+    margin: auto;
+    width: 750px;
+}
+#task-form {
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+.task-code {
+    width: 135px;
+    text-align: left;
+}
+.task-content {
+    text-align: left;
+}
+.col-20 {
+    position: relative;
+    text-align: left;
+    margin-top: 15px;
+    float: left;
+    width: 20%;
+}
+.col-80 {
+    position: relative;
+    float: left;
+    width: 80%;
+}
+textarea {
+    resize: vertical;
+    height: 80px;
+}
+#taskDescription {
+    height: 240px;
 }

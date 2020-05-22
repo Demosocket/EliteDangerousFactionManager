@@ -13,7 +13,7 @@
     <div th:switch="${systemsDb}">
         <h2 th:case="null">No systems found!</h2>
         <div th:case="*">
-            <h2>Systems</h2>
+            <h1>Systems</h1>
             <table>
                 <thead>
                 <tr>
@@ -111,24 +111,24 @@
             </table>
         </div>
         <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-            <a class="menu-link" th:href="@{/systems/add}">Add system</a>
-            <a class="menu-link" href="javascript:Spoiler('Edit');" id="EditSpoiler">Edit system</a>
-            <a class="menu-link" href="javascript:Spoiler('Delete');" id="DeleteSpoiler">Delete system</a>
+            <a class="menu-link" th:href="@{/systems/add}">Add System</a>
+            <a class="menu-link" href="javascript:Spoiler('Edit');" id="EditSpoiler">Edit System</a>
+            <a class="menu-link" href="javascript:Spoiler('Delete');" id="DeleteSpoiler">Delete System</a>
         </div>
     </div>
 </div>
 </body>
 <script>
     function Spoiler(param) {
-        const elements = document.getElementsByClassName("spoiler"+param);
-        const text = document.getElementById(param+"Spoiler");
+        const elements = document.getElementsByClassName("spoiler" + param);
+        const text = document.getElementById(param + "Spoiler");
         for (let item of elements) {
             if(item.style.display === "table-cell") {
                 item.style.display = "none";
-                text.innerHTML = param +" system";
+                text.innerHTML = param + " System";
             } else {
                 item.style.display = "table-cell";
-                text.innerHTML = "Hide "+param;
+                text.innerHTML = "Hide " + param;
             }
         }
     }

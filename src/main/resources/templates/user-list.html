@@ -12,7 +12,7 @@
     <div th:switch="${userPage}">
         <h2 th:case="null">No users found!</h2>
         <div th:case="*">
-            <h2>Users</h2>
+            <h1>Users</h1>
             <table>
                 <thead>
                 <tr>
@@ -42,7 +42,6 @@
                     <span>Pages:</span>
                 </div>
                 <div th:if="${userPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="pagination">
-
                     <div>
                         <a th:href="@{/users/all(size=${userPage.size}, page=${pageNumber})}"
                            th:text=${pageNumber}

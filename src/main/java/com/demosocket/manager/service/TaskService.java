@@ -1,8 +1,10 @@
 package com.demosocket.manager.service;
 
-import com.demosocket.manager.model.Task;
+import com.demosocket.manager.dto.TaskDto;
 
 public interface TaskService {
 
-    Task findLast();
+    TaskDto findLast();
+    TaskDto findById(Long id);
+    void editTask(TaskDto taskDto);
 }

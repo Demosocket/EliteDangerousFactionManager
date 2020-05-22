@@ -38,53 +38,61 @@
     </ul>
 </div>
 <div class="content">
-    <h1 th:inline="text">Hello, cmdr <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
-    <div th:switch="${task}">
-        <h2 th:case="null">No tasks found!</h2>
-        <div th:case="*">
-            <table>
-                <thead>
-                <tr>
-                    <th colspan="2">Today we have the following tasks:</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th colspan="2">Changed [[${task.taskDate}]] by: <em>[[${task.user.username}]]</em></th>
-                </tr>
-                </tfoot>
-                <tbody>
+    <div class="task-div">
+        <h1 th:inline="text">Hello, cmdr <em>[[${#httpServletRequest.remoteUser}]]!</em></h1>
+        <div th:switch="${task}">
+            <h2 th:case="null">No tasks found!</h2>
+            <div th:case="*">
+                <table id="task">
+                    <thead>
                     <tr>
-                        <td colspan="2" th:text="${task.messageHeader}" class="task-message-header"></td>
+                        <th colspan="2">Today we have the following tasks:</th>
                     </tr>
-                    <tr th:unless="${#strings.equals(task.combatTask, NULL)}">
-                        <td>Combat Task:</td>
-                        <td th:text="${task.combatTask}"></td>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th colspan="2" id="task-footer">Изменено [[${task.taskDate}]] командиром <em>[[${task.userName}]]</em></th>
                     </tr>
-                    <tr th:unless="${#strings.equals(task.electionTask, NULL)}">
-                        <td>Election Task:</td>
-                        <td th:text="${task.electionTask}"></td>
-                    </tr>
-                    <tr th:unless="${#strings.equals(task.task1, NULL)}">
-                        <td>Priority 1:</td>
-                        <td th:text="${task.task1}"></td>
-                    </tr>
-                    <tr th:unless="${#strings.equals(task.task2, NULL)}">
-                        <td>Priority 2:</td>
-                        <td th:text="${task.task2}"></td>
-                    </tr>
-                    <tr th:unless="${#strings.equals(task.doNothing, NULL)}">
-                        <td>Do Nothing:</td>
-                        <td th:text="${task.doNothing}" class="task-do-nothing"></td>
-                    </tr>
-                    <tr th:unless="${#strings.equals(task.taskDescription, NULL)}">
-                        <td>Description:</td>
-                        <td th:text="${task.taskDescription}"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
-                <a class="menu-link" th:href="@{/task/edit/{id}(id=${task.id})}">Edit task</a>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" th:text="${task.messageHeader}" class="task-message-header"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.combatTask, '')}">
+                            <td class="task-code">Боевой приоритет:</td>
+                            <td class="task-content" th:utext="${#strings.replace(task.combatTask,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.electionTask, '')}">
+                            <td class="task-code">Выборы:</td>
+                            <td class="task-content" th:utext="${#strings.replace(task.electionTask,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.task1, '')}">
+                            <td class="task-code">Приоритет №1:</td>
+                            <td class="task-content" th:utext="${#strings.replace(task.task1,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.task2, '')}">
+                            <td class="task-code">Приоритет №2:</td>
+                            <td class="task-content" th:utext="${#strings.replace(task.task2,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.doNothing, '')}">
+                            <td class="task-code">Ничего не делаем:</td>
+                            <td class="task-content" id="task-do-nothing" th:utext="${#strings.replace(task.doNothing,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                        <tr th:unless="${#strings.equals(task.taskDescription, '')}">
+                            <td class="task-code">Описание:</td>
+                            <td class="task-content" th:utext="${#strings.replace(task.taskDescription,
+                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+                    <a class="menu-link" th:href="@{/task/edit/{id}(id=${task.id})}">Edit Task</a>
+                </div>
             </div>
         </div>
     </div>

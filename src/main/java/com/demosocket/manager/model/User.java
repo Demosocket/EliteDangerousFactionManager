@@ -3,6 +3,7 @@ package com.demosocket.manager.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +27,7 @@ public class User{
 
     @Column(name = "enabled")
     private boolean enabled;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Task> tasks;
 }

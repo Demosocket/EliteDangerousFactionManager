@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit System</title>
-    <link rel="shortcut icon" th:href="@{../images/favicon.ico}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{../../images/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{../../styles/style.css}">
 </head>
 <body style="background-color: gainsboro">
@@ -11,7 +11,7 @@
 <div class="content">
     <div class="form-div">
         <form th:action="@{/systems/edit}" th:object="${systemDto}" method="post">
-            <span>Edit system data:</span>
+            <h1>Edit system data:</h1>
             <div class="row" id="id-hide">
                 <div class="col-35">
                     <label for="id">Id</label>

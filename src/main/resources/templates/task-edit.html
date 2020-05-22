@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task</title>
+    <link rel="shortcut icon" th:href="@{../../images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{../../styles/style.css}">
+</head>
+<body style="background-color: gainsboro">
+<div th:insert="home :: header"></div>
+<div class="content">
+    <div class="task-div" id="task-form">
+        <form th:action="@{/task/edit}" th:object="${taskDto}" method="post">
+            <h1>Edit task:</h1>
+            <div class="row" id="id-hide">
+                <div class="col-20">
+                    <label for="id">Id</label>
+                </div>
+                <div class="col-80">
+                    <input readonly type="number" th:field="*{id}" id="id" placeholder="id"><br>
+                </div>
+                <div class="col-20">
+                    <label for="userName">userName</label>
+                </div>
+                <div class="col-80">
+                    <input readonly type="text" th:field="*{userName}" placeholder="userName"
+                           th:value="*{userName = #httpServletRequest.remoteUser}" id="userName" ><br>
+                </div>
+                <div class="col-20">
+                    <label for="taskDate">taskDate</label>
+                </div>
+                <div class="col-80">
+                    <input readonly type="date" th:field="*{taskDate}" id="taskDate" placeholder="taskDate"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="messageHeader">Задача:</label>
+                </div>
+                <div class="col-80">
+                    <input type="text" th:field="*{messageHeader}" id="messageHeader" placeholder="MessageHeader"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="combatTask">Боевой приоритет:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{combatTask}" id="combatTask" placeholder="Combat Task"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="electionTask">Выборы:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{electionTask}" id="electionTask" placeholder="Election Task"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="task1">Приоритет №1:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{task1}" id="task1" placeholder="Task №1"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="task2">Приоритет №2:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{task2}" id="task2" placeholder="Task №2"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="doNothing">Ничего не делаем:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{doNothing}" id="doNothing" placeholder="Do Nothing"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-20">
+                    <label for="taskDescription">Описание:</label>
+                </div>
+                <div class="col-80">
+                    <textarea th:field="*{taskDescription}" id="taskDescription" placeholder="Task Description"></textarea><br>
+                </div>
+            </div>
+            <input type="submit" class="menu-link" value="Edit Task">
+        </form>
+    </div>
+</div>
+</body>
+</html>
