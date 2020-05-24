@@ -20,6 +20,9 @@ import java.util.stream.IntStream;
 @RequestMapping("/users")
 public class UserController {
 
+    private static final int CURRENT_PAGE = 1;
+    private static final int PAGE_SIZE = 25;
+
     private final UserService userService;
 
     @Autowired
@@ -33,8 +36,8 @@ public class UserController {
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
 
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(25);
+        int currentPage = page.orElse(CURRENT_PAGE);
+        int pageSize = size.orElse(PAGE_SIZE);
 
         Page<UserEditDto> userPage = userService.findAll(
                 PageRequest.of(currentPage - 1, pageSize, Sort.by("id").ascending()));
