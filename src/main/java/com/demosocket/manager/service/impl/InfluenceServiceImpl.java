@@ -11,7 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class InfluenceServiceImpl implements InfluenceService {
@@ -84,13 +86,21 @@ public class InfluenceServiceImpl implements InfluenceService {
 //        and set Nagii at 0 position
         influenceDtoResultList.add(0, influenceDtoNagii);
 
+
+//        Here we add +1 day
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd" );
+        Date day = lastTwoDays.get(0);
+        Date nextDate = new Date(day.getTime() + TimeUnit.DAYS.toMillis(1));
+        influenceDtoResultList.get(1).setDay(dateFormat.format(nextDate));
+//        resolve it
+
         return influenceDtoResultList;
     }
 
     @Override
     public void saveInfluence(InfluenceFormDto influenceFormDto) {
 //        day when you should add the information in db
-        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDay());
+        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(1).getDay());
 
         List<Influence> influenceList = new ArrayList<>();
         for (InfluenceDto inf : influenceFormDto.getInfluences()) {

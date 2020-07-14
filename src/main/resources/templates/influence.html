@@ -66,6 +66,7 @@
             </table>
         </div>
         <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
+            <a class="menu-link" th:href="@{/influence/edit}">Edit</a>
             <a class="menu-link" th:href="@{/influence/update}">Update</a>
         </div>
     </div>
