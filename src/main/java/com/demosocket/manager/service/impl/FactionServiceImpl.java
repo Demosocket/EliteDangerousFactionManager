@@ -46,8 +46,11 @@ public class FactionServiceImpl implements FactionService {
         Integer expectationOfElectionsCount = 0;
         Integer warCount = 0;
         Integer electionsCount = 0;
-        for (Influence inf :
-                influenceRepository.findAllByDateOrderById(influenceRepository.findTwoLastDays().get(0))) {
+
+        List<Influence> influenceLastDayList =
+                influenceRepository.findAllByDateOrderById(influenceRepository.findTwoLastDays().get(0));
+
+        for (Influence inf : influenceLastDayList) {
             if (inf.getState().equals(State.EXPANSION)
                     || inf.getState().equals(State.EXPECTATION_OF_EXPANSION)
                     || inf.getState().equals(State.NONE)) {
@@ -64,13 +67,15 @@ public class FactionServiceImpl implements FactionService {
                 electionsCount++;
             }
         }
-        return new StateInformationDto(
-                controlCount,
-                noControlCount,
-                expectationOfWarCount,
-                expectationOfElectionsCount,
-                warCount,
-                electionsCount);
+
+        return StateInformationDto.builder()
+                .controlCount(controlCount)
+                .noControlCount(noControlCount)
+                .expectationOfWarCount(expectationOfWarCount)
+                .expectationOfElectionsCount(expectationOfElectionsCount)
+                .warCount(warCount)
+                .electionsCount(electionsCount)
+                .build();
     }
 
     @Override
@@ -114,23 +119,37 @@ public class FactionServiceImpl implements FactionService {
                 totalPlanetBase += sys.getPlanetBase();
             }
         }
-        return new StationsInformationDto(
-                totalOrbitLargeControl,
-                totalOrbitLarge,
-                totalOrbitMediumControl,
-                totalOrbitMedium,
-                totalPlanetLargeControl,
-                totalPlanetLarge,
-                totalPlanetBaseControl,
-                totalPlanetBase);
+
+        return StationsInformationDto.builder()
+                .totalOrbitLargeControl(totalOrbitLargeControl)
+                .totalOrbitLarge(totalOrbitLarge)
+                .totalOrbitMediumControl(totalOrbitMediumControl)
+                .totalOrbitMedium(totalOrbitMedium)
+                .totalPlanetLargeControl(totalPlanetLargeControl)
+                .totalPlanetLarge(totalPlanetLarge)
+                .totalPlanetBaseControl(totalPlanetBaseControl)
+                .totalPlanetBase(totalPlanetBase)
+                .build();
     }
 
     @Override
     public InfluenceInformationDto findInfluenceInformation() {
         List<InfluenceDto> influenceDtoList = influenceService.findInfluenceDtoLastDay();
-        return new InfluenceInformationDto(
-                influenceDtoList.get(0).getDay(),
-                influenceDtoList.stream().mapToInt(InfluenceDto::getChanges).sum()
-        );
+
+        return InfluenceInformationDto.builder()
+                .day(getDate(influenceDtoList))
+                .totalChanges(getInfluenceChanges(influenceDtoList))
+                .build();
+    }
+
+    private String getDate(List<InfluenceDto> influenceDtoList) {
+        return influenceDtoList.get(0).getDate();
+    }
+
+    private int getInfluenceChanges(List<InfluenceDto> influenceDtoList) {
+        return influenceDtoList
+                .stream()
+                .mapToInt(InfluenceDto::getChanges)
+                .sum();
     }
 }

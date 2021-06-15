@@ -90,7 +90,7 @@ public class InfluenceServiceImpl implements InfluenceService {
     @Override
     public void saveInfluence(InfluenceFormDto influenceFormDto) {
 //        day when you should add the information in db
-        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDay());
+        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDate());
 
         List<Influence> influenceList = new ArrayList<>();
         for (InfluenceDto inf : influenceFormDto.getInfluences()) {

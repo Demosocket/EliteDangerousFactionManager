@@ -56,9 +56,9 @@
                 <tbody>
                 <tr th:each="sys : ${systemsDb}">
 <!--                    №-->
-                    <td th:text="${sys.systemNum}"></td>
+                    <td th:text="${sys.number}"></td>
 <!--                    System-->
-                    <td th:text="${sys.systemName}"></td>
+                    <td th:text="${sys.name}"></td>
 <!--                    Population-->
                     <td th:text="${#numbers.formatInteger(sys.population,3,'POINT')}"></td>
 <!--                    Economy-->
@@ -90,7 +90,7 @@
                     <td th:unless="(${sys.planetBase} == null) or (${sys.planetBaseControl} == ${sys.planetBase})"
                         th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}"></td>
 <!--                    Expansion Date-->
-                    <td th:text="${sys.expDate}"></td>
+                    <td th:text="${sys.expansionDate}"></td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')"
                         class="spoilerEdit" style="display: none">
                         <a class="tooltip" th:href="@{/systems/edit/{id}(id=${sys.id})}">

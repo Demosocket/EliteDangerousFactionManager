@@ -6,8 +6,8 @@ import lombok.Data;
 public class SystemDto {
 
     private Long id;
-    private Integer systemNum;
-    private String systemName;
+    private Integer number;
+    private String name;
     private Long population;
     private String primaryEconomy;
     private String secondaryEconomy;
@@ -19,5 +19,5 @@ public class SystemDto {
     private Integer planetLarge;
     private Integer planetBaseControl;
     private Integer planetBase;
-    private String expDate;
+    private String expansionDate;
 }

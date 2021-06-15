@@ -6,7 +6,7 @@ import lombok.Data;
 public class InfluenceDto {
 
     private String systemName;
-    private String day;
+    private String date;
     private String state;
     private Integer influence;
     private Integer changes;

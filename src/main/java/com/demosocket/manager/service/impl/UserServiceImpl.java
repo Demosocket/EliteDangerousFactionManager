@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
         List<UserEditDto> userEditDtoList = new ArrayList<>();
         for (User user : userList) {
-            String role = user.getRole().getTitle();
+            String role = user.getUserRole().getTitle();
             UserEditDto userEditDto = modelMapper.map(user, UserEditDto.class);
             userEditDto.setRole(role);
             userEditDtoList.add(userEditDto);
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
             return null;
         } else {
             UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
-            userEditDto.setRole(userFromDb.getRole().getTitle());
+            userEditDto.setRole(userFromDb.getUserRole().getTitle());
             return userEditDto;
         }
     }
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public void saveNewUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole(Role.USER);
+        user.setUserRole(Role.USER);
         user.setEnabled(true);
         userRepository.save(user);
     }
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         User userFromDB = userRepository.findByUsername(userEditDto.getUsername());
         User user = modelMapper.map(userEditDto, User.class);
         user.setHashPassword(userFromDB.getHashPassword());
-        user.setRole(Role.valueOf(userEditDto.getRole().toUpperCase()));
+        user.setUserRole(Role.valueOf(userEditDto.getRole().toUpperCase()));
         userRepository.save(user);
     }
 }

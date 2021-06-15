@@ -17,15 +17,15 @@
                     <label for="num">№</label>
                 </div>
                 <div class="col-65">
-                    <input type="number" th:field="*{systemNum}" id="num" placeholder="№" max="200"><br>
+                    <input type="number" th:field="*{number}" id="num" placeholder="№" max="200"><br>
                 </div>
             </div>
             <div class="row">
                 <div class="col-35">
-                    <label for="systemName">System</label>
+                    <label for="name">System</label>
                 </div>
                 <div class="col-65">
-                    <input type="text" th:field="*{systemName}" id="systemName" placeholder="System"><br>
+                    <input type="text" th:field="*{name}" id="name" placeholder="System"><br>
                 </div>
             </div>
             <div class="row">
@@ -153,7 +153,7 @@
                     <label for="date">Expansion Date</label>
                 </div>
                 <div class="col-65">
-                    <input type="date" th:field="*{expDate}" id="date" placeholder="Date"><br>
+                    <input type="date" th:field="*{expansionDate}" id="date" placeholder="Date"><br>
                 </div>
             </div>
             <input type="submit" value="Add System">

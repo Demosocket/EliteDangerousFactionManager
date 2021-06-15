@@ -7,7 +7,7 @@ public class TaskDto {
 
     private Long id;
     private String userName;
-    private String taskDate;
+    private String date;
     private String messageHeader;
     private String combatTask;
     private String electionTask;

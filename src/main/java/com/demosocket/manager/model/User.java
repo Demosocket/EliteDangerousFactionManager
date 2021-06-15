@@ -7,6 +7,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User{
 
@@ -21,9 +24,9 @@ public class User{
     @Column(name = "hash_password")
     private String hashPassword;
 
-    @Column(name = "role")
+    @Column(name = "user_role")
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private Role userRole;
 
     @Column(name = "enabled")
     private boolean enabled;
