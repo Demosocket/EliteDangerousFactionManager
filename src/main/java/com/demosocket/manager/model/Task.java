@@ -20,10 +20,10 @@ public class Task {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "task_date")
+    @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date taskDate;
+    private Date date;
 
     @Column(name = "message_header")
     private String messageHeader;

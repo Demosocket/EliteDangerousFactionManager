@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SystemRepository extends JpaRepository<System, Long> {
 
-    System findBySystemName(String systemName);
+    System findByName(String systemName);
     List<System> findAllByFaction(Faction faction);
     Integer countAllByFaction(Faction faction);
 }

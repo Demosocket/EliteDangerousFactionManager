@@ -47,7 +47,7 @@ public class FactionServiceImpl implements FactionService {
         Integer warCount = 0;
         Integer electionsCount = 0;
         for (Influence inf :
-                influenceRepository.findAllByDayOrderById(influenceRepository.findTwoLastDays().get(0))) {
+                influenceRepository.findAllByDateOrderById(influenceRepository.findTwoLastDays().get(0))) {
             if (inf.getState().equals(State.EXPANSION)
                     || inf.getState().equals(State.EXPECTATION_OF_EXPANSION)
                     || inf.getState().equals(State.NONE)) {

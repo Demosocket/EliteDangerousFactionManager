@@ -39,8 +39,8 @@ public class InfluenceServiceImpl implements InfluenceService {
 //        Find two last days in db
         List<Date> lastTwoDays = influenceRepository.findTwoLastDays();
 //        Make query to find 2 lists of influences
-        List<Influence> influenceLastDayList = influenceRepository.findAllByDayOrderById(lastTwoDays.get(0));
-        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDayOrderById(lastTwoDays.get(1));
+        List<Influence> influenceLastDayList = influenceRepository.findAllByDateOrderById(lastTwoDays.get(0));
+        List<Influence> influenceDayBeforeLastList = influenceRepository.findAllByDateOrderById(lastTwoDays.get(1));
 
         List<InfluenceDto> influenceDtoResultList = new ArrayList<>();
 //        InfluenceDto for Nagii - main system
@@ -95,8 +95,8 @@ public class InfluenceServiceImpl implements InfluenceService {
         List<Influence> influenceList = new ArrayList<>();
         for (InfluenceDto inf : influenceFormDto.getInfluences()) {
             Influence influence = new Influence();
-            influence.setSystem(systemRepository.findBySystemName(inf.getSystemName()));
-            influence.setDay(day);
+            influence.setSystem(systemRepository.findByName(inf.getSystemName()));
+            influence.setDate(day);
             influence.setInfluence(inf.getInfluence());
             influence.setState(State.valueOf(
                     inf.getState().toUpperCase().replaceAll("\\s+", "_")

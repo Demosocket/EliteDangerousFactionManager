@@ -21,11 +21,11 @@ public class System {
     @Enumerated(value = EnumType.STRING)
     private Faction faction;
 
-    @Column(name = "system_num")
-    private Integer systemNum;
+    @Column(name = "number")
+    private Integer number;
 
-    @Column(name = "system_name")
-    private String systemName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "population")
     private Long population;
@@ -62,10 +62,10 @@ public class System {
     @Column(name = "planet_base")
     private Integer planetBase;
 
-    @Column(name = "exp_date")
+    @Column(name = "expansion_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date expDate;
+    private Date expansionDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "system")
     private List<Influence> influences;

@@ -11,5 +11,5 @@ public interface InfluenceRepository extends JpaRepository<Influence, Long> {
 
     @Query(value = "SELECT i.day FROM Influence i GROUP BY i.day ORDER BY i.day DESC LIMIT 2", nativeQuery = true)
     List<Date> findTwoLastDays();
-    List<Influence> findAllByDayOrderById(Date date);
+    List<Influence> findAllByDateOrderById(Date date);
 }

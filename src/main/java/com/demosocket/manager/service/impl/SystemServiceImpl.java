@@ -81,7 +81,7 @@ public class SystemServiceImpl implements SystemService {
 
         Influence influence = new Influence();
         influence.setSystem(system);
-        influence.setDay(influenceRepository.findTwoLastDays().get(0));
+        influence.setDate(influenceRepository.findTwoLastDays().get(0));
         influence.setInfluence(0);
         influence.setState(State.NO_CONTROL);
         influenceRepository.save(influence);

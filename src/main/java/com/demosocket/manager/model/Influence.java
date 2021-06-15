@@ -20,10 +20,10 @@ public class Influence {
     @JoinColumn(name = "systems_id", referencedColumnName = "id")
     private System system;
 
-    @Column(name = "day")
+    @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date day;
+    private Date date;
 
     @Column(name = "influence")
     private Integer influence;
