@@ -61,7 +61,7 @@ public class UserController {
 
     @PostMapping("/edit")
     public String updateUser(UserEditDto userEditDto) {
-        userService.saveUser(userEditDto);
+        userService.updateUser(userEditDto);
         return "redirect:/users/all";
     }
 }

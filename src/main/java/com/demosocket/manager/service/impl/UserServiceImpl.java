@@ -2,6 +2,7 @@ package com.demosocket.manager.service.impl;
 
 import com.demosocket.manager.dto.UserDto;
 import com.demosocket.manager.dto.UserEditDto;
+import com.demosocket.manager.exception.UserNotFoundException;
 import com.demosocket.manager.model.Role;
 import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
@@ -50,19 +51,19 @@ public class UserServiceImpl implements UserService {
             userEditDto.setRole(role);
             userEditDtoList.add(userEditDto);
         }
+
         return new PageImpl<>(userEditDtoList, pageable, userPage.getTotalElements());
     }
 
     @Override
     public UserEditDto findById(Long id) {
-        User userFromDb = userRepository.findById(id).orElse(null);
-        if (userFromDb == null) {
-            return null;
-        } else {
-            UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
-            userEditDto.setRole(userFromDb.getUserRole().getTitle());
-            return userEditDto;
-        }
+        User userFromDb = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %d not found", id)));
+
+        UserEditDto userEditDto = modelMapper.map(userFromDb, UserEditDto.class);
+        userEditDto.setRole(userFromDb.getUserRole().getTitle());
+
+        return userEditDto;
     }
 
     @Override
@@ -75,8 +76,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserEditDto userEditDto) {
+    public void updateUser(UserEditDto userEditDto) {
         User userFromDB = userRepository.findByUsername(userEditDto.getUsername());
+
         User user = modelMapper.map(userEditDto, User.class);
         user.setHashPassword(userFromDB.getHashPassword());
         user.setUserRole(Role.valueOf(userEditDto.getRole().toUpperCase()));
