@@ -29,17 +29,21 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto findLast() {
-        Task task = taskRepository.findFirstByOrderByIdDesc().orElse(Task.builder().user(userRepository.findById(1L).orElseThrow()).doNothing("No tasks found").build());
+        Task task = taskRepository.findFirstByOrderByIdDesc().orElseThrow(EntityNotFoundException::new);
         TaskDto taskDto = modelMapper.map(task, TaskDto.class);
         taskDto.setUserName(task.getUser().getUsername());
+
         return taskDto;
     }
 
     @Override
     public TaskDto findById(Long id) {
-        TaskDto taskDto = modelMapper.map(taskRepository.findById(id).orElseThrow(EntityNotFoundException::new), TaskDto.class);
+        Task task = taskRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        TaskDto taskDto = modelMapper.map(task, TaskDto.class);
         taskDto.setDate(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
-        return taskDto;
+
+        throw new EntityNotFoundException();
+//        return taskDto;
     }
 
     @Override

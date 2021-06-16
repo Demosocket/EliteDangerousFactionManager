@@ -13,4 +13,5 @@ public class SecurityConstants {
     public static final String STYLES_URL = "/styles/*";
     public static final String IMAGES_URL = "/images/*";
     public static final String LOGIN_URL = "/login";
+    public static final String ERROR_URL = "/error";
 }

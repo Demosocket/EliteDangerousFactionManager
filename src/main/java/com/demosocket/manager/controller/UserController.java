@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-
 @Controller
 @RequestMapping("/users")
 public class UserController {

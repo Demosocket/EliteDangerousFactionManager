@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class MainController {
+public class TaskController {
 
     private final TaskService taskService;
 
     @Autowired
-    public MainController(TaskService taskService) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
@@ -26,13 +26,13 @@ public class MainController {
     }
 
     @GetMapping("/task/edit/{id}")
-    public String updateTaskForm(@PathVariable("id") Long id, Model model){
+    public String updateTaskForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("taskDto", taskService.findById(id));
         return "task-edit";
     }
 
     @PostMapping("/task/edit")
-    public String updateTask(TaskDto taskDto){
+    public String updateTask(TaskDto taskDto) {
         taskService.editTask(taskDto);
         return "redirect:/";
     }
