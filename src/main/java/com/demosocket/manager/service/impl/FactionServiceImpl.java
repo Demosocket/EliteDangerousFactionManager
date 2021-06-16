@@ -15,7 +15,10 @@ import com.demosocket.manager.service.InfluenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+
+import static com.demosocket.manager.model.State.*;
 
 @Service
 public class FactionServiceImpl implements FactionService {
@@ -47,23 +50,23 @@ public class FactionServiceImpl implements FactionService {
         Integer warCount = 0;
         Integer electionsCount = 0;
 
-        List<Influence> influenceLastDayList =
-                influenceRepository.findAllByDateOrderById(influenceRepository.findTwoLastDays().get(0));
+        Date lastUpdate = influenceRepository.findTwoLastDays().get(0);
+        List<Influence> influenceLastUpdateList = influenceRepository.findAllByDateOrderById(lastUpdate);
 
-        for (Influence inf : influenceLastDayList) {
-            if (inf.getState().equals(State.EXPANSION)
-                    || inf.getState().equals(State.EXPECTATION_OF_EXPANSION)
-                    || inf.getState().equals(State.NONE)) {
+        for (Influence inf : influenceLastUpdateList) {
+            State state = inf.getState();
+
+            if (EXPANSION.equal(state) || EXPECTATION_OF_EXPANSION.equal(state) || NONE.equal(state)) {
                 controlCount++;
-            } else if (inf.getState().equals(State.NO_CONTROL)) {
+            } else if (NO_CONTROL.equal(state)) {
                 noControlCount++;
-            } else if (inf.getState().equals(State.EXPECTATION_OF_WAR)) {
+            } else if (EXPECTATION_OF_WAR.equal(state)) {
                 expectationOfWarCount++;
-            } else if (inf.getState().equals(State.EXPECTATION_OF_ELECTIONS)) {
+            } else if (EXPECTATION_OF_ELECTIONS.equal(state)) {
                 expectationOfElectionsCount++;
-            } else if (inf.getState().equals(State.WAR)) {
+            } else if (WAR.equals(state)) {
                 warCount++;
-            } else {
+            } else if (ELECTIONS.equal(state)) {
                 electionsCount++;
             }
         }
@@ -80,7 +83,10 @@ public class FactionServiceImpl implements FactionService {
 
     @Override
     public Long findTotalPopulation() {
-        return systemRepository.findAllByFaction(Faction.NAGII_UNION).stream().mapToLong(System::getPopulation).sum();
+        return systemRepository.findAllByFaction(Faction.NAGII_UNION)
+                .stream()
+                .mapToLong(System::getPopulation)
+                .sum();
     }
 
     @Override
@@ -93,6 +99,7 @@ public class FactionServiceImpl implements FactionService {
         Integer totalPlanetLarge = 0;
         Integer totalPlanetBaseControl = 0;
         Integer totalPlanetBase = 0;
+
         for (System sys : systemRepository.findAll()) {
             if (sys.getOrbitLargeControl() != null) {
                 totalOrbitLargeControl += sys.getOrbitLargeControl();

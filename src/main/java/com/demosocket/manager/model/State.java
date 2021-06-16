@@ -16,4 +16,8 @@ public enum State {
 
     @Getter
     public String title;
+
+    public boolean equal(State state) {
+        return this.name().equals(state.name());
+    }
 }

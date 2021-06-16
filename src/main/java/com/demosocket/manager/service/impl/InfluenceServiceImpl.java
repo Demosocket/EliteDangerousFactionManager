@@ -30,11 +30,6 @@ public class InfluenceServiceImpl implements InfluenceService {
     }
 
     @Override
-    public List<Date> findTwoLastDays() {
-        return influenceRepository.findTwoLastDays();
-    }
-
-    @Override
     public List<InfluenceDto> findInfluenceDtoLastDay() {
 //        Find two last days in db
         List<Date> lastTwoDays = influenceRepository.findTwoLastDays();

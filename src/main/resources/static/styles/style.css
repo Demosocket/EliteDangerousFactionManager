@@ -1,5 +1,5 @@
 body {
-    background: gainsboro url("/images/background-pic.jpg");
+    background: gainsboro url("../images/background-pic.jpg");
 }
 /*--------------------header style--------------------*/
 .header {

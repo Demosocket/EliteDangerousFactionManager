@@ -9,6 +9,5 @@ import java.util.List;
 public interface InfluenceService {
 
     List<InfluenceDto> findInfluenceDtoLastDay();
-    List<Date> findTwoLastDays();
     void saveInfluence(InfluenceFormDto influenceFormDto);
 }

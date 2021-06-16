@@ -8,8 +8,12 @@ import com.demosocket.manager.model.Faction;
 public interface FactionService {
 
     Integer countAll(Faction faction);
+
     StateInformationDto findStateInformation();
+
     Long findTotalPopulation();
+
     StationsInformationDto findStationsInformation();
+
     InfluenceInformationDto findInfluenceInformation();
 }
