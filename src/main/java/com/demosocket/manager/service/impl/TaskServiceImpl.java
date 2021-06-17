@@ -42,8 +42,7 @@ public class TaskServiceImpl implements TaskService {
         TaskDto taskDto = modelMapper.map(task, TaskDto.class);
         taskDto.setDate(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
 
-        throw new EntityNotFoundException();
-//        return taskDto;
+        return taskDto;
     }
 
     @Override

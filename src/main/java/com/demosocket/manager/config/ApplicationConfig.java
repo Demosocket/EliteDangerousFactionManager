@@ -15,11 +15,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login-page");
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-    }
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
