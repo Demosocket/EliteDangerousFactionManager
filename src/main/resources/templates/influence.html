@@ -24,19 +24,19 @@
                 </tr>
                 </thead>
                 <tfoot>
-                    <tr>
-                        <th colspan="3">Total Changes:</th>
-                        <th th:if="${influenceInformation.totalChanges} >= 0"
-                            th:text="${influenceInformation.totalChanges}" class="influence-changes-positive"></th>
-                        <td th:unless="${influenceInformation.totalChanges >= 0}"
-                            th:text="${influenceInformation.totalChanges}" class="influence-changes-negative"></td>
-                    </tr>
+                <tr>
+                    <th colspan="3">Total Changes:</th>
+                    <th th:if="${influenceInformation.totalChanges} >= 0"
+                        th:text="${influenceInformation.totalChanges}" class="influence-changes-positive"></th>
+                    <td th:unless="${influenceInformation.totalChanges >= 0}"
+                        th:text="${influenceInformation.totalChanges}" class="influence-changes-negative"></td>
+                </tr>
                 </tfoot>
                 <tbody>
                 <tr th:each="inf : ${influences}">
-<!--                    System-->
+                    <!--System-->
                     <td th:text="${inf.systemName}"></td>
-<!--                    State-->
+                    <!--State-->
                     <td th:if="${inf.state} == None" th:text="${inf.state}"></td>
                     <td th:if="${inf.state} == No+' '+Control"
                         th:text="${inf.state}" class="state-no-control"></td>
@@ -49,12 +49,12 @@
                         th:text="${inf.state}" class="state-expansion"></td>
                     <td th:if="${inf.state} == Expectation+' '+Of+' '+Expansion"
                         th:text="${inf.state}" class="state-expansion-expectation"></td>
-<!--                    Influence-->
+                    <!--Influence-->
                     <td th:if="${inf.influence} >= 75" th:text="${inf.influence}" class="influence-more75"></td>
                     <td th:if="${inf.influence} < 60" th:text="${inf.influence}" class="influence-less60"></td>
                     <td th:unless="(${inf.influence} < 60) or (${inf.influence} >= 75)"
                         th:text="${inf.influence}" class="influence-norm"></td>
-<!--                    Changes-->
+                    <!--Changes-->
                     <td th:if="${inf.changes} == 0"
                         th:text="${inf.changes}" class="influence-changes-zero"></td>
                     <td th:if="${inf.changes} > 0"

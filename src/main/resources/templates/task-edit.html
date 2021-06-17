@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-80">
                     <input readonly type="text" th:field="*{userName}" placeholder="userName"
-                           th:value="*{userName = #httpServletRequest.remoteUser}" id="userName" ><br>
+                           th:value="*{userName = #httpServletRequest.remoteUser}" id="userName"><br>
                 </div>
                 <div class="col-20">
                     <label for="date">date</label>
@@ -86,7 +86,8 @@
                     <label for="taskDescription">Описание:</label>
                 </div>
                 <div class="col-80">
-                    <textarea th:field="*{taskDescription}" id="taskDescription" placeholder="Task Description"></textarea><br>
+                    <textarea th:field="*{taskDescription}" id="taskDescription"
+                              placeholder="Task Description"></textarea><br>
                 </div>
             </div>
             <input type="submit" class="menu-link" value="Edit Task">

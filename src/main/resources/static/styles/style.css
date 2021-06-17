@@ -1,6 +1,7 @@
 body {
     background: gainsboro url("../images/background-pic.jpg");
 }
+
 /*--------------------header style--------------------*/
 .header {
     position: relative;
@@ -8,6 +9,7 @@ body {
     height: 125px;
     background: darkgrey;
 }
+
 .menu {
     list-style: none;
     position: relative;
@@ -15,33 +17,40 @@ body {
     top: 50%;
     padding-right: 10px;
 }
+
 #logo {
     position: relative;
     margin-top: -50px;
 }
+
 #logo-link {
     background: #a9a9a9;
 }
+
 .menu-list-left {
     float: left;
     margin-top: -0.625em;
 }
+
 .menu-list-right {
     float: right;
     margin-top: -0.625em;
 }
+
 .menu-link {
     text-decoration: none;
     padding: 10px;
     margin-left: 5px;
     margin-right: 5px;
-    color:#fff;
+    color: #fff;
     background: #696969;
-    border-radius:5px;
+    border-radius: 5px;
 }
+
 .menu-link:hover {
     background: #cf7c1f;
 }
+
 /*--------------------main div and tips--------------------*/
 .content {
     background-color: #a9a9a9;
@@ -51,12 +60,14 @@ body {
     padding-bottom: 10px;
     margin-top: 15px;
 }
+
 .tooltip {
     position: relative;
     display: inline-block;
     margin-bottom: -2px;
     border-bottom: 2px dotted black;
 }
+
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 150px;
@@ -68,68 +79,84 @@ body {
     position: absolute;
     top: -25px;
 }
+
 .tooltip:hover .tooltip-text {
     visibility: visible;
 }
+
 .error-message {
     color: firebrick;
 }
+
 .inform-message {
     color: black;
 }
+
 /*--------------------table style--------------------*/
 table {
     text-align: center;
     margin: auto;
 }
+
 th {
     background: #0d53b5;
     color: white;
     padding: 10px 15px;
 }
+
 th, td {
     border-style: solid;
     border-width: 0 0 0 0;
     border-color: white;
 }
+
 td {
     padding: 5px 10px;
     background: gray;
 }
+
 td.equal-stations {
     background: forestgreen;
 }
+
 /*--------------------pagination--------------------*/
 .pagination-main {
     position: relative;
 }
+
 .pagination-name {
     position: relative;
     bottom: 17px;
     display: inline-block;
 }
+
 .pagination {
     margin-top: 10px;
     margin-bottom: 5px;
     display: inline-block;
 }
+
 .pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
 }
+
 .pagination a.active {
     background-color: gray;
     color: white;
 }
+
 .pagination a:hover:not(.active) {
     background-color: #cf7c1f;
 }
+
 /*--------------------forms style--------------------*/
 #id-hide {
     display: none;
 }
+
 .form-div {
     margin: auto;
     width: 500px;
@@ -137,10 +164,12 @@ td.equal-stations {
     border-radius: 10px;
     padding: 20px;
 }
+
 .row {
     margin-top: 5px;
     height: 45px;
 }
+
 .col-35 {
     position: relative;
     text-align: left;
@@ -148,27 +177,32 @@ td.equal-stations {
     float: left;
     width: 40%;
 }
+
 .col-65 {
     position: relative;
     float: left;
     width: 60%;
 }
+
 .col-25-left {
     position: relative;
     float: left;
     width: 45%;
 }
+
 .col-15-center {
     position: relative;
     float: left;
     width: 10%;
     margin-top: 13px;
 }
+
 .col-25-right {
     position: relative;
     float: right;
     width: 45%;
 }
+
 input, select, textarea {
     background: white;
     width: 100%;
@@ -181,85 +215,107 @@ input, select, textarea {
     transition: 0.5s;
     outline: none;
 }
+
 input:focus, select:focus, textarea:focus {
     border: 3px solid #555;
 }
+
 input[type=checkbox] {
-    cursor:pointer;
+    cursor: pointer;
     height: 25px;
     width: 25px;
 }
+
 input[type=submit] {
     background: darkgrey;
     width: 100px;
 }
+
 input[type=submit]:hover {
     background-color: #cf7c1f;
 }
+
 /*--------------------influence table--------------------*/
 .thisDate {
     width: auto;
 }
+
 .influence-date-title {
     padding-right: 10px;
     margin-top: 9px;
     display: flex;
     width: auto;
 }
+
 .influence-date-main {
-    width:auto;
+    width: auto;
     display: flex;
 }
+
 .influence-date {
     margin: -7px;
     -webkit-flex: 1;
     display: flex;
 }
+
 .influence-value {
     width: 75px;
 }
+
 .influence-value {
     /*height: 10px;*/
     margin: -2px;
 }
+
 .influence-state {
     margin: -2px;
 }
+
 .influence-changes-negative, .influence-less60 {
     background: red;
     color: black;
 }
+
 .influence-changes-zero, .influence-norm {
     background: forestgreen;
     color: black;
 }
+
 .influence-changes-positive {
     background: #00630b;
     color: black;
 }
+
 .influence-more75 {
     background: #800000;
     color: black;
 }
+
 .state-conflict {
     background: slateblue;
 }
+
 .state-conflict-expectation {
     background: deepskyblue;
 }
+
 .state-expansion {
     background: greenyellow;
 }
+
 .state-expansion-expectation {
     background: khaki;
 }
+
 .state-no-control {
     background: fuchsia;
 }
+
 /*--------------------info text style--------------------*/
 .info-div {
     text-align: center;
 }
+
 /*--------------------faction list--------------------*/
 .faction-information {
     margin: auto;
@@ -268,37 +324,46 @@ input[type=submit]:hover {
     border-radius: 10px;
     padding: 20px;
 }
+
 li {
     text-align: left;
 }
+
 /*--------------------tasks--------------------*/
 .task-message-header {
     color: yellow;
     font-weight: bold;
 }
+
 #task-do-nothing {
     color: maroon;
     font-weight: bold;
 }
+
 #task-footer {
     text-align: right;
 }
+
 .task-div {
     margin: auto;
     width: 750px;
 }
+
 #task-form {
     border: 2px solid #cccccc;
     border-radius: 10px;
     padding: 20px;
 }
+
 .task-code {
     width: 135px;
     text-align: left;
 }
+
 .task-content {
     text-align: left;
 }
+
 .col-20 {
     position: relative;
     text-align: left;
@@ -306,15 +371,18 @@ li {
     float: left;
     width: 20%;
 }
+
 .col-80 {
     position: relative;
     float: left;
     width: 80%;
 }
+
 textarea {
     resize: vertical;
     height: 80px;
 }
+
 #taskDescription {
     height: 240px;
 }

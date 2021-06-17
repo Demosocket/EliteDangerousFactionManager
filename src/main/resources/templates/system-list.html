@@ -55,41 +55,41 @@
                 </thead>
                 <tbody>
                 <tr th:each="sys : ${systemsDb}">
-<!--                    №-->
+                    <!--№-->
                     <td th:text="${sys.number}"></td>
-<!--                    System-->
+                    <!--System-->
                     <td th:text="${sys.name}"></td>
-<!--                    Population-->
+                    <!--Population-->
                     <td th:text="${#numbers.formatInteger(sys.population,3,'POINT')}"></td>
-<!--                    Economy-->
+                    <!--Economy-->
                     <td th:if="${sys.secondaryEconomy} == None" th:text="${sys.primaryEconomy}"></td>
                     <td th:unless="${sys.secondaryEconomy} == None"
                         th:text="${sys.primaryEconomy} + ' / ' + ${sys.secondaryEconomy}"></td>
-<!--                    Orbital Large-->
+                    <!--Orbital Large-->
                     <td th:if="${sys.orbitLarge} == null" th:text="'- / -'"></td>
                     <td th:unless="(${sys.orbitLarge} == null) or (${sys.orbitLargeControl} != ${sys.orbitLarge})"
                         th:text="${sys.orbitLargeControl} + ' / ' + ${sys.orbitLarge}" class="equal-stations"></td>
                     <td th:unless="(${sys.orbitLarge} == null) or (${sys.orbitLargeControl} == ${sys.orbitLarge})"
                         th:text="${sys.orbitLargeControl} + ' / ' + ${sys.orbitLarge}"></td>
-<!--                    Orbital Medium-->
+                    <!--Orbital Medium-->
                     <td th:if="${sys.orbitMedium} == null" th:text="'- / -'"></td>
                     <td th:unless="(${sys.orbitMedium} == null) or (${sys.orbitMediumControl} != ${sys.orbitMedium})"
                         th:text="${sys.orbitMediumControl} + ' / ' + ${sys.orbitMedium}" class="equal-stations"></td>
                     <td th:unless="(${sys.orbitMedium} == null) or (${sys.orbitMediumControl} == ${sys.orbitMedium})"
                         th:text="${sys.orbitMediumControl} + ' / ' + ${sys.orbitMedium}"></td>
-<!--                    Planet Large-->
+                    <!--Planet Large-->
                     <td th:if="${sys.planetLarge} == null" th:text="'- / -'"></td>
                     <td th:unless="(${sys.planetLarge} == null) or (${sys.planetLargeControl} != ${sys.planetLarge})"
                         th:text="${sys.planetLargeControl} + ' / ' + ${sys.planetLarge}" class="equal-stations"></td>
                     <td th:unless="(${sys.planetLarge} == null) or (${sys.planetLargeControl} == ${sys.planetLarge})"
                         th:text="${sys.planetLargeControl} + ' / ' + ${sys.planetLarge}"></td>
-<!--                    Planet Base-->
+                    <!--Planet Base-->
                     <td th:if="${sys.planetBase} == null" th:text="'- / -'"></td>
                     <td th:unless="(${sys.planetBase} == null) or (${sys.planetBaseControl} != ${sys.planetBase})"
                         th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}" class="equal-stations"></td>
                     <td th:unless="(${sys.planetBase} == null) or (${sys.planetBaseControl} == ${sys.planetBase})"
                         th:text="${sys.planetBaseControl} + ' / ' + ${sys.planetBase}"></td>
-<!--                    Expansion Date-->
+                    <!--Expansion Date-->
                     <td th:text="${sys.expansionDate}"></td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')"
                         class="spoilerEdit" style="display: none">
@@ -123,7 +123,7 @@
         const elements = document.getElementsByClassName("spoiler" + param);
         const text = document.getElementById(param + "Spoiler");
         for (let item of elements) {
-            if(item.style.display === "table-cell") {
+            if (item.style.display === "table-cell") {
                 item.style.display = "none";
                 text.innerHTML = param + " System";
             } else {

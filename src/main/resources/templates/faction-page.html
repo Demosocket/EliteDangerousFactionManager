@@ -13,7 +13,7 @@
         <h1>Summary information:</h1>
         <ul>
             <li>Nagii Union faction is represented in <b><em>[[${countAll}]]</em></b> systems:
-<!--                State-->
+                <!--State-->
                 <ul>
                     <li th:if="${stateInformation.controlCount} != 0">Control
                         <b><em>[[${stateInformation.controlCount}]]</em></b></li>
@@ -29,10 +29,10 @@
                         <b><em>[[${stateInformation.electionsCount}]]</em></b></li>
                 </ul>
             </li>
-<!--            Population-->
+            <!--Population-->
             <li>Total population of Nagii Union systems:
                 <b><em>[[${#numbers.formatInteger(totalPopulation,3,'POINT')}]]</em></b></li>
-<!--            Stations-->
+            <!--Stations-->
             <li>Total stations in faction systems:
                 <b><em>[[${stationsInformation.totalOrbitLargeControl}
                     + ${stationsInformation.totalOrbitMediumControl}
@@ -57,7 +57,7 @@
                         <b><em>[[${stationsInformation.totalPlanetBase}]]</em></b></li>
                 </ul>
             </li>
-<!--            Influence-->
+            <!--Influence-->
             <li>Last influence update: <b><em>[[${influenceInformation.day}]]</em></b>
                 <ul>
                     <li>Total impact changes:
