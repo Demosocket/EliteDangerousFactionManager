@@ -12,7 +12,6 @@ import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
 import com.demosocket.manager.service.FactionService;
 import com.demosocket.manager.service.InfluenceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -27,7 +26,6 @@ public class FactionServiceImpl implements FactionService {
     private final InfluenceRepository influenceRepository;
     private final InfluenceService influenceService;
 
-    @Autowired
     public FactionServiceImpl(SystemRepository systemRepository,
                               InfluenceRepository influenceRepository,
                               InfluenceService influenceService) {
@@ -101,6 +99,7 @@ public class FactionServiceImpl implements FactionService {
         Integer totalPlanetBase = 0;
 
         for (System sys : systemRepository.findAll()) {
+
             if (sys.getOrbitLargeControl() != null) {
                 totalOrbitLargeControl += sys.getOrbitLargeControl();
             }

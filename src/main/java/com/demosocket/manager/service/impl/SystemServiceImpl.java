@@ -1,18 +1,22 @@
 package com.demosocket.manager.service.impl;
 
 import com.demosocket.manager.dto.SystemDto;
-import com.demosocket.manager.model.*;
+import com.demosocket.manager.model.Economy;
+import com.demosocket.manager.model.Influence;
+import com.demosocket.manager.model.State;
 import com.demosocket.manager.model.System;
 import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
 import com.demosocket.manager.service.SystemService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import static com.demosocket.manager.model.Faction.NAGII_UNION;
 
 @Service
 public class SystemServiceImpl implements SystemService {
@@ -21,7 +25,6 @@ public class SystemServiceImpl implements SystemService {
     private final InfluenceRepository influenceRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public SystemServiceImpl(SystemRepository systemRepository,
                              InfluenceRepository influenceRepository,
                              ModelMapper modelMapper) {
@@ -30,64 +33,69 @@ public class SystemServiceImpl implements SystemService {
         this.modelMapper = modelMapper;
     }
 
+    @Override
     public List<SystemDto> findAll() {
-        List<System> systemList = systemRepository.findAllByFaction(Faction.NAGII_UNION);
+        List<System> systemList = systemRepository.findAllByFaction(NAGII_UNION);
         systemList.sort(Comparator.comparing(System::getId));
+
         List<SystemDto> systemDtoList = new ArrayList<>();
         for (System system : systemList) {
-            SystemDto systemDto = modelMapper.map(system, SystemDto.class);
-            systemDto.setPrimaryEconomy(system.getPrimaryEconomy().getTitle());
-            systemDto.setSecondaryEconomy(system.getSecondaryEconomy().getTitle());
-            systemDtoList.add(systemDto);
+            systemDtoList.add(getSystemFromDto(system));
         }
+
         return systemDtoList;
     }
 
+    @Override
     public SystemDto findById(Long id) {
-        System systemFromDb = systemRepository.findById(id).orElse(null);
-        if (systemFromDb == null) {
-            return null;
-        } else {
-            SystemDto systemDto = modelMapper.map(systemFromDb, SystemDto.class);
-            systemDto.setPrimaryEconomy(systemFromDb.getPrimaryEconomy().getTitle());
-            systemDto.setSecondaryEconomy(systemFromDb.getSecondaryEconomy().getTitle());
-            return systemDto;
-        }
+        System systemFromDb = systemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+
+        return getSystemFromDto(systemFromDb);
     }
 
+    @Override
     public void editSystem(SystemDto systemDto) {
-        System system = modelMapper.map(systemDto, System.class);
-        system.setFaction(Faction.NAGII_UNION);
-        system.setPrimaryEconomy(Economy.valueOf(
-                systemDto.getPrimaryEconomy().toUpperCase().replaceAll("\\s+", "_")
-        ));
-        system.setSecondaryEconomy(Economy.valueOf(
-                systemDto.getSecondaryEconomy().toUpperCase().replaceAll("\\s+", "_")
-        ));
-        systemRepository.save(system);
+        save(systemDto);
     }
 
     @Override
     public void saveSystem(SystemDto systemDto) {
-        System system = modelMapper.map(systemDto, System.class);
-        system.setFaction(Faction.NAGII_UNION);
-        system.setPrimaryEconomy(Economy.valueOf(
-                systemDto.getPrimaryEconomy().toUpperCase().replaceAll("\\s+", "_")
-        ));
-        system.setSecondaryEconomy(Economy.valueOf(
-                systemDto.getSecondaryEconomy().toUpperCase().replaceAll("\\s+", "_")
-        ));
-        systemRepository.save(system);
+        System system = save(systemDto);
 
-        Influence influence = new Influence();
-        influence.setSystem(system);
-        influence.setDate(influenceRepository.findTwoLastDays().get(0));
-        influence.setInfluence(0);
-        influence.setState(State.NO_CONTROL);
+        Influence influence = Influence.builder()
+                .system(system)
+                .date(influenceRepository.findTwoLastDays().get(0))
+                .influence(0)
+                .state(State.NO_CONTROL)
+                .build();
+
         influenceRepository.save(influence);
     }
 
+    @Override
     public void deleteById(Long id) {
         systemRepository.deleteById(id);
+    }
+
+    private SystemDto getSystemFromDto(System system) {
+        SystemDto systemDto = modelMapper.map(system, SystemDto.class);
+        systemDto.setPrimaryEconomy(system.getPrimaryEconomy().getTitle());
+        systemDto.setSecondaryEconomy(system.getSecondaryEconomy().getTitle());
+
+        return systemDto;
+    }
+
+    private System save(SystemDto systemDto) {
+        System system = modelMapper.map(systemDto, System.class);
+        system.setFaction(NAGII_UNION);
+        system.setPrimaryEconomy(getEconomyFromEnum(systemDto.getPrimaryEconomy()));
+        system.setSecondaryEconomy(getEconomyFromEnum(systemDto.getSecondaryEconomy()));
+        systemRepository.save(system);
+
+        return system;
+    }
+
+    private Economy getEconomyFromEnum(String economy) {
+        return Economy.valueOf(economy.toUpperCase().replaceAll("\\s+", "_"));
     }
 }

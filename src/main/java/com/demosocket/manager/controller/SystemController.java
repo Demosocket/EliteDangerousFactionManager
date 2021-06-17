@@ -2,7 +2,6 @@ package com.demosocket.manager.controller;
 
 import com.demosocket.manager.dto.SystemDto;
 import com.demosocket.manager.service.SystemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ public class SystemController {
 
     private final SystemService systemService;
 
-    @Autowired
     public SystemController(SystemService systemService) {
         this.systemService = systemService;
     }

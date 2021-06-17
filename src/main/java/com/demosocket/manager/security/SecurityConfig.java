@@ -1,7 +1,6 @@
 package com.demosocket.manager.security;
 
 import com.demosocket.manager.model.Role;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,7 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
     private final Environment environment;
 
-    @Autowired
     public SecurityConfig(DataSource dataSource, Environment environment) {
         this.dataSource = dataSource;
         this.environment = environment;

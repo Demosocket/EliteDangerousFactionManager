@@ -2,7 +2,6 @@ package com.demosocket.manager.controller;
 
 import com.demosocket.manager.dto.TaskDto;
 import com.demosocket.manager.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @Autowired
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }

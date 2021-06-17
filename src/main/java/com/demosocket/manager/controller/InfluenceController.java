@@ -3,7 +3,6 @@ package com.demosocket.manager.controller;
 import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.service.FactionService;
 import com.demosocket.manager.service.InfluenceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ public class InfluenceController {
     private final InfluenceService influenceService;
     private final FactionService factionService;
 
-    @Autowired
     public InfluenceController(InfluenceService influenceService, FactionService factionService) {
         this.influenceService = influenceService;
         this.factionService = factionService;

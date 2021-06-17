@@ -4,13 +4,14 @@ import com.demosocket.manager.dto.InfluenceDto;
 import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.model.Influence;
 import com.demosocket.manager.model.State;
+import com.demosocket.manager.model.System;
 import com.demosocket.manager.repository.InfluenceRepository;
 import com.demosocket.manager.repository.SystemRepository;
 import com.demosocket.manager.service.InfluenceService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
@@ -20,7 +21,6 @@ public class InfluenceServiceImpl implements InfluenceService {
     private final SystemRepository systemRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public InfluenceServiceImpl(InfluenceRepository influenceRepository,
                                 SystemRepository systemRepository,
                                 ModelMapper modelMapper) {
@@ -51,9 +51,11 @@ public class InfluenceServiceImpl implements InfluenceService {
                     influenceDayBeforeLastList,
                     influenceDtoResultList);
         }
+        // TODO check when we lost the system
+
         // sort the resulting list for easy presentation
         influenceDtoResultList.sort(Comparator.comparing(InfluenceDto::getSystemName));
-        // and set Nagii at 0 position
+        // and set Nagii on first position
         influenceDtoResultList.add(0, influenceDtoNagii);
 
         return influenceDtoResultList;
@@ -61,19 +63,12 @@ public class InfluenceServiceImpl implements InfluenceService {
 
     @Override
     public void saveInfluence(InfluenceFormDto influenceFormDto) {
-        // day when you should add the information in db
-        java.sql.Date day = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDate());
+        // date when you should add the information in db
+        java.sql.Date date = java.sql.Date.valueOf(influenceFormDto.getInfluences().get(0).getDate());
 
         List<Influence> influenceList = new ArrayList<>();
         for (InfluenceDto inf : influenceFormDto.getInfluences()) {
-            Influence influence = new Influence();
-            influence.setSystem(systemRepository.findByName(inf.getSystemName()));
-            influence.setDate(day);
-            influence.setInfluence(inf.getInfluence());
-            influence.setState(State.valueOf(
-                    inf.getState().toUpperCase().replaceAll("\\s+", "_")
-            ));
-            influenceList.add(influence);
+            influenceList.add(getInfluenceFromDto(date, inf));
         }
         // sorting the influence by 'systems_id'
         Map<Long, Influence> influenceMap = new TreeMap<>();
@@ -84,6 +79,45 @@ public class InfluenceServiceImpl implements InfluenceService {
         List<Influence> resultList = new ArrayList<>(influenceMap.values());
 
         influenceRepository.saveAll(resultList);
+    }
+
+    private Influence getInfluenceFromDto(java.sql.Date date, InfluenceDto inf) {
+        System system = systemRepository.findByName(inf.getSystemName()).orElseThrow(EntityNotFoundException::new);
+        return Influence.builder()
+                .system(system)
+                .date(date)
+                .influence(inf.getInfluence())
+                .state(State.valueOf(inf.getState().toUpperCase().replaceAll("\\s+", "_")))
+                .build();
+    }
+
+    private InfluenceDto getInfluenceDtoNagii(List<Influence> influenceLastDayList,
+                                              List<Influence> influenceDayBeforeLastList) {
+        InfluenceDto influenceDtoNagii = modelMapper.map(influenceLastDayList.get(0), InfluenceDto.class);
+        influenceDtoNagii.setState(influenceLastDayList.get(0).getState().getTitle());
+        influenceDtoNagii.setChanges(
+                influenceLastDayList.get(0).getInfluence() - influenceDayBeforeLastList.get(0).getInfluence()
+        );
+
+        return influenceDtoNagii;
+    }
+
+    private void calculateInfluenceWithNewSystem(List<Influence> influenceLastDayList,
+                                                 List<Influence> influenceDayBeforeLastList,
+                                                 List<InfluenceDto> influenceDtoResultList) {
+        // Our faction get some new systems
+        int howManySystemsAdded = influenceLastDayList.size() - influenceDayBeforeLastList.size();
+        int systemCountDayBefore = influenceLastDayList.size() - howManySystemsAdded;
+        calculateInfluence(influenceLastDayList,
+                influenceDayBeforeLastList,
+                influenceDtoResultList,
+                systemCountDayBefore);
+        for (int i = systemCountDayBefore; i < influenceLastDayList.size(); i++) {
+            InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
+            influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
+            influenceDto.setChanges(influenceLastDayList.get(i).getInfluence());
+            influenceDtoResultList.add(influenceDto);
+        }
     }
 
     private void calculateInfluence(List<Influence> influenceLastDayList,
@@ -99,33 +133,5 @@ public class InfluenceServiceImpl implements InfluenceService {
             );
             influenceDtoResultList.add(influenceDto);
         }
-    }
-
-    private void calculateInfluenceWithNewSystem(List<Influence> influenceLastDayList,
-                                                 List<Influence> influenceDayBeforeLastList,
-                                                 List<InfluenceDto> influenceDtoResultList) {
-        // Our faction get some new systems
-        int howManySystemsAdded = influenceLastDayList.size() - influenceDayBeforeLastList.size();
-        calculateInfluence(influenceLastDayList,
-                influenceDayBeforeLastList,
-                influenceDtoResultList,
-                influenceLastDayList.size() - howManySystemsAdded);
-        for (int i = influenceLastDayList.size() - howManySystemsAdded; i < influenceLastDayList.size(); i++) {
-            InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
-            influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
-            influenceDto.setChanges(influenceLastDayList.get(i).getInfluence());
-            influenceDtoResultList.add(influenceDto);
-        }
-    }
-
-    private InfluenceDto getInfluenceDtoNagii(List<Influence> influenceLastDayList,
-                                              List<Influence> influenceDayBeforeLastList) {
-        InfluenceDto influenceDtoNagii = modelMapper.map(influenceLastDayList.get(0), InfluenceDto.class);
-        influenceDtoNagii.setState(influenceLastDayList.get(0).getState().getTitle());
-        influenceDtoNagii.setChanges(
-                influenceLastDayList.get(0).getInfluence() - influenceDayBeforeLastList.get(0).getInfluence()
-        );
-
-        return influenceDtoNagii;
     }
 }

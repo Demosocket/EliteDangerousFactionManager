@@ -2,7 +2,6 @@ package com.demosocket.manager.controller;
 
 import com.demosocket.manager.dto.UserEditDto;
 import com.demosocket.manager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,7 +23,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }

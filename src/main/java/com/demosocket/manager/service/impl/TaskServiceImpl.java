@@ -7,7 +7,6 @@ import com.demosocket.manager.repository.UserRepository;
 import com.demosocket.manager.service.TaskService;
 import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +19,6 @@ public class TaskServiceImpl implements TaskService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository , ModelMapper modelMapper) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;

@@ -8,7 +8,6 @@ import com.demosocket.manager.model.User;
 import com.demosocket.manager.repository.UserRepository;
 import com.demosocket.manager.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +24,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
     public UserServiceImpl(PasswordEncoder passwordEncoder,
                            UserRepository userRepository,
                            ModelMapper modelMapper) {
@@ -46,9 +44,8 @@ public class UserServiceImpl implements UserService {
 
         List<UserEditDto> userEditDtoList = new ArrayList<>();
         for (User user : userList) {
-            String role = user.getUserRole().getTitle();
             UserEditDto userEditDto = modelMapper.map(user, UserEditDto.class);
-            userEditDto.setRole(role);
+            userEditDto.setRole(user.getUserRole().getTitle());
             userEditDtoList.add(userEditDto);
         }
 
@@ -72,6 +69,7 @@ public class UserServiceImpl implements UserService {
         user.setHashPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setUserRole(Role.USER);
         user.setEnabled(true);
+
         userRepository.save(user);
     }
 
@@ -82,6 +80,7 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(userEditDto, User.class);
         user.setHashPassword(userFromDB.getHashPassword());
         user.setUserRole(Role.valueOf(userEditDto.getRole().toUpperCase()));
+
         userRepository.save(user);
     }
 }
