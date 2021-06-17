@@ -61,33 +61,27 @@
                     </tr>
                     <tr th:unless="${#strings.equals(task.combatTask, '')}">
                         <td class="task-code">Боевой приоритет:</td>
-                        <td class="task-content" th:utext="${#strings.replace(task.combatTask,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" th:utext="${task.combatTask}"></td>
                     </tr>
                     <tr th:unless="${#strings.equals(task.electionTask, '')}">
                         <td class="task-code">Выборы:</td>
-                        <td class="task-content" th:utext="${#strings.replace(task.electionTask,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" th:utext="${task.electionTask}"></td>
                     </tr>
                     <tr th:unless="${#strings.equals(task.task1, '')}">
                         <td class="task-code">Приоритет №1:</td>
-                        <td class="task-content" th:utext="${#strings.replace(task.task1,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" th:utext="${task.task1}"></td>
                     </tr>
                     <tr th:unless="${#strings.equals(task.task2, '')}">
                         <td class="task-code">Приоритет №2:</td>
-                        <td class="task-content" th:utext="${#strings.replace(task.task2,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" th:utext="${task.task2}"></td>
                     </tr>
                     <tr th:unless="${#strings.equals(task.doNothing, '')}">
                         <td class="task-code">Ничего не делаем:</td>
-                        <td class="task-content" id="task-do-nothing" th:utext="${#strings.replace(task.doNothing,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" id="task-do-nothing" th:utext="${task.doNothing}"></td>
                     </tr>
                     <tr th:unless="${#strings.equals(task.taskDescription, '')}">
                         <td class="task-code">Описание:</td>
-                        <td class="task-content" th:utext="${#strings.replace(task.taskDescription,
-                                    T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>
+                        <td class="task-content" th:utext="${task.taskDescription}"></td>
                     </tr>
                     </tbody>
                 </table>
