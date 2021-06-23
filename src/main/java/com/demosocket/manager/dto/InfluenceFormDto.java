@@ -1,13 +1,13 @@
 package com.demosocket.manager.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class InfluenceFormDto {
 
-    private final List<InfluenceDto> influences;
+    private List<InfluenceDto> influences;
 }

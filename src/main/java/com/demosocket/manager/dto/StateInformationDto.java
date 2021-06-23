@@ -1,12 +1,12 @@
 package com.demosocket.manager.dto;
 
+import lombok.Data;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 
+@Data
 @Builder
-@Getter
-@Setter
+@AllArgsConstructor
 public class StateInformationDto {
 
     private Integer controlCount;
