@@ -41,12 +41,8 @@ public class FactionServiceImpl implements FactionService {
 
     @Override
     public StateInformationDto findStateInformation() {
-        Integer controlCount = 0;
-        Integer noControlCount = 0;
-        Integer expectationOfWarCount = 0;
-        Integer expectationOfElectionsCount = 0;
-        Integer warCount = 0;
-        Integer electionsCount = 0;
+
+        StateInformationDto informationDto = new StateInformationDto();
 
         Date lastUpdate = influenceRepository.findTwoLastDays().get(0);
         List<Influence> influenceLastUpdateList = influenceRepository.findAllByDateOrderById(lastUpdate);
@@ -55,28 +51,21 @@ public class FactionServiceImpl implements FactionService {
             State state = inf.getState();
 
             if (EXPANSION.equal(state) || EXPECTATION_OF_EXPANSION.equal(state) || NONE.equal(state)) {
-                controlCount++;
+                informationDto.incrementControlCount();
             } else if (NO_CONTROL.equal(state)) {
-                noControlCount++;
+                informationDto.incrementNoControlCount();
             } else if (EXPECTATION_OF_WAR.equal(state)) {
-                expectationOfWarCount++;
+                informationDto.incrementExpectationOfWarCount();
             } else if (EXPECTATION_OF_ELECTIONS.equal(state)) {
-                expectationOfElectionsCount++;
+                informationDto.incrementExpectationOfElectionsCount();
             } else if (WAR.equals(state)) {
-                warCount++;
+                informationDto.incrementWarCount();
             } else if (ELECTIONS.equal(state)) {
-                electionsCount++;
+                informationDto.incrementElectionsCount();
             }
         }
 
-        return StateInformationDto.builder()
-                .controlCount(controlCount)
-                .noControlCount(noControlCount)
-                .expectationOfWarCount(expectationOfWarCount)
-                .expectationOfElectionsCount(expectationOfElectionsCount)
-                .warCount(warCount)
-                .electionsCount(electionsCount)
-                .build();
+        return informationDto;
     }
 
     @Override
