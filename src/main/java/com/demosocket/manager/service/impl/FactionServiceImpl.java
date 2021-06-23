@@ -41,7 +41,6 @@ public class FactionServiceImpl implements FactionService {
 
     @Override
     public StateInformationDto findStateInformation() {
-
         StateInformationDto informationDto = new StateInformationDto();
 
         Date lastUpdate = influenceRepository.findTwoLastDays().get(0);
@@ -78,53 +77,36 @@ public class FactionServiceImpl implements FactionService {
 
     @Override
     public StationsInformationDto findStationsInformation() {
-        Integer totalOrbitLargeControl = 0;
-        Integer totalOrbitLarge = 0;
-        Integer totalOrbitMediumControl = 0;
-        Integer totalOrbitMedium = 0;
-        Integer totalPlanetLargeControl = 0;
-        Integer totalPlanetLarge = 0;
-        Integer totalPlanetBaseControl = 0;
-        Integer totalPlanetBase = 0;
+        StationsInformationDto stationsInformationDto = new StationsInformationDto();
 
         for (System sys : systemRepository.findAll()) {
-
             if (sys.getOrbitLargeControl() != null) {
-                totalOrbitLargeControl += sys.getOrbitLargeControl();
+                stationsInformationDto.addOrbitLargeControl(sys.getOrbitLargeControl());
             }
             if (sys.getOrbitLarge() != null) {
-                totalOrbitLarge += sys.getOrbitLarge();
+                stationsInformationDto.addOrbitLarge(sys.getOrbitLarge());
             }
             if (sys.getOrbitMediumControl() != null) {
-                totalOrbitMediumControl += sys.getOrbitMediumControl();
+                stationsInformationDto.addOrbitMediumControl(sys.getOrbitMediumControl());
             }
             if (sys.getOrbitMedium() != null) {
-                totalOrbitMedium += sys.getOrbitMedium();
+                stationsInformationDto.addOrbitMedium(sys.getOrbitMedium());
             }
             if (sys.getPlanetLargeControl() != null) {
-                totalPlanetLargeControl += sys.getPlanetLargeControl();
+                stationsInformationDto.addPlanetLargeControl(sys.getPlanetLargeControl());
             }
             if (sys.getPlanetLarge() != null) {
-                totalPlanetLarge += sys.getPlanetLarge();
+                stationsInformationDto.addPlanetLarge(sys.getPlanetLarge());
             }
             if (sys.getPlanetBaseControl() != null) {
-                totalPlanetBaseControl += sys.getPlanetBaseControl();
+                stationsInformationDto.addPlanetBaseControl(sys.getPlanetBaseControl());
             }
             if (sys.getPlanetBase() != null) {
-                totalPlanetBase += sys.getPlanetBase();
+                stationsInformationDto.addPlanetBase(sys.getPlanetBase());
             }
         }
 
-        return StationsInformationDto.builder()
-                .totalOrbitLargeControl(totalOrbitLargeControl)
-                .totalOrbitLarge(totalOrbitLarge)
-                .totalOrbitMediumControl(totalOrbitMediumControl)
-                .totalOrbitMedium(totalOrbitMedium)
-                .totalPlanetLargeControl(totalPlanetLargeControl)
-                .totalPlanetLarge(totalPlanetLarge)
-                .totalPlanetBaseControl(totalPlanetBaseControl)
-                .totalPlanetBase(totalPlanetBase)
-                .build();
+        return stationsInformationDto;
     }
 
     @Override
