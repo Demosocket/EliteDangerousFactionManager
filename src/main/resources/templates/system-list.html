@@ -100,8 +100,7 @@
                     </td>
                     <td sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')"
                         class="spoilerDelete" style="display: none">
-                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}"
-                           onclick="return confirm('Delete system? This will delete the information about influence');">
+                        <a class="tooltip" th:href="@{/systems/delete/{id}(id=${sys.id})}" onclick="showWarning()">
                             <img src="/images/delete.png" alt="Delete">
                             <span class="tooltip-text">Delete System</span>
                         </a>
@@ -112,8 +111,8 @@
         </div>
         <div class="content" sec:authorize="hasAnyAuthority('COMMANDER,COMMUNIST')">
             <a class="menu-link" th:href="@{/systems/add}">Add System</a>
-            <a class="menu-link" href="javascript:Spoiler('Edit');" id="EditSpoiler">Edit System</a>
-            <a class="menu-link" href="javascript:Spoiler('Delete');" id="DeleteSpoiler">Delete System</a>
+            <a class="menu-link" href="javascript:spoiler('Edit');" id="EditSpoiler">Edit System</a>
+            <a class="menu-link" href="javascript:spoiler('Delete');" id="DeleteSpoiler">Delete System</a>
         </div>
     </div>
 </div>

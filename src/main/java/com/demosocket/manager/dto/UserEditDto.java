@@ -1,8 +1,10 @@
 package com.demosocket.manager.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class UserEditDto {
 
     private Long id;

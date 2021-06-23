@@ -1,18 +1,18 @@
 package com.demosocket.manager.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Builder
-@AllArgsConstructor
+@Getter
+@Setter
 public class StateInformationDto {
 
-    Integer controlCount;
-    Integer noControlCount;
-    Integer expectationOfWarCount;
-    Integer expectationOfElectionsCount;
-    Integer warCount;
-    Integer electionsCount;
+    private Integer controlCount;
+    private Integer noControlCount;
+    private Integer expectationOfWarCount;
+    private Integer expectationOfElectionsCount;
+    private Integer warCount;
+    private Integer electionsCount;
 }

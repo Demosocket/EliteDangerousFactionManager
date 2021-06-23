@@ -1,4 +1,4 @@
-function Spoiler(param) {
+function spoiler(param) {
     const elements = document.getElementsByClassName("spoiler" + param);
     const text = document.getElementById(param + "Spoiler");
     for (let item of elements) {
@@ -10,4 +10,8 @@ function Spoiler(param) {
             text.innerHTML = "Hide " + param;
         }
     }
+}
+
+function showWarning() {
+    return confirm('Delete system? It\'ll delete the information about influence');
 }
