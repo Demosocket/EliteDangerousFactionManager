@@ -1,8 +1,10 @@
 package com.demosocket.manager.security;
 
 import com.demosocket.manager.model.Role;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,14 +17,21 @@ import javax.sql.DataSource;
 import static com.demosocket.manager.security.SecurityConstants.*;
 
 @EnableWebSecurity
+@ConfigurationProperties(prefix = "security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
-    private final Environment environment;
+    @Getter
+    @Setter
+    private String users_query;
 
-    public SecurityConfig(DataSource dataSource, Environment environment) {
+    @Getter
+    @Setter
+    private String roles_query;
+
+    private final DataSource dataSource;
+
+    public SecurityConfig(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.environment = environment;
     }
 
     @Override
@@ -52,8 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(environment.getProperty("spring.queries.users-query"))
-                .authoritiesByUsernameQuery(environment.getProperty("spring.queries.roles-query"))
+                .usersByUsernameQuery(users_query)
+                .authoritiesByUsernameQuery(roles_query)
                 .passwordEncoder(passwordEncoder());
     }
 
