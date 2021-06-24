@@ -1,5 +1,6 @@
 package com.demosocket.manager.service.impl;
 
+import com.demosocket.manager.dto.InfluenceCalculateDto;
 import com.demosocket.manager.dto.InfluenceDto;
 import com.demosocket.manager.dto.InfluenceFormDto;
 import com.demosocket.manager.model.Influence;
@@ -41,15 +42,16 @@ public class InfluenceServiceImpl implements InfluenceService {
         InfluenceDto influenceDtoNagii = getInfluenceDtoNagii(influenceLastDayList, influenceDayBeforeLastList);
 
         List<InfluenceDto> influenceDtoResultList = new ArrayList<>();
+        InfluenceCalculateDto influenceCalculateDto = InfluenceCalculateDto.builder()
+                .influenceLastDayList(influenceLastDayList)
+                .influenceDayBeforeLastList(influenceDayBeforeLastList)
+                .influenceDtoResultList(influenceDtoResultList)
+                .build();
+
         if (influenceLastDayList.size() == influenceDayBeforeLastList.size()) {
-            calculateInfluence(influenceLastDayList,
-                    influenceDayBeforeLastList,
-                    influenceDtoResultList,
-                    influenceLastDayList.size());
+            calculateInfluence(influenceCalculateDto, influenceLastDayList.size());
         } else if (influenceLastDayList.size() > influenceDayBeforeLastList.size()) {
-            calculateInfluenceWithNewSystem(influenceLastDayList,
-                    influenceDayBeforeLastList,
-                    influenceDtoResultList);
+            calculateInfluenceWithNewSystem(influenceCalculateDto);
         }
         // TODO check when we lost the system
 
@@ -59,6 +61,46 @@ public class InfluenceServiceImpl implements InfluenceService {
         influenceDtoResultList.add(0, influenceDtoNagii);
 
         return influenceDtoResultList;
+    }
+
+    private InfluenceDto getInfluenceDtoNagii(List<Influence> influenceLastDayList,
+                                              List<Influence> influenceDayBeforeLastList) {
+        final Influence influenceNagiiLastDay = influenceLastDayList.get(0);
+        final Influence influenceNagiiDayBeforeLast = influenceDayBeforeLastList.get(0);
+
+        return calculateTwoDays(influenceNagiiLastDay, influenceNagiiDayBeforeLast);
+    }
+
+    private void calculateInfluence(InfluenceCalculateDto influenceCalculateDto, int size) {
+        // Our faction don't have new systems
+        for (int i = 1; i < size; i++) {
+            InfluenceDto influenceDto = calculateTwoDays(influenceCalculateDto.getInfluenceLastDayList().get(i),
+                    influenceCalculateDto.getInfluenceDayBeforeLastList().get(i));
+            influenceCalculateDto.getInfluenceDtoResultList().add(influenceDto);
+        }
+    }
+
+    private void calculateInfluenceWithNewSystem(InfluenceCalculateDto influenceCalculateDto) {
+        // Our faction get some new systems
+        int howManySystemsAdded = influenceCalculateDto.getInfluenceLastDayList().size() -
+                influenceCalculateDto.getInfluenceDayBeforeLastList().size();
+        int systemCountDayBefore = influenceCalculateDto.getInfluenceLastDayList().size() - howManySystemsAdded;
+        calculateInfluence(influenceCalculateDto, systemCountDayBefore);
+        for (int i = systemCountDayBefore; i < influenceCalculateDto.getInfluenceLastDayList().size(); i++) {
+            InfluenceDto influenceDto = modelMapper.map(influenceCalculateDto.getInfluenceLastDayList().get(i),
+                    InfluenceDto.class);
+            influenceDto.setState(influenceCalculateDto.getInfluenceLastDayList().get(i).getState().getTitle());
+            influenceDto.setChanges(influenceCalculateDto.getInfluenceLastDayList().get(i).getInfluence());
+            influenceCalculateDto.getInfluenceDtoResultList().add(influenceDto);
+        }
+    }
+
+    private InfluenceDto calculateTwoDays(Influence infLastDay, Influence infDayBeforeLast) {
+        InfluenceDto influenceDto = modelMapper.map(infLastDay, InfluenceDto.class);
+        influenceDto.setState(infLastDay.getState().getTitle());
+        influenceDto.setChanges(infLastDay.getInfluence() - infDayBeforeLast.getInfluence());
+
+        return influenceDto;
     }
 
     @Override
@@ -83,55 +125,12 @@ public class InfluenceServiceImpl implements InfluenceService {
 
     private Influence getInfluenceFromDto(java.sql.Date date, InfluenceDto inf) {
         System system = systemRepository.findByName(inf.getSystemName()).orElseThrow(EntityNotFoundException::new);
+
         return Influence.builder()
                 .system(system)
                 .date(date)
                 .influence(inf.getInfluence())
                 .state(State.valueOf(inf.getState().toUpperCase().replaceAll("\\s+", "_")))
                 .build();
-    }
-
-    private InfluenceDto getInfluenceDtoNagii(List<Influence> influenceLastDayList,
-                                              List<Influence> influenceDayBeforeLastList) {
-        InfluenceDto influenceDtoNagii = modelMapper.map(influenceLastDayList.get(0), InfluenceDto.class);
-        influenceDtoNagii.setState(influenceLastDayList.get(0).getState().getTitle());
-        influenceDtoNagii.setChanges(
-                influenceLastDayList.get(0).getInfluence() - influenceDayBeforeLastList.get(0).getInfluence()
-        );
-
-        return influenceDtoNagii;
-    }
-
-    private void calculateInfluenceWithNewSystem(List<Influence> influenceLastDayList,
-                                                 List<Influence> influenceDayBeforeLastList,
-                                                 List<InfluenceDto> influenceDtoResultList) {
-        // Our faction get some new systems
-        int howManySystemsAdded = influenceLastDayList.size() - influenceDayBeforeLastList.size();
-        int systemCountDayBefore = influenceLastDayList.size() - howManySystemsAdded;
-        calculateInfluence(influenceLastDayList,
-                influenceDayBeforeLastList,
-                influenceDtoResultList,
-                systemCountDayBefore);
-        for (int i = systemCountDayBefore; i < influenceLastDayList.size(); i++) {
-            InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
-            influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
-            influenceDto.setChanges(influenceLastDayList.get(i).getInfluence());
-            influenceDtoResultList.add(influenceDto);
-        }
-    }
-
-    private void calculateInfluence(List<Influence> influenceLastDayList,
-                                    List<Influence> influenceDayBeforeLastList,
-                                    List<InfluenceDto> influenceDtoResultList,
-                                    int size) {
-        // Our faction don't have new systems
-        for (int i = 1; i < size; i++) {
-            InfluenceDto influenceDto = modelMapper.map(influenceLastDayList.get(i), InfluenceDto.class);
-            influenceDto.setState(influenceLastDayList.get(i).getState().getTitle());
-            influenceDto.setChanges(
-                    influenceLastDayList.get(i).getInfluence() - influenceDayBeforeLastList.get(i).getInfluence()
-            );
-            influenceDtoResultList.add(influenceDto);
-        }
     }
 }
