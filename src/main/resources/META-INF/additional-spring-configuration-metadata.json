@@ -3,12 +3,12 @@
     {
       "name": "security.users_query",
       "type": "java.lang.String",
-      "description": "Description for security.queries.users-query."
+      "description": "Defining security.users_query for Spring Security"
     },
     {
       "name": "security.roles_query",
       "type": "java.lang.String",
-      "description": "Description for security.queries.roles-query."
+      "description": "Defining security.roles_query for Spring Security"
     }
   ]
 }
