@@ -1,7 +1,6 @@
 package com.demosocket.manager.security;
 
 import com.demosocket.manager.model.Role;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,13 +19,9 @@ import static com.demosocket.manager.security.SecurityConstants.*;
 @ConfigurationProperties(prefix = "security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Getter
-    @Setter
-    private String users_query;
+    @Setter private String users_query;
 
-    @Getter
-    @Setter
-    private String roles_query;
+    @Setter private String roles_query;
 
     private final DataSource dataSource;
 

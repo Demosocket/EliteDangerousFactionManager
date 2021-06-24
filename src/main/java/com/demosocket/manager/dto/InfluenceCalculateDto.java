@@ -15,5 +15,4 @@ public class InfluenceCalculateDto {
     private List<Influence> influenceLastDayList;
     private List<Influence> influenceDayBeforeLastList;
     private List<InfluenceDto> influenceDtoResultList;
-
 }
